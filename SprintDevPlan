@@ -7,5 +7,6 @@ Sprint 4 - Moderation and cleaning up and stuff.
 
 Notes:
 go mod download installs all required dependencies 
+Location is currently stored as a string. We might want to change that once we integrate a map to lat and long
 
 Log:
