@@ -1,3 +1,5 @@
+
+#Site Users
 - As a site user, I want to see how many active activities are going on on a certain day
 
 - As a site user, I want to be able to easily create an event around gainesville and have other students sign up
@@ -17,10 +19,10 @@
 - As a site user, I want an easy way to connect with my peers so I can meet new people and make new connections. 
     *Maybe add a chat/share social media accounts/share phone number option to other users in an activity group
 
-- As a site owner, I want to be able to monitor posts and delete them if they are inappropriate
-    *Have an auto filtering check to check for blacklisted words/phrases
-
 - As a business owner, I want to be able to advertise my events to increase the turnout. 
 
 - As a site user, I want a simple/self-explanatory UI that makes it easy for me to use the site as soon as I make an account without a tutorial
 
+#Admin
+- As a site owner, I want to be able to monitor posts and delete them if they are inappropriate
+    *Have an auto filtering check to check for blacklisted words/phrases
