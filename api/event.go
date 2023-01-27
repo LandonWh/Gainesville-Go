@@ -62,3 +62,9 @@ func CreateEvent(c *gin.Context) {
 
 	c.JSON(http.StatusOK, gin.H{"data": event})
 }
+
+func PingGet(c *gin.Context) {
+	c.JSON(http.StatusOK, map[string]string{
+		"hello": "Found me",
+	})
+}
