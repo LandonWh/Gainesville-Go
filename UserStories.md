@@ -18,4 +18,4 @@
 
 ## Admin
 - As a site owner, I want to be able to monitor posts and delete them if they are inappropriate
-    *Have an auto filtering check to check for blacklisted words/phrases
+    * Have an auto filtering check to check for blacklisted words/phrases
