@@ -2,8 +2,7 @@
 {
   "compileOnSave": false,
   "compilerOptions": {
-    //This may need to be changed to src, or if it is src, it may need to be changed to ./
-    "baseUrl": "./",
+    "baseUrl": "./", //comment
     "outDir": "./dist/out-tsc",
     "forceConsistentCasingInFileNames": true,
     "strict": true,
