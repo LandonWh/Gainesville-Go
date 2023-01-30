@@ -3,13 +3,3 @@ Sprint 1 - Post activities or select from premade activities, rsvp.
 Sprint 2 - Select from map and not just dashboard, accounts.
 Sprint 3 - Posts disappearing when full, restrictions on who can see the posts.
 Sprint 4 - Moderation and cleaning up and stuff.
-
-
-Notes:
-go mod download installs all required dependencies 
-
-in db:
-Location is currently stored as a string. We might want to change that once we integrate a map to lat and long
-User may need to be changed to a foreign key once accounts are set up.
-
-Log:
