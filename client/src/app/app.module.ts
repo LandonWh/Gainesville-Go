@@ -1,25 +1,43 @@
 import { NgModule } from '@angular/core';
 import { BrowserModule } from '@angular/platform-browser';
-import { MatSlideToggleModule } from '@angular/material/slide-toggle';
-import { MatInputModule } from '@angular/material/input';
 import { AppRoutingModule } from './app-routing.module';
 import { AppComponent } from './app.component';
 import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
-import { LogInComponent } from './components/log-in/log-in.component';
-import { RegisterComponent } from './components/register/register.component';
+import { HomeComponent } from './home/home.component';
+import { MatCardModule } from '@angular/material/card';
+import { MatButtonModule } from '@angular/material/button'
+import { MatInputModule } from '@angular/material/input';
+import { MatSlideToggleModule } from '@angular/material/slide-toggle';
+import { MatIconModule} from '@angular/material/icon';
+import { MatToolbarModule} from '@angular/material/toolbar';
+import { ReactiveFormsModule } from '@angular/forms';
+import { MainPageComponent } from './main-page/main-page.component';
+import { MatSidenavModule} from '@angular/material/sidenav';
+import { MatListModule} from '@angular/material/list';
+import { FlexLayoutModule } from '@angular/flex-layout';
+
+
 
 @NgModule({
   declarations: [
     AppComponent,
-    LogInComponent,
-    RegisterComponent
+    HomeComponent,
+    MainPageComponent
   ],
   imports: [
     MatSlideToggleModule,
+    MatSidenavModule,
+    MatListModule,
+    MatIconModule,
     MatInputModule,
+    MatToolbarModule,
     BrowserModule,
+    FlexLayoutModule,
     AppRoutingModule,
-    BrowserAnimationsModule
+    BrowserAnimationsModule,
+    MatCardModule,
+    MatButtonModule,
+    ReactiveFormsModule
   ],
   providers: [],
   bootstrap: [AppComponent]
