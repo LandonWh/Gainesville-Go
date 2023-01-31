@@ -1,14 +1,6 @@
-p {
-    font-family: Lato;
-  }
-  .position-fixed{
-    position: fixed
-  }
-  
-  .mat-spacer{
-    flex: 1 1 auto;
-  }
-  
-  .content {
-    margin-top: 58px
-  }
+.content-body{
+    min-height: 100%;
+    padding: 60px 1rem;
+    background-color: #FFFFFF;
+    display:block;
+}
