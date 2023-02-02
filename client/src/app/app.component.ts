@@ -1,6 +1,7 @@
 import { ChangeDetectionStrategy, Component } from '@angular/core';
 import { HomeComponent } from './home/home.component';
 
+
 @Component({
   selector: 'app-root',
   templateUrl: './app.component.html',
@@ -11,6 +12,8 @@ import { HomeComponent } from './home/home.component';
 })
 export class AppComponent {
   title: any;
+
+
 }
 
 

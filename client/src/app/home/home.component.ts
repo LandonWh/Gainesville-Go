@@ -1,6 +1,7 @@
 import { ViewEncapsulation } from '@angular/core';
 import { Component, OnInit} from '@angular/core';
 import { FormGroup, FormControl, Validators, FormBuilder} from '@angular/forms';
+import { Router } from '@angular/router';
 
 @Component({
   selector: 'app-home',
@@ -13,7 +14,7 @@ import { FormGroup, FormControl, Validators, FormBuilder} from '@angular/forms';
 
 export class HomeComponent implements OnInit{
   hide: boolean = false;
-  constructor(private fb: FormBuilder) { }
+  constructor(private fb: FormBuilder, private router: Router) { }
   ngOnInit(): void {
     throw new Error('Method not implemented.');
   }

@@ -15,6 +15,7 @@ import { MainPageComponent } from './main-page/main-page.component';
 import { MatSidenavModule} from '@angular/material/sidenav';
 import { MatListModule} from '@angular/material/list';
 import { FlexLayoutModule } from '@angular/flex-layout';
+import { RegisterComponent } from './register/register.component';
 
 
 
@@ -22,7 +23,8 @@ import { FlexLayoutModule } from '@angular/flex-layout';
   declarations: [
     AppComponent,
     HomeComponent,
-    MainPageComponent
+    MainPageComponent,
+    RegisterComponent
   ],
   imports: [
     MatSlideToggleModule,
