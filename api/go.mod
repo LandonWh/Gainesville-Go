@@ -1,4 +1,4 @@
-module github.com/LandonWh/RestAPI
+module github.com/LandonWh/Gainesville-Go
 
 go 1.19
 

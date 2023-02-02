@@ -4,6 +4,7 @@ import { AppComponent } from './app.component';
 import { MainPageComponent } from './main-page/main-page.component';
 import { CreateEventComponent } from './create-event/create-event.component';
 import { LoginComponent } from './login/login.component';
+import { RegisterComponent } from './register/register.component';
 
 const routes: Routes = [
   {
@@ -16,8 +17,13 @@ const routes: Routes = [
   },
   {
     path: 'create-event',
-    component: CreateEventComponent
-  }   
+    component: CreateEventComponent,
+  },
+  {
+    path: 'register',
+    component: RegisterComponent
+  }
+
     ]
 
 
