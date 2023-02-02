@@ -8,8 +8,8 @@ Going to http://localhost:4200/api/ping should return a "Found me" message once 
 
 
 Installs:
-*ng add @angular/material
-*npm install leaflet
-*npm install @types/leaflet
-*npm install @asymmetrik/ngx-leaflet
-*npm install @angular/flex-layout
+-ng add @angular/material
+-npm install leaflet
+-npm install @types/leaflet
+-npm install @asymmetrik/ngx-leaflet
+-npm install @angular/flex-layout
