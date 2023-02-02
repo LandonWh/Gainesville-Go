@@ -1,0 +1,17 @@
+.toolbar {
+    top: 0;
+    left: 0;
+    position: fixed;
+    z-index: 999;
+ }
+ 
+ .header {
+    text-align: center;
+    margin: 0 auto;
+ }
+
+.content {
+    height: 100%;
+    width: 100%;
+    overflow: auto
+}
