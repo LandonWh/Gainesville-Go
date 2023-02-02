@@ -14,6 +14,9 @@ import { FormGroup, FormControl, Validators, FormBuilder} from '@angular/forms';
 export class HomeComponent implements OnInit{
   hide: boolean = false;
   constructor(private fb: FormBuilder) { }
+  ngOnInit(): void {
+    throw new Error('Method not implemented.');
+  }
   loginForm : FormGroup = this.fb.group({
     email: ['', [Validators.required, Validators.email]],
     password: ['', [Validators.required, Validators.minLength(6)]]
