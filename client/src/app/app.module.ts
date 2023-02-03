@@ -19,6 +19,7 @@ import { NavbarComponent } from './navbar/navbar.component';
 import { LeafletModule } from '@asymmetrik/ngx-leaflet';
 import { MapComponent } from './map/map.component';
 import { LoginComponent } from './login/login.component';
+import { RegisterComponent } from './register/register.component';
 
 
 @NgModule({
@@ -29,6 +30,7 @@ import { LoginComponent } from './login/login.component';
     NavbarComponent,
     MapComponent,
     LoginComponent,
+    RegisterComponent,
   ],
   imports: [
     MatSlideToggleModule,

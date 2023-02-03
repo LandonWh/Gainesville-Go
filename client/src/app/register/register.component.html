@@ -1,1 +1,57 @@
-<p>register works!</p>
+<mat-card>
+    <mat-card-content>
+      <div class="header">
+        <header>Enter Information</header>
+      </div>
+      <form (ngSubmit)="onLogin()" name="registerForm" [formGroup]="registerForm">
+        <div class="emailInput">
+          <mat-form-field class="full-width" appearance="outline">
+            <mat-label>Email</mat-label>
+            <input
+              formControlName="email"
+              matInput
+              placeholder="Enter email address" required
+            />
+            <mat-error *ngIf="!registerForm.controls['email'].valid">
+                Email is required
+              </mat-error>
+          </mat-form-field>
+        </div>
+
+        <div>
+          
+          <mat-form-field class="full-width" appearance="outline">
+            <mat-label>Password</mat-label>
+            <input formControlName="password" matInput [type]=" hide ? 'password' : 'text'" required />
+            <button  mat-icon-button matSuffix (click)="hide = !hide" [attr.aria-label]="'Hide Password'"
+            [attr.aria-pressed]="hide">
+            <mat-icon>
+                {{hide ? 'visibility_off' : 'visibility'}}
+            </mat-icon>
+        </button>
+        <mat-error *ngIf="!registerForm.controls['password'].valid">
+            Password is required
+          </mat-error>
+        </mat-form-field>
+        </div>
+
+        <div>
+            <mat-form-field class="full-width" appearance="outline">
+                <mat-label>Confirm Password</mat-label>
+                <input formControlName="confirmPassword" matInput [type]=" hide ? 'password' : 'text'" required />
+                <button  mat-icon-button matSuffix (click)="hide = !hide" [attr.aria-label]="'Hide Password'"
+                [attr.aria-pressed]="hide">
+                <mat-icon>
+                    {{hide ? 'visibility_off' : 'visibility'}}
+                </mat-icon>
+            </button>
+            <mat-error *ngIf="!registerForm.controls['confirmPassword'].valid">
+                You must confirm your password
+              </mat-error>
+            </mat-form-field>
+        </div>
+        <button mat-flat-button color="primary">Create Account!</button>
+      </form>
+    </mat-card-content>
+  </mat-card>
+
