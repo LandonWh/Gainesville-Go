@@ -1,19 +1,18 @@
 package main
 
-import "github.com/gin-gonic/gin"
+import (
+	"github.com/gin-gonic/gin"
+	"Gainesville-Go/api/controllers"
+)
 
 func initalizeRouter() {
 	r := gin.Default()
+	
+	public := r.Group("/api")
 
-	api := r.Group("/api")
+	public.POST("/register", controllers.Register)
 
-	{
-		api.GET("/ping", PingGet)
-		api.GET("/events", GetEvents)
-		api.POST("/events", CreateEvent)
-	}
-
-	err := r.Run()
+	err := r.Run(":8080")
 	if err != nil {
 		return
 	}
