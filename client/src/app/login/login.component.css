@@ -2,7 +2,7 @@ mat-card {
     max-width: 500px;
     margin: 20em auto;
     text-align: center;
-    max-height: 500px;
+    max-height: 800px;
   }
   
   .header{
@@ -14,26 +14,21 @@ mat-card {
     width: 80%;
   }
   
-  .button-row {
+  .register {
     padding-top: 20px;
-  }
-  
-  .button-row a {
-    margin-right: 8px;
-    text-align: center;
-  }
-  
-  .forget-password{
-    padding-left: 50px;
-    
+    text-align: center
   }
   
   .emailInput{
-    padding-top: 10px;
+    padding-top: 30px;
   }
   
-  .aLink{
+  .forgot-password{
     float: right;
     padding-right: 60px;
     text-decoration: none;
+  }
+
+  .SubmitButton {
+    padding-top: 5px;
   }

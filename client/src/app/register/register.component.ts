@@ -15,6 +15,8 @@ export class RegisterComponent {
   hide: boolean = false;
   constructor(private fb: FormBuilder) { }
   registerForm : FormGroup = this.fb.group({
+    firstName: ['', [Validators.required, Validators.pattern("^[a-zA-z']*$")]],
+    lastName: ['', [Validators.required, Validators.pattern("^[a-zA-z']*$")]],
     email: ['', [Validators.required, Validators.email]],
     password: ['', [Validators.required, Validators.minLength(6)]],
     confirmPassword: ['', [Validators.required, Validators.minLength(6)]]

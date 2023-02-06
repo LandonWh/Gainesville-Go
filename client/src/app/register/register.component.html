@@ -3,8 +3,38 @@
       <div class="header">
         <header>Enter Information</header>
       </div>
+
       <form (ngSubmit)="onLogin()" name="registerForm" [formGroup]="registerForm">
-        <div class="emailInput">
+        <div class="firstName">
+          <mat-form-field class="full-width" appearance="outline">
+            <mat-label>First Name</mat-label>
+            <input
+              formControlName="firstName"
+              matInput
+              placeholder="First Name" required
+            />
+            <mat-error *ngIf="!registerForm.controls['firstName'].valid">
+                Invalid first name
+              </mat-error>
+          </mat-form-field>
+        </div>
+
+        <div class="lastName">
+          <mat-form-field class="full-width" appearance="outline">
+            <mat-label>Last Name</mat-label>
+            <input
+              formControlName="lastName"
+              matInput
+              placeholder="Last Name" required
+            />
+            <mat-error *ngIf="!registerForm.controls['lastName'].valid">
+                Invalid last name
+              </mat-error>
+          </mat-form-field>
+        </div>
+
+
+        <div>
           <mat-form-field class="full-width" appearance="outline">
             <mat-label>Email</mat-label>
             <input
@@ -13,13 +43,12 @@
               placeholder="Enter email address" required
             />
             <mat-error *ngIf="!registerForm.controls['email'].valid">
-                Email is required
+                Invalid email
               </mat-error>
           </mat-form-field>
         </div>
 
-        <div>
-          
+        <div>  
           <mat-form-field class="full-width" appearance="outline">
             <mat-label>Password</mat-label>
             <input formControlName="password" matInput [type]=" hide ? 'password' : 'text'" required />
@@ -30,7 +59,7 @@
             </mat-icon>
         </button>
         <mat-error *ngIf="!registerForm.controls['password'].valid">
-            Password is required
+            Password must be at least 6 characters
           </mat-error>
         </mat-form-field>
         </div>
@@ -50,7 +79,9 @@
               </mat-error>
             </mat-form-field>
         </div>
-        <button mat-flat-button color="primary">Create Account!</button>
+        <div class="createAccount">
+        <button mat-flat-button color="primary" >Create Account!</button>
+        </div>
       </form>
     </mat-card-content>
   </mat-card>
