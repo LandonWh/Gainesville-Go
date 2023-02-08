@@ -13,3 +13,16 @@ Installs:
 - npm install @types/leaflet
 - npm install @asymmetrik/ngx-leaflet
 - npm install @angular/flex-layout
+
+
+Creating an event: 
+POST to http://localhost:8080/api/events
+{
+    "title":"Second Test 2",
+    "description":"The second test to create an entry in the event database for 15 people lasting 3 hours",
+    "capacity":15,
+    "duration":3
+}
+
+Viewing all events:
+GET from http://localhost:8080/api/events
