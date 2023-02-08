@@ -2,6 +2,7 @@ package main
 
 import (
 	"net/http"
+	"fmt"
 
 	"github.com/gin-gonic/gin"
 	"gorm.io/driver/sqlite"
@@ -31,6 +32,8 @@ func ConnectDatabase() {
 
 	if err != nil {
 		panic("Failed to connect to database!")
+	} else {
+		fmt.Println("We are connected to the sqlitedatabase")
 	}
 
 	err = database.AutoMigrate(&Event{})
@@ -39,6 +42,7 @@ func ConnectDatabase() {
 	}
 
 	DB = database
+	DB.AutoMigrate(&User{}) //Create database of users
 }
 
 func GetEvents(c *gin.Context) {
