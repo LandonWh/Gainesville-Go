@@ -42,5 +42,5 @@ POST from http://localhost:8080/api/login and go to Body and insert:
 }
 
 Fetch a user based on token:
-GET from http://localhost:8080/api/admin/user and select Auth -> Bearer Token -> insert token (no quotes)
+GET from http://localhost:8080/api/admin/user and select Authorization -> Bearer Token -> insert token (no quotes)
 
