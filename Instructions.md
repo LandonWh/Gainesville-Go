@@ -26,3 +26,12 @@ POST to http://localhost:8080/api/events
 
 Viewing all events:
 GET from http://localhost:8080/api/events
+
+Register an account to database:
+POST from http://localhost:8080/api/register
+
+Login and generate a token:
+POST from http://localhost:8080/api/login
+
+Fetch a user based on token:
+GET from http://localhost:8080/api/admin/user
