@@ -30,15 +30,15 @@ GET from http://localhost:8080/api/events
 Register an account to database:
 POST from http://localhost:8080/api/register and go to Body and insert:
 {
-    Username: "<your username here>"
-    Password: "<your password here>"
+    Username: "your username here"
+    Password: "your password here"
 }
 
 Login and generate a token:
 POST from http://localhost:8080/api/login and go to Body and insert:
 {
-    Username: "<your username here>"
-    Password: "<your password here>"
+    Username: "your username here"
+    Password: "your password here"
 }
 
 Fetch a user based on token:
