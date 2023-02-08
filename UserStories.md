@@ -20,3 +20,4 @@
 ## Admin
 - As a site owner, I want to be able to monitor posts and delete them if they are inappropriate
     * Have an auto filtering check to check for blacklisted words/phrases
+- As a site owner, I want a welcoming home page that tells users more information about the website
