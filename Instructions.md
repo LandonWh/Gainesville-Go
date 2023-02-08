@@ -28,10 +28,19 @@ Viewing all events:
 GET from http://localhost:8080/api/events
 
 Register an account to database:
-POST from http://localhost:8080/api/register
+POST from http://localhost:8080/api/register and go to Body and insert:
+{
+    Username: "<your username here>"
+    Password: "<your password here>"
+}
 
 Login and generate a token:
-POST from http://localhost:8080/api/login
+POST from http://localhost:8080/api/login and go to Body and insert:
+{
+    Username: "<your username here>"
+    Password: "<your password here>"
+}
 
 Fetch a user based on token:
-GET from http://localhost:8080/api/admin/user
+GET from http://localhost:8080/api/admin/user and select Auth -> Bearer Token -> insert token (no quotes)
+
