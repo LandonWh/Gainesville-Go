@@ -44,24 +44,27 @@ func LoginCheck(username string, password string) (string,error) {
 	u := User{}
 
 	err = DB.Model(User{}).Where("username = ?", username).Take(&u).Error
-
+	fmt.Println("checking db for user")
 	if err != nil {
+		fmt.Println("user not present")
 		return "", err
 	}
 
 	err = VerifyPassword(password, u.Password)
 	fmt.Println(password, u.Password)
-
+	fmt.Println("verifying pass")
 	if err != nil && err == bcrypt.ErrMismatchedHashAndPassword {
+		fmt.Println("pass failed")
 		return "", err
 	}
 
 	token,err := GenerateToken(u.ID)
-
+	fmt.Println("generating token")
 	if err != nil {
+		fmt.Println("token failed")
 		return "",err
 	}
-
+	fmt.Println("login success")
 	return token,nil
 	
 }
