@@ -14,7 +14,7 @@
 - As a site user, I want an easy way to connect with my peers so I can meet new people and make new connections. 
     * Maybe add a chat/share social media accounts/share phone number option to other users in an activity group
 - As a business owner, I want to be able to advertise my events to increase the turnout. 
-- As a site user, I want a simple/self-explanatory UI that makes it easy for me to use the site as soon as I make an account without a tutorial
+- As a site user, I want a simple/self-explanatory UI that makes it easy for me to use the site
 - As a site user, I want to be able to see who rsvpd to my events
 
 ## Admin
