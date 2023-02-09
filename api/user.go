@@ -46,20 +46,6 @@ func LoginCheck(username string, password string) (string,error) {
 
 	err = DB.Model(User{}).Where("username = ?", username).Take(&u).Error
 
-	//turn password into hash
-	hashedPassword, err := bcrypt.GenerateFromPassword([]byte(u.Password),bcrypt.DefaultCost)
-	if err != nil {
-		return "", err
-	}
-	u.Password = string(hashedPassword)
-
-	//remove spaces in username 
-	u.Username = html.EscapeString(strings.TrimSpace(u.Username))
-
-	if err != nil {
-		return "", err
-	}
-
 	err = VerifyPassword(password, u.Password)
 	fmt.Println(err)
 	if err != nil && err == bcrypt.ErrMismatchedHashAndPassword {
@@ -77,8 +63,23 @@ func LoginCheck(username string, password string) (string,error) {
 }
 
 func (u *User) SaveUser() (*User, error) {
-
+	
 	var err error
+
+	//turn password into hash
+	hashedPassword, err := bcrypt.GenerateFromPassword([]byte(u.Password),bcrypt.DefaultCost)
+	if err != nil {
+		return &User{}, err
+	}
+	u.Password = string(hashedPassword)
+
+	//remove spaces in username 
+	u.Username = html.EscapeString(strings.TrimSpace(u.Username))
+
+	if err != nil {
+		return &User{}, err
+	}
+
 	err = DB.Create(&u).Error
 	if err != nil {
 		return &User{}, err
