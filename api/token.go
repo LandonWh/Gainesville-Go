@@ -12,11 +12,10 @@ import (
 )
 
 func GenerateToken(user_id uint) (string, error) {
-	fmt.Println("generation begin")
-	token_lifespan,err := strconv.Atoi("1")
+
+	token_lifespan,err := strconv.Atoi("10")
 
 	if err != nil {
-		fmt.Println("lifespan fail")
 		return "",err
 	}
 
@@ -25,7 +24,7 @@ func GenerateToken(user_id uint) (string, error) {
 	claims["user_id"] = user_id
 	claims["exp"] = time.Now().Add(time.Hour * time.Duration(token_lifespan)).Unix()
 	token := jwt.NewWithClaims(jwt.SigningMethodHS256, claims)
-	fmt.Println("generation complete")
+
 	return token.SignedString([]byte(os.Getenv("API_SECRET")))
 
 }

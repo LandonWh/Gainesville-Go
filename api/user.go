@@ -11,8 +11,8 @@ import (
 
 type User struct {
 	gorm.Model
-	Username string `gorm:"size:255;not null;unique" json:"username"`
-	Password string `gorm:"size:255;not null;" json:"password"`
+	Username string `gorm:"type:varchar;size:60;not null;unique" json:"username"`
+	Password string `gorm:"type:varchar;size:60;not null;" json:"password"`
 }
 
 func GetUserByID(uid uint) (User,error) {
@@ -34,6 +34,7 @@ func (u *User) PrepareGive(){
 }
 
 func VerifyPassword(password,hashedPassword string) error {
+	fmt.Println(hashedPassword, password)
 	return bcrypt.CompareHashAndPassword([]byte(hashedPassword), []byte(password))
 }
 
@@ -44,27 +45,33 @@ func LoginCheck(username string, password string) (string,error) {
 	u := User{}
 
 	err = DB.Model(User{}).Where("username = ?", username).Take(&u).Error
-	fmt.Println("checking db for user")
+
+	//turn password into hash
+	hashedPassword, err := bcrypt.GenerateFromPassword([]byte(u.Password),bcrypt.DefaultCost)
 	if err != nil {
-		fmt.Println("user not present")
+		return "", err
+	}
+	u.Password = string(hashedPassword)
+
+	//remove spaces in username 
+	u.Username = html.EscapeString(strings.TrimSpace(u.Username))
+
+	if err != nil {
 		return "", err
 	}
 
 	err = VerifyPassword(password, u.Password)
-	fmt.Println(password, u.Password)
-	fmt.Println("verifying pass")
+	fmt.Println(err)
 	if err != nil && err == bcrypt.ErrMismatchedHashAndPassword {
-		fmt.Println("pass failed")
 		return "", err
 	}
 
 	token,err := GenerateToken(u.ID)
-	fmt.Println("generating token")
+
 	if err != nil {
-		fmt.Println("token failed")
 		return "",err
 	}
-	fmt.Println("login success")
+
 	return token,nil
 	
 }
@@ -77,20 +84,4 @@ func (u *User) SaveUser() (*User, error) {
 		return &User{}, err
 	}
 	return u, nil
-}
-
-func (u *User) BeforeSave() error {
-
-	//turn password into hash
-	hashedPassword, err := bcrypt.GenerateFromPassword([]byte(u.Password),bcrypt.DefaultCost)
-	if err != nil {
-		return err
-	}
-	u.Password = string(hashedPassword)
-
-	//remove spaces in username 
-	u.Username = html.EscapeString(strings.TrimSpace(u.Username))
-
-	return nil
-
 }
