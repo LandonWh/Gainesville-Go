@@ -1,16 +1,16 @@
 User Stories:
-As a site user, I want to see how many active activities are going on on a certain day.
-As a site user, I want to be able to easily create an event around gainesville and have other students sign up.
-As a site visitor, I want an easy sign up process so I can start using Gainesville Go.
-As a site user, I want customizable options to filter people who sign up for my event (girls, boys, 21+).
-As a site user, I want to be able to sort by types of events * active, non-active, nighttime, daytime.
-As a site user, I want an easy way to connect with my peers so I can meet new people and make new connections.
-As a business owner, I want to be able to advertise my events to increase the turnout.
-As a site user, I want a simple/self-explanatory UI that makes it easy for me to use the site.
-As a site user, I want to be able to see who rsvpd to my events.
-As a site owner, I want to be able to monitor posts and delete them if they are inappropriate.
-Have an auto filtering check to check for blacklisted words/phrases.
-As a site owner, I want a welcoming home page that tells users more information about the website.
+- As a site user, I want to see how many active activities are going on on a certain day.
+- As a site user, I want to be able to easily create an event around gainesville and have other students sign up.
+- As a site visitor, I want an easy sign up process so I can start using Gainesville Go.
+- As a site user, I want customizable options to filter people who sign up for my event (girls, boys, 21+).
+- As a site user, I want to be able to sort by types of events * active, non-active, nighttime, daytime.
+- As a site user, I want an easy way to connect with my peers so I can meet new people and make new connections.
+- As a business owner, I want to be able to advertise my events to increase the turnout.
+- As a site user, I want a simple/self-explanatory UI that makes it easy for me to use the site.
+- As a site user, I want to be able to see who rsvpd to my events.
+- As a site owner, I want to be able to monitor posts and delete them if they are inappropriate.
+  * Have an auto filtering check to check for blacklisted words/phrases.
+- As a site owner, I want a welcoming home page that tells users more information about the website.
 
 Backend:
 This sprint we planned to allow users to set up the events table, have a list of premade events to choose from, and rsvp to events. We were able to create the events table and set up get and post requests for it. We decided not to add all the potential elements to its schema this sprint so we can add them as the frontend is ready for them. We also decided to wait to make the premade events and allow users to rsvp till a later sprint. We also added the ability to create accounts, login, and get info about that account, which was intially planned for sprint 2.
