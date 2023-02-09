@@ -1,4 +1,5 @@
 <h4>User Stories:</h4>
+
 - As a site user, I want to see how many active activities are going on on a certain day.
 - As a site user, I want to be able to easily create an event around gainesville and have other students sign up.
   * Calendar Option for date
