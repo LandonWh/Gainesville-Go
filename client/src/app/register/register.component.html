@@ -89,7 +89,7 @@
                 />
                 <div *ngIf="f.confirmPassword.touched && f.confirmPassword.invalid" class="alert alert-danger">
                   <div *ngIf="f.confirmPassword.errors?.required">Password is required.</div>
-                  <div *ngIf="f.confirm_password.errors?.confirmedValidator">Password and Confirm Password must be match.</div>
+                  <div *ngIf="f.confirmPassword.errors?.confirmedValidator">Password and Confirm Password must be match.</div>
                 </div>
                 <button  mat-icon-button matSuffix (click)="hide = !hide" [attr.aria-label]="'Hide Password'"
                 [attr.aria-pressed]="hide">
