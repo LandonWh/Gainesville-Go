@@ -3,7 +3,7 @@
       <div class="header">
         <header>Enter Information</header>
       </div>
-
+      <!--First Name-->
       <form (ngSubmit)="onLogin()" name="registerForm" [formGroup]="registerForm">
         <div class="firstName">
           <mat-form-field class="full-width" appearance="outline">
@@ -18,7 +18,7 @@
               </mat-error>
           </mat-form-field>
         </div>
-
+        <!--Last Name-->
         <div class="lastName">
           <mat-form-field class="full-width" appearance="outline">
             <mat-label>Last Name</mat-label>
@@ -32,8 +32,7 @@
               </mat-error>
           </mat-form-field>
         </div>
-
-
+        <!--Email-->
         <div>
           <mat-form-field class="full-width" appearance="outline">
             <mat-label>Email</mat-label>
@@ -47,11 +46,22 @@
               </mat-error>
           </mat-form-field>
         </div>
-
+        <!--Password-->
         <div>  
           <mat-form-field class="full-width" appearance="outline">
             <mat-label>Password</mat-label>
-            <input formControlName="password" matInput [type]=" hide ? 'password' : 'text'" required />
+            <input 
+            formControlName="password" 
+            name="password"
+            matInput [type]=" hide ? 'password' : 'text'" required 
+            id="password"
+            type = "password"
+            class="form-control"
+            placeholder="Enter Password" required
+            />
+            <div *ngIf="f.password.touched && f.password.invalid" class="alert alert-danger">
+              <div *ngIf="f.password.errors?.required">Password is required.</div>
+            </div>
             <button  mat-icon-button matSuffix (click)="hide = !hide" [attr.aria-label]="'Hide Password'"
             [attr.aria-pressed]="hide">
             <mat-icon>
@@ -64,10 +74,23 @@
         </mat-form-field>
         </div>
 
+        <!--Confirm Password-->
         <div>
             <mat-form-field class="full-width" appearance="outline">
                 <mat-label>Confirm Password</mat-label>
-                <input formControlName="confirmPassword" matInput [type]=" hide ? 'password' : 'text'" required />
+                <input 
+                formControlName="confirmPassword" 
+                name="confirmPassword"
+                matInput [type]=" hide ? 'password' : 'text'" required  
+                id="confirmPassword"
+                type = "password"
+                class="form-control"
+                placeholder="Confirm Password" required
+                />
+                <div *ngIf="f.confirmPassword.touched && f.confirmPassword.invalid" class="alert alert-danger">
+                  <div *ngIf="f.confirmPassword.errors?.required">Password is required.</div>
+                  <div *ngIf="f.confirm_password.errors?.confirmedValidator">Password and Confirm Password must be match.</div>
+                </div>
                 <button  mat-icon-button matSuffix (click)="hide = !hide" [attr.aria-label]="'Hide Password'"
                 [attr.aria-pressed]="hide">
                 <mat-icon>

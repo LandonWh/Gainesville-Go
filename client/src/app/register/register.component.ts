@@ -8,9 +8,8 @@ import { FormGroup, FormControl, Validators, FormBuilder} from '@angular/forms';
   styleUrls: ['./register.component.css']
 })
 export class RegisterComponent {
-  ngOnit() {
-    
-  }
+  reactiveForm:FormGroup;
+  ngOnit() {}
   
   hide: boolean = false;
   constructor(private fb: FormBuilder) { }
@@ -21,7 +20,10 @@ export class RegisterComponent {
     password: ['', [Validators.required, Validators.minLength(6)]],
     confirmPassword: ['', [Validators.required, Validators.minLength(6)]]
   })
-
+  
+  get f () {
+    return this.reactiveForm.controls
+  }
 
   onLogin() {
     if (!this.registerForm.valid) {
