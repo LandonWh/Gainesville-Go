@@ -88,8 +88,8 @@
                 placeholder="Confirm Password" required
                 />
                 <div *ngIf="f.confirmPassword.touched && f.confirmPassword.invalid" class="alert alert-danger">
-                  <div *ngIf="f.confirmPassword.errors?.required">Password is required.</div>
-                  <div *ngIf="f.confirmPassword.errors?.confirmedValidator">Password and Confirm Password must be match.</div>
+                  <div *ngIf="f.confirmPassword.errors?.required">Confirm Password is required.</div>
+                  <div *ngIf="f.confirmPassword.errors?.MustMatch">Password and Confirm Password must match.</div>
                 </div>
                 <button  mat-icon-button matSuffix (click)="hide = !hide" [attr.aria-label]="'Hide Password'"
                 [attr.aria-pressed]="hide">
@@ -99,7 +99,7 @@
             </button>
             <mat-error *ngIf="!registerForm.controls['confirmPassword'].valid">
                 You must confirm your password
-              </mat-error>
+            </mat-error>
             </mat-form-field>
         </div>
         <div class="createAccount">
