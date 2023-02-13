@@ -59,9 +59,9 @@
             class="form-control"
             placeholder="Enter Password" required
             />
-            <div *ngIf="f.password.touched && f.password.invalid" class="alert alert-danger">
+            <!--<div *ngIf="f.password.touched && f.password.invalid" class="alert alert-danger">
               <div *ngIf="f.password.errors?.required">Password is required.</div>
-            </div>
+            </div>-->
             <button  mat-icon-button matSuffix (click)="hide = !hide" [attr.aria-label]="'Hide Password'"
             [attr.aria-pressed]="hide">
             <mat-icon>
@@ -87,10 +87,10 @@
                 class="form-control"
                 placeholder="Confirm Password" required
                 />
-                <div *ngIf="f.confirmPassword.touched && f.confirmPassword.invalid" class="alert alert-danger">
+                <!--<div *ngIf="f.confirmPassword.touched && f.confirmPassword.invalid" class="alert alert-danger">
                   <div *ngIf="f.confirmPassword.errors?.required">Confirm Password is required.</div>
                   <div *ngIf="f.confirmPassword.errors?.MustMatch">Password and Confirm Password must match.</div>
-                </div>
+                </div>-->
                 <button  mat-icon-button matSuffix (click)="hide = !hide" [attr.aria-label]="'Hide Password'"
                 [attr.aria-pressed]="hide">
                 <mat-icon>

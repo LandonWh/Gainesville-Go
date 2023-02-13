@@ -45,6 +45,7 @@ export class RegisterComponent {
       }
     }
   }
+  
 
   onLogin() {
     if (!this.registerForm.valid) {
