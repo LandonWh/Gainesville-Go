@@ -1,21 +1,34 @@
 //Password Validation is from https://www.youtube.com/watch?v=qe-ebQ65sUY&t=68s
-
+//Frontend to Backend Link is from https://www.youtube.com/watch?v=pHRHJCYBqxw&t=1817s
 import { Component } from '@angular/core';
 import { OnInit} from '@angular/core';
 import { FormGroup, FormControl, Validators, FormBuilder} from '@angular/forms';
+import { HttpClient } from '@angular/common/http';
+import { lastValueFrom } from 'rxjs';
+
+interface IAccountInfo {
+  firstName: string
+  lastName: string
+  email: string
+  password: string
+}
 
 @Component({
   selector: 'app-register',
   templateUrl: './register.component.html',
   styleUrls: ['./register.component.css']
 })
-export class RegisterComponent {
+export class RegisterComponent implements OnInit {
+  
   reactiveForm:FormGroup;
-  ngOnit() {}
   
   hide: boolean = false;
-  constructor(private fb: FormBuilder) { }
-  registerForm : FormGroup = this.fb.group({
+  constructor(private fb: FormBuilder, private httpClient: HttpClient) { }
+  async ngOnInit() {
+    await this.loadAccountInfo()
+  }
+    
+    registerForm : FormGroup = this.fb.group({
     firstName: ['', [Validators.required, Validators.pattern("^[a-zA-z']*$")]],
     lastName: ['', [Validators.required, Validators.pattern("^[a-zA-z']*$")]],
     email: ['', [Validators.required, Validators.email]],
@@ -23,14 +36,14 @@ export class RegisterComponent {
     confirmPassword: ['', [Validators.required, Validators.minLength(6)]]
   },
   {
-    Validators: this.MustMatch('password', 'confirmPassword')
+    //Validators: this.MustMatch('password', 'confirmPassword')
   })
   
   get f () {
     return this.reactiveForm.controls
   }
 
-  MustMatch(controlName: string, matchingControlName: string) {
+  /*MustMatch(controlName: string, matchingControlName: string) {
     return(formGroup:FormGroup)=> {
       const control = formGroup.controls[controlName];
       const matchingControl = formGroup.controls[matchingControlName];
@@ -45,6 +58,7 @@ export class RegisterComponent {
       }
     }
   }
+  */
   
 
   onLogin() {
@@ -52,5 +66,49 @@ export class RegisterComponent {
       return;
     }
     console.log(this.registerForm.value);
+  }
+
+  //Stuff to send account info to backend
+  //This needs to be moved to app.component.ts (maybe?)
+  public firstName = ''
+  public lastName = ''
+  public email = ''
+  public password = ''
+  public accountInfoItems: IAccountInfo[] = [
+
+    {
+      firstName: 'John',
+      lastName: 'Smith',
+      email: 'Hello',
+      password: 'first password'
+    },
+    {
+      firstName: 'John',
+      lastName: 'Doe',
+      email: 'Hello',
+      password: 'second password'
+    }
+  ]
+
+  //.promise replacement from https://stackoverflow.com/questions/67044273/rxjs-topromise-deprecated
+  public async loadAccountInfo() {
+    const accountInfoItems$ = this.httpClient.get<IAccountInfo[]>('/api');
+    this.accountInfoItems = await lastValueFrom(accountInfoItems$);
+    //this.accountInfoItems = await this.httpClient.get<IAccountInfo[]>('/api/').toPromise //Make a new request type in main.go and toPromise is deprecated, find replacement 
+  }
+
+  public async createAccount() {
+    await this.httpClient.post('/api/', {
+      firstName: this.firstName,
+      lastName: this.lastName,
+      email: this.email,
+      password: this.password
+    })
+    await this.loadAccountInfo();
+    this.firstName = ''
+    this.lastName = ''
+    this.email = ''
+    this.password = ''
+     //Make a new request type in main.go here too
   }
 }

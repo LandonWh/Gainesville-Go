@@ -9,6 +9,7 @@
           <mat-form-field class="full-width" appearance="outline">
             <mat-label>First Name</mat-label>
             <input
+              [(ngModel)]="firstName"
               formControlName="firstName"
               matInput
               placeholder="First Name" required
@@ -23,6 +24,7 @@
           <mat-form-field class="full-width" appearance="outline">
             <mat-label>Last Name</mat-label>
             <input
+              [(ngModel)]="lastName"
               formControlName="lastName"
               matInput
               placeholder="Last Name" required
@@ -37,6 +39,7 @@
           <mat-form-field class="full-width" appearance="outline">
             <mat-label>Email</mat-label>
             <input
+              [(ngModel)]="email"
               formControlName="email"
               matInput
               placeholder="Enter email address" required
@@ -51,6 +54,7 @@
           <mat-form-field class="full-width" appearance="outline">
             <mat-label>Password</mat-label>
             <input 
+            [(ngModel)]="password"
             formControlName="password" 
             name="password"
             matInput [type]=" hide ? 'password' : 'text'" required 
@@ -103,8 +107,9 @@
             </mat-form-field>
         </div>
         <div class="createAccount">
-        <button mat-flat-button color="primary" >Create Account!</button>
+        <button mat-flat-button color="primary" (click)="createAccount()">Create Account!</button>
         </div>
+      
       </form>
     </mat-card-content>
   </mat-card>
