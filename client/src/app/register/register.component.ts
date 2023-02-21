@@ -1,5 +1,5 @@
 //Password Validation is from https://www.youtube.com/watch?v=qe-ebQ65sUY&t=68s
-
+//Frontend to Backend Link is from https://www.youtube.com/watch?v=pHRHJCYBqxw&t=1817s
 import { Component } from '@angular/core';
 import { OnInit} from '@angular/core';
 import { FormGroup, FormControl, Validators, FormBuilder} from '@angular/forms';
@@ -18,13 +18,15 @@ interface IAccountInfo {
   templateUrl: './register.component.html',
   styleUrls: ['./register.component.css']
 })
-export class RegisterComponent {
+export class RegisterComponent implements OnInit {
   
   reactiveForm:FormGroup;
-  ngOnit() {}
   
   hide: boolean = false;
   constructor(private fb: FormBuilder, private httpClient: HttpClient) { }
+  async ngOnInit() {
+    await this.loadAccountInfo()
+  }
     
     registerForm : FormGroup = this.fb.group({
     firstName: ['', [Validators.required, Validators.pattern("^[a-zA-z']*$")]],
@@ -102,6 +104,7 @@ export class RegisterComponent {
       email: this.email,
       password: this.password
     })
+    await this.loadAccountInfo();
     this.firstName = ''
     this.lastName = ''
     this.email = ''
