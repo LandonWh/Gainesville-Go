@@ -1,5 +1,8 @@
 import { Component, AfterViewInit} from '@angular/core';
+import { MatDialog } from '@angular/material/dialog';
 import * as L from 'leaflet';
+import { EventFormComponent } from '../event-form/event-form.component';
+import { ElementRef } from '@angular/core';
 
 
 @Component({
@@ -11,6 +14,11 @@ styleUrls: ['./map.component.css']
 
 export class MapComponent  {
 
+  constructor(public dialog: MatDialog, private elementRef: ElementRef) {}
+
+  openDialog() {
+    this.dialog.open(EventFormComponent);
+  }
 
   options={ 
   layers:[L.tileLayer('https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png',  {
@@ -26,18 +34,27 @@ export class MapComponent  {
 
 
 onMapReady(map: L.Map) {
-  var TheSocial = L.marker([29.652630, -82.345551]).addTo(map);
-  if (TheSocial.bindPopup("The Social At Midtown").openPopup()) {
-    
-  }
   
+  
+  const socialContent = `
+  <h3 class="header">The Social at Midtown</h3>
+  Click Marker to Create an Event Here!
+  `
+  const _this = this;
+  
+  var TheSocial = L.marker([29.652630, -82.345551]).addTo(map)
+  .bindPopup(socialContent).on("mouseover", () => {
+    TheSocial.openPopup();
+  }).on("click", e => {
+    this.openDialog();
+  })
+  .on("mouseout", () => {
+    TheSocial.closePopup();
+  })
+ 
 
+  }
 }
-
-
-}
-
-
 
 
 

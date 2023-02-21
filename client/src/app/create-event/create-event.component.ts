@@ -14,5 +14,5 @@ import { NavbarComponent } from '../navbar/navbar.component';
 
 
 export class CreateEventComponent {
-
+  
 }

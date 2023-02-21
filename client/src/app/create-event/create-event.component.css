@@ -6,6 +6,7 @@
   
   .heading {
      text-align: center;
+     flex: auto;
      margin-top: 5%;
      border: 10px;
      font-weight: 200;

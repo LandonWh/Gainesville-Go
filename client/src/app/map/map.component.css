@@ -6,3 +6,8 @@
     width: 40%;
     align-content: flex-end;
 }
+
+.header {
+    flex: auto 1 1;
+    align-content: center;
+}

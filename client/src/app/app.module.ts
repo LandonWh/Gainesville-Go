@@ -21,7 +21,9 @@ import { MapComponent } from './map/map.component';
 import { LoginComponent } from './login/login.component';
 import { RegisterComponent } from './register/register.component';
 import {HttpClientModule} from '@angular/common/http'
-
+import { MatFormFieldModule } from '@angular/material/form-field';
+import {  MatDialogModule} from '@angular/material/dialog';
+import { EventFormComponent } from './event-form/event-form.component'
 
 @NgModule({
   declarations: [
@@ -32,7 +34,9 @@ import {HttpClientModule} from '@angular/common/http'
     MapComponent,
     LoginComponent,
     RegisterComponent,
+    EventFormComponent,
   ],
+  entryComponents: [EventFormComponent],
   imports: [
     MatSlideToggleModule,
     MatSidenavModule,
@@ -48,7 +52,10 @@ import {HttpClientModule} from '@angular/common/http'
     MatButtonModule,
     ReactiveFormsModule,
     LeafletModule,
-    HttpClientModule
+    HttpClientModule,
+    MatFormFieldModule,
+    MatDialogModule,
+    
   ],
   providers: [],
   bootstrap: [AppComponent]
