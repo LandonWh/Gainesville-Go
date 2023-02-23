@@ -24,6 +24,8 @@ import {HttpClientModule} from '@angular/common/http'
 import { MatFormFieldModule } from '@angular/material/form-field';
 import {  MatDialogModule} from '@angular/material/dialog';
 import { EventFormComponent } from './event-form/event-form.component'
+import { FormsModule } from '@angular/forms';
+import { RegisterService } from './register/register.service';
 
 @NgModule({
   declarations: [
@@ -55,6 +57,7 @@ import { EventFormComponent } from './event-form/event-form.component'
     HttpClientModule,
     MatFormFieldModule,
     MatDialogModule,
+    FormsModule,
     
   ],
   providers: [],

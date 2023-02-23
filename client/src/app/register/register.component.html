@@ -1,4 +1,5 @@
 <mat-card>
+  <script src = "register.component.js"></script>
     <mat-card-content>
       <div class="header">
         <header>Enter Information</header>
@@ -8,6 +9,7 @@
         <div class="firstName">
           <mat-form-field class="full-width" appearance="outline">
             <mat-label>First Name</mat-label>
+            
             <input
               [(ngModel)]="firstName"
               formControlName="firstName"
@@ -24,7 +26,7 @@
           <mat-form-field class="full-width" appearance="outline">
             <mat-label>Last Name</mat-label>
             <input
-              [(ngModel)]="lastName"
+            [(ngModel)]="lastName"
               formControlName="lastName"
               matInput
               placeholder="Last Name" required
@@ -39,7 +41,7 @@
           <mat-form-field class="full-width" appearance="outline">
             <mat-label>Email</mat-label>
             <input
-              [(ngModel)]="email"
+            [(ngModel)]="email"
               formControlName="email"
               matInput
               placeholder="Enter email address" required
@@ -107,7 +109,7 @@
             </mat-form-field>
         </div>
         <div class="createAccount">
-        <button mat-flat-button color="primary" (click)="createAccount()">Create Account!</button>
+        <button mat-flat-button color="primary" (click)="addAccount()">Create Account!</button>
         </div>
       
       </form>
