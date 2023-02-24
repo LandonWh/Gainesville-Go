@@ -2,10 +2,22 @@
 
 .header{
   text-align: center;
-  font-size: 20px;
+  font-size: 40px;
   font-weight: 100;
+  margin-top: 30px
 }
 
 .select {
   flex: auto 1 1;
+}
+
+.calendar {
+  float: right;
+  padding-right: 60px
+}
+
+.full-width {
+  width: 20%;
+  align-self: center;
+  padding-left: 40px;
 }

@@ -20,7 +20,7 @@ export class MapComponent  {
   openDialog(message: string ) {
     const dialogRef = this.dialog.open(EventFormComponent,{
       width: '1000px', 
-      height: '500px',
+      height: '1000px',
       data: {message: message}
     });
 

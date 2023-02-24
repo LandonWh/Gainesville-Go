@@ -1,2 +1,32 @@
-<h4>{{ data.message }}</h4>
+
+<h1 class="header">{{ data.message }}</h1>
+
+<mat-form-field class="full-width" appearance="fill">
+    <mat-label>Amount of People</mat-label>
+    <input matInput>
+  </mat-form-field>
+  
+  <mat-form-field class="calendar" appearance="fill">
+    <mat-label>Choose a date</mat-label>
+  <!-- #docregion toggle -->
+    <input matInput [matDatepicker]="picker">
+    <mat-hint>MM/DD/YYYY</mat-hint>
+    <mat-datepicker-toggle matIconSuffix [for]="picker"></mat-datepicker-toggle>
+    <mat-datepicker #picker></mat-datepicker>
+  <!-- #enddocregion toggle -->
+  </mat-form-field>
+
+
+
+  <mat-form-field class="calendar" appearance="fill">
+    <mat-label>Description</mat-label>
+    <textarea matInput
+    cdkTextareaAutosize
+    #autosize="cdkTextareaAutosize"
+    ></textarea>
+  </mat-form-field>
+
+
+
+
 

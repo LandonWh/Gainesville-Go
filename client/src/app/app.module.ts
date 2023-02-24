@@ -27,7 +27,8 @@ import { EventFormComponent } from './event-form/event-form.component'
 import { FormsModule } from '@angular/forms';
 import { MatSelectModule } from '@angular/material/select'
 import { RegisterService } from './register/register.service';
-
+import {MatDatepickerModule} from '@angular/material/datepicker';
+import { MatNativeDateModule } from '@angular/material/core';
 @NgModule({
   declarations: [
     AppComponent,
@@ -59,7 +60,9 @@ import { RegisterService } from './register/register.service';
     MatFormFieldModule,
     MatDialogModule,
     FormsModule,
-    MatSelectModule
+    MatSelectModule,
+    MatDatepickerModule,
+    MatNativeDateModule,
     
   ],
   providers: [],
