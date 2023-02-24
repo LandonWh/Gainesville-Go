@@ -19,7 +19,7 @@ export class MapComponent  {
 
   openDialog(message: string ) {
     const dialogRef = this.dialog.open(EventFormComponent,{
-      width: '1000px', 
+      width: '600px', 
       height: '1000px',
       data: {message: message}
     });
@@ -54,6 +54,12 @@ onMapReady(map: L.Map) {
   <h3 class="header">The Social at Midtown</h3>
   Click Marker to Create an Event Here!
   `
+
+  const DepotParkContent = `
+  <h3 class="header">The Social at Midtown</h3>
+  Click Marker to Create an Event Here!
+  `
+
   const _this = this;
   
   var TheSocial = L.marker([29.652630, -82.345551]).addTo(map)
@@ -68,8 +74,31 @@ onMapReady(map: L.Map) {
   .on("mouseout", () => {
     TheSocial.closePopup();
   })
+
+  
+  var DepotPark = L.marker([29.6437363, -82.321861]).addTo(map)
+  .bindPopup(DepotParkContent).on("mouseover", () => {
+    DepotPark.openPopup();
+  }).on("click", () => 
+    {
+      this.ngZone.run(() => {
+        this.openDialog("Depot Park");
+      });
+  })
+  .on("mouseout", () => {
+    DepotPark.closePopup();
+  })
   }
+
+
+
+
+
+
 }
+
+-82.321861
+29.6437363
 
 
 
