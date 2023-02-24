@@ -24,7 +24,6 @@ export class EventFormComponent {
   eventForm: FormGroup = this.formBuilder.group({
       event: ['', [Validators.required,]],
       numPeople: ['', [Validators.required]]
-      startTime: ['', ]
   })
 
 
