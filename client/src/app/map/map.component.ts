@@ -16,8 +16,19 @@ export class MapComponent  {
 
   constructor(public dialog: MatDialog, private elementRef: ElementRef) {}
 
-  openDialog() {
-    this.dialog.open(EventFormComponent);
+  openDialog(message: string ) {
+    const dialogRef = this.dialog.open(EventFormComponent,{
+      width: '1000px', 
+      height: '500px',
+      data: {message: message}
+    });
+
+    dialogRef.afterOpened().subscribe(() => {
+      const inputElement = document.getElementById('inputField');
+      if (inputElement) {
+        inputElement.focus();
+      }
+    });
   }
 
   options={ 
@@ -45,14 +56,12 @@ onMapReady(map: L.Map) {
   var TheSocial = L.marker([29.652630, -82.345551]).addTo(map)
   .bindPopup(socialContent).on("mouseover", () => {
     TheSocial.openPopup();
-  }).on("click", e => {
-    this.openDialog();
+  }).addEventListener("click", e => {
+    this.openDialog("The Social");
   })
   .on("mouseout", () => {
     TheSocial.closePopup();
   })
- 
-
   }
 }
 
