@@ -25,6 +25,7 @@ import { MatFormFieldModule } from '@angular/material/form-field';
 import {  MatDialogModule} from '@angular/material/dialog';
 import { EventFormComponent } from './event-form/event-form.component'
 import { FormsModule } from '@angular/forms';
+import { MatSelectModule } from '@angular/material/select'
 import { RegisterService } from './register/register.service';
 
 @NgModule({
@@ -58,6 +59,7 @@ import { RegisterService } from './register/register.service';
     MatFormFieldModule,
     MatDialogModule,
     FormsModule,
+    MatSelectModule
     
   ],
   providers: [],
