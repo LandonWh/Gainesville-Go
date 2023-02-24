@@ -1,8 +1,9 @@
-import { Component, AfterViewInit} from '@angular/core';
+import { Component, ChangeDetectorRef, NgZone} from '@angular/core';
 import { MatDialog } from '@angular/material/dialog';
 import * as L from 'leaflet';
 import { EventFormComponent } from '../event-form/event-form.component';
 import { ElementRef } from '@angular/core';
+
 
 
 @Component({
@@ -14,7 +15,7 @@ styleUrls: ['./map.component.css']
 
 export class MapComponent  {
 
-  constructor(public dialog: MatDialog, private elementRef: ElementRef) {}
+  constructor(public dialog: MatDialog, private ngZone: NgZone) {}
 
   openDialog(message: string ) {
     const dialogRef = this.dialog.open(EventFormComponent,{
@@ -24,10 +25,12 @@ export class MapComponent  {
     });
 
     dialogRef.afterOpened().subscribe(() => {
-      const inputElement = document.getElementById('inputField');
-      if (inputElement) {
-        inputElement.focus();
-      }
+      setTimeout(() => {
+        const inputElement = document.getElementById('inputField');
+        if (inputElement) {
+          inputElement.focus();
+        }
+      }, 100);
     });
   }
 
@@ -56,8 +59,11 @@ onMapReady(map: L.Map) {
   var TheSocial = L.marker([29.652630, -82.345551]).addTo(map)
   .bindPopup(socialContent).on("mouseover", () => {
     TheSocial.openPopup();
-  }).addEventListener("click", e => {
-    this.openDialog("The Social");
+  }).on("click", () => 
+    {
+      this.ngZone.run(() => {
+        this.openDialog("The Social");
+      });
   })
   .on("mouseout", () => {
     TheSocial.closePopup();
