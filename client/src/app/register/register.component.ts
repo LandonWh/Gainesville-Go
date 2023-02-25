@@ -5,7 +5,11 @@ import { OnInit} from '@angular/core';
 import { FormGroup, FormControl, Validators, FormBuilder} from '@angular/forms';
 import { HttpClient } from '@angular/common/http';
 import { firstValueFrom, lastValueFrom } from 'rxjs';
-import { Account, RegisterService} from './register.service'
+import { first } from 'rxjs/operators';
+import { AccountService } from '../_services/account.service';
+import { AlertService } from '../_services/alert.service';
+import { ActivatedRoute } from '@angular/router';
+import { Router } from '@angular/router';
 
 
 @Component({
@@ -14,7 +18,7 @@ import { Account, RegisterService} from './register.service'
   styleUrls: ['./register.component.css']
 })
 export class RegisterComponent{
-  accounts: Account[] = [];
+  
 
   firstName: string = "";
   lastName: string = "";
@@ -23,12 +27,21 @@ export class RegisterComponent{
 
   reactiveForm:FormGroup;
   hide: boolean = false;
+  httpClient: any;
 
+  submitted = false;
+  loading = true;
   
-  constructor(private fb: FormBuilder, private RegisterService: RegisterService, private httpClient: HttpClient) { 
-    this.accounts = RegisterService.get();
-  }
+  constructor(
+    private fb: FormBuilder,
+    private route: ActivatedRoute,
+    private router: Router,
+    private accountService: AccountService,
+    private alertService: AlertService
+
+    ) { }
     
+
     registerForm : FormGroup = this.fb.group({
     firstName: ['', [Validators.required, Validators.pattern("^[a-zA-z']*$")]],
     lastName: ['', [Validators.required, Validators.pattern("^[a-zA-z']*$")]],
@@ -44,18 +57,27 @@ export class RegisterComponent{
     return this.reactiveForm.controls
   }
 
-  async addAccount() {
-    await firstValueFrom(
-      this.httpClient.post('/api/register', {
-        firstName: this.firstName,
-        lastName: this.lastName,
-        email: this.email,
-        password: this.password
-      }));
-    this.firstName = '',
-    this.lastName = '',
-    this.email = '',
-    this.password = ''
+  onSubmit() {
+    this.submitted = true;
+
+    this.alertService.clear();
+
+    if (this.reactiveForm.invalid) {
+      return;
+    }
+    this.loading  = true;
+    this.accountService.register(this.reactiveForm.value)
+      .pipe(first())
+      .subscribe({
+        next: () => {
+          this.alertService.success('Registration Successful', { keepAfterRouteChange: true});
+          this.router.navigate(['../login'], { relativeTo: this.route});
+        },
+        error: error => {
+          this.alertService.error(error);
+          this.loading = false;
+        }
+      })
   }
 
   /*MustMatch(controlName: string, matchingControlName: string) {

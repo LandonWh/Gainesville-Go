@@ -20,13 +20,16 @@ import { LeafletModule } from '@asymmetrik/ngx-leaflet';
 import { MapComponent } from './map/map.component';
 import { LoginComponent } from './login/login.component';
 import { RegisterComponent } from './register/register.component';
-import {HttpClientModule} from '@angular/common/http'
+import {HttpClientModule, HTTP_INTERCEPTORS} from '@angular/common/http'
 import { MatFormFieldModule } from '@angular/material/form-field';
 import {  MatDialogModule} from '@angular/material/dialog';
 import { EventFormComponent } from './event-form/event-form.component'
 import { FormsModule } from '@angular/forms';
 import { MatSelectModule } from '@angular/material/select'
-import { RegisterService } from './register/register.service';
+import { AlertComponent } from './_components/alert.component';
+import { JwtInterceptor } from './_helpers/jwt.interceptor';
+import { ErrorInterceptor } from './_helpers/error.interceptor';
+import { RouterModule } from '@angular/router';
 
 @NgModule({
   declarations: [
@@ -36,8 +39,10 @@ import { RegisterService } from './register/register.service';
     NavbarComponent,
     MapComponent,
     LoginComponent,
-    RegisterComponent,
     EventFormComponent,
+    RegisterComponent,
+    AlertComponent
+
   ],
   entryComponents: [EventFormComponent],
   imports: [
@@ -59,10 +64,14 @@ import { RegisterService } from './register/register.service';
     MatFormFieldModule,
     MatDialogModule,
     FormsModule,
-    MatSelectModule
+    MatSelectModule,
+    RouterModule
     
   ],
-  providers: [],
+  providers: [ 
+    { provide: HTTP_INTERCEPTORS, useClass: JwtInterceptor, multi: true},
+    { provide: HTTP_INTERCEPTORS, useClass: ErrorInterceptor, multi: true}
+  ],
   bootstrap: [AppComponent]
 })
 export class AppModule { }
