@@ -6,7 +6,7 @@ import { Router } from '@angular/router';
 @Injectable()
 export class AuthService {
 
-    API_URL = 'http://localhost:1337';
+    API_URL = 'http://localhost:8080';
     TOKEN_KEY = 'token';
 
     constructor(private http: HttpClient, private router: Router) { }
