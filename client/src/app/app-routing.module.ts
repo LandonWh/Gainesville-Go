@@ -5,24 +5,29 @@ import { MainPageComponent } from './main-page/main-page.component';
 import { CreateEventComponent } from './create-event/create-event.component';
 import { LoginComponent } from './login/login.component';
 import { RegisterComponent } from './register/register.component';
+import { MembersComponent } from './members/members.component';
 
 const routes: Routes = [
   {path: '', pathMatch: 'full', redirectTo: 'login'},
   {
     path: 'login',
-    component: LoginComponent,
+    component: LoginComponent
   },
   {
     path: 'home',
-    component: MainPageComponent,
+    component: MainPageComponent
   },
   {
     path: 'create-event',
-    component: CreateEventComponent,
+    component: CreateEventComponent
   },
   {
     path: 'register',
     component: RegisterComponent
+  },
+  {
+    path: 'members',
+    component: MembersComponent
   }
 
     ]
