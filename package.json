@@ -1,0 +1,9 @@
+{
+  "devDependencies": {
+    "cypress": "^12.7.0"
+  },
+  "dependencies": {
+    "@angular/http": "^7.2.16",
+    "base64url": "^3.0.1"
+  }
+}

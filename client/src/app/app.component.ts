@@ -1,10 +1,13 @@
 import { ChangeDetectionStrategy, Component } from '@angular/core';
 import {HttpClient} from '@angular/common/http'
+import { lastValueFrom } from 'rxjs';
 
-interface IAccountsItem {
-  email: string
-  password: string
-}
+// interface IAccountInfo {
+//   firstName: string
+//   lastName: string
+//   email: string
+//   password: string
+// }
 
 @Component({
   selector: 'app-root',
@@ -15,34 +18,51 @@ interface IAccountsItem {
 
 })
 export class AppComponent {
-  title: any;
 
-  public accountsItems: IAccountsItem[] = [
+  // public firstName = ''
+  // public lastName = ''
+  // public email = ''
+  // public password = ''
+  // public accountInfoItems: IAccountInfo[] = [
 
-    {
-      email: 'Hello',
-      password: 'first password'
-    },
-    {
-      email: 'another one',
-      password: 'another value'
-    }
-  ]
+  //   {
+  //     firstName: 'John',
+  //     lastName: 'Smith',
+  //     email: 'Hello',
+  //     password: 'first password'
+  //   },
+  //   {
+  //     firstName: 'John',
+  //     lastName: 'Doe',
+  //     email: 'Hello',
+  //     password: 'first password'
+  //   }
+  // ]
 
-  constructor(
-    private httpClient: HttpClient
-  ) {}
+  // constructor(
+  //   private httpClient: HttpClient
+  // ) {}
 
-  async loadAccountInfo() {
-    //this.accountsItems = await this.httpClient.get<IAccountsItem[]>('/api/').toPromise //Make a new request type in main.go and toPromise is deprecated, find replacement 
-  }
+  // //.promise replacement from https://stackoverflow.com/questions/67044273/rxjs-topromise-deprecated
+  // public async loadAccountInfo() {
+  //   const accountInfoItems$ = this.httpClient.get<IAccountInfo[]>('/api');
+  //   this.accountInfoItems = await lastValueFrom(accountInfoItems$);
+  //   //this.accountInfoItems = await this.httpClient.get<IAccountInfo[]>('/api/').toPromise //Make a new request type in main.go and toPromise is deprecated, find replacement 
+  // }
 
-  async addAccount() {
-    await this.httpClient.post('/api/', {
-      //email: this.email,
-      //password: this.password
-    }).toPromise //Make a new request type in main.go here too
-  }
+  // public async createAccount() {
+  //   await this.httpClient.post('/api/', {
+  //     firstName: this.firstName,
+  //     lastName: this.lastName,
+  //     email: this.email,
+  //     password: this.password
+  //   })
+  //   this.firstName = ''
+  //   this.lastName = ''
+  //   this.email = ''
+  //   this.password = ''
+  //    //Make a new request type in main.go here too
+  // }
   
 }
 

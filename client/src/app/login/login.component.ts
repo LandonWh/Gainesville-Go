@@ -1,6 +1,7 @@
-import { ViewEncapsulation } from '@angular/core';
-import { Component, OnInit} from '@angular/core';
-import { FormGroup, FormControl, Validators, FormBuilder} from '@angular/forms';
+
+import { Component } from '@angular/core';
+import { FormGroup, Validators, FormBuilder} from '@angular/forms';
+import { AuthService } from '../auth.service';
 
 @Component({
   selector: 'app-login',
@@ -13,20 +14,24 @@ export class LoginComponent {
   ngOnit() {
     
   }
+
+  form: FormGroup;
   
   hide: boolean = false;
-  constructor(private fb: FormBuilder) { }
-  loginForm : FormGroup = this.fb.group({
-    email: ['', [Validators.required, Validators.email]],
-    password: ['', [Validators.required, Validators.minLength(6)]]
-  })
+  constructor(private fb: FormBuilder, private authService: AuthService) {
+    this.form = this.fb.group({
+      email: ['', [Validators.required, Validators.email]],
+      password: ['', [Validators.required, Validators.minLength(6)]]
+    });
+  }
 
 
-  onLogin() {
-    if (!this.loginForm.valid) {
-      return;
+  login() {
+    const val = this.form.value;
+
+    if (val.email && val.password) {
+      this.authService.login(val.email, val.password);
     }
-    console.log(this.loginForm.value);
   }
   
 }

@@ -20,8 +20,35 @@ import { LeafletModule } from '@asymmetrik/ngx-leaflet';
 import { MapComponent } from './map/map.component';
 import { LoginComponent } from './login/login.component';
 import { RegisterComponent } from './register/register.component';
-import {HttpClientModule} from '@angular/common/http'
+import {HttpClientModule, HTTP_INTERCEPTORS} from '@angular/common/http'
+import { MatFormFieldModule } from '@angular/material/form-field';
+import {  MatDialogModule} from '@angular/material/dialog';
+import { EventFormComponent } from './event-form/event-form.component'
+import { FormsModule } from '@angular/forms';
+import { MatSelectModule } from '@angular/material/select'
+import { RegisterService } from './register/register.service';
+import {MatDatepickerModule} from '@angular/material/datepicker';
+import { MatNativeDateModule } from '@angular/material/core';
+import {NgxMaterialTimepickerModule} from 'ngx-material-timepicker';
+import {MatSliderModule} from '@angular/material/slider';
+import {MatCheckboxModule} from '@angular/material/checkbox';
 
+import { MembersComponent } from './members/members.component';
+import { AuthInterceptorService } from './auth-interceptor.service';
+import { CanActivateViaAuthGuard } from './can-activate-via-auth.guard';
+import { AuthService } from './auth.service';
+
+const routes = [
+  { path: 'login', component: LoginComponent },
+  {
+      path: 'members',
+      component: MembersComponent,
+      canActivate: [
+          CanActivateViaAuthGuard
+      ]
+  },
+  { path: '**', redirectTo: '' }
+];
 
 @NgModule({
   declarations: [
@@ -32,7 +59,10 @@ import {HttpClientModule} from '@angular/common/http'
     MapComponent,
     LoginComponent,
     RegisterComponent,
+    EventFormComponent,
+    MembersComponent,
   ],
+  entryComponents: [EventFormComponent],
   imports: [
     MatSlideToggleModule,
     MatSidenavModule,
@@ -48,9 +78,27 @@ import {HttpClientModule} from '@angular/common/http'
     MatButtonModule,
     ReactiveFormsModule,
     LeafletModule,
-    HttpClientModule
+    HttpClientModule,
+    MatFormFieldModule,
+    MatDialogModule,
+    FormsModule,
+    MatSelectModule,
+    MatDatepickerModule,
+    MatNativeDateModule,
+    NgxMaterialTimepickerModule,
+    MatSliderModule,
+    MatCheckboxModule,
+    
   ],
-  providers: [],
+  providers: [
+    AuthService,
+    {
+      provide: HTTP_INTERCEPTORS,
+      useClass: AuthInterceptorService,
+      multi: true
+    },
+    CanActivateViaAuthGuard
+  ],
   bootstrap: [AppComponent]
 })
 export class AppModule { }
