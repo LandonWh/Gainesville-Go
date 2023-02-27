@@ -3,7 +3,6 @@ package main
 import (
 	"html"
 	"strings"
-	"fmt"
 	"errors"
 	"github.com/jinzhu/gorm"
 	"golang.org/x/crypto/bcrypt"
@@ -11,7 +10,10 @@ import (
 
 type User struct {
 	gorm.Model
-	Username string `gorm:"type:varchar;size:60;not null;unique" json:"username"`
+	//Username string `gorm:"type:varchar;size:60;not null;unique" json:"username"`
+	FirstName string `gorm:"type:varchar;size:60;not null;" json:"firstname"`
+	LastName string `gorm:"type:varchar;size:60;not null;" json:"lastname"`
+	Email string `gorm:"type:varchar;size:60;not null;unique" json:"email"`
 	Password string `gorm:"type:varchar;size:60;not null;" json:"password"`
 }
 
@@ -34,20 +36,21 @@ func (u *User) PrepareGive(){
 }
 
 func VerifyPassword(password,hashedPassword string) error {
-	fmt.Println(hashedPassword, password)
 	return bcrypt.CompareHashAndPassword([]byte(hashedPassword), []byte(password))
 }
 
-func LoginCheck(username string, password string) (string,error) {
+func LoginCheck(email string, password string) (string,error) {
 	
 	var err error
 
 	u := User{}
 
-	err = DB.Model(User{}).Where("username = ?", username).Take(&u).Error
-
+	err = DB.Model(User{}).Where("email = ?", email).Take(&u).Error
+	if err != nil {
+		return "",err
+	}
+	
 	err = VerifyPassword(password, u.Password)
-	fmt.Println(err)
 	if err != nil && err == bcrypt.ErrMismatchedHashAndPassword {
 		return "", err
 	}
@@ -73,8 +76,8 @@ func (u *User) SaveUser() (*User, error) {
 	}
 	u.Password = string(hashedPassword)
 
-	//remove spaces in username 
-	u.Username = html.EscapeString(strings.TrimSpace(u.Username))
+	//remove spaces in email 
+	u.Email = html.EscapeString(strings.TrimSpace(u.Email)) //Probably useless now, keep just in case for now
 
 	if err != nil {
 		return &User{}, err

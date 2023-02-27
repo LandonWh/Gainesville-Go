@@ -27,6 +27,12 @@ import { EventFormComponent } from './event-form/event-form.component'
 import { FormsModule } from '@angular/forms';
 import { MatSelectModule } from '@angular/material/select'
 import { RegisterService } from './register/register.service';
+import {MatDatepickerModule} from '@angular/material/datepicker';
+import { MatNativeDateModule } from '@angular/material/core';
+import {NgxMaterialTimepickerModule} from 'ngx-material-timepicker';
+import {MatSliderModule} from '@angular/material/slider';
+import {MatCheckboxModule} from '@angular/material/checkbox';
+
 import { MembersComponent } from './members/members.component';
 import { AuthInterceptorService } from './auth-interceptor.service';
 import { CanActivateViaAuthGuard } from './can-activate-via-auth.guard';
@@ -76,7 +82,12 @@ const routes = [
     MatFormFieldModule,
     MatDialogModule,
     FormsModule,
-    MatSelectModule
+    MatSelectModule,
+    MatDatepickerModule,
+    MatNativeDateModule,
+    NgxMaterialTimepickerModule,
+    MatSliderModule,
+    MatCheckboxModule,
     
   ],
   providers: [
