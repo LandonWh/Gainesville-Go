@@ -1,30 +1,82 @@
 
 <h1 class="header">{{ data.message }}</h1>
 
+<form (ngSubmit)="onSubmit()" name="eventForm" [formGroup]="eventForm">
 <mat-form-field class="full-width" appearance="fill">
     <mat-label>Amount of People</mat-label>
-    <input matInput>
+    <input matInput formControlName="numPeople">
+    <mat-error *ngIf="!eventForm.controls['numPeople'].valid">
+      Must have between 1-999 people
+    </mat-error>
   </mat-form-field>
   
-  <mat-form-field class="calendar" appearance="fill">
+
+  <mat-form-field class="full-width" appearance="fill">
     <mat-label>Choose a date</mat-label>
-  <!-- #docregion toggle -->
-    <input matInput [matDatepicker]="picker">
+    <input matInput [matDatepicker]="picker" formControlName="date">
     <mat-hint>MM/DD/YYYY</mat-hint>
     <mat-datepicker-toggle matIconSuffix [for]="picker"></mat-datepicker-toggle>
     <mat-datepicker #picker></mat-datepicker>
-  <!-- #enddocregion toggle -->
+    <mat-error *ngIf="!eventForm.controls['date'].valid">
+      Date is required
+    </mat-error>
   </mat-form-field>
 
+  <mat-form-field class="full-width" appearance="fill">
+    <mat-label>Start Time</mat-label>
+    <input matInput formControlName="startTime"[ngxTimepicker]="starttimepicker"  readonly required>
+    <mat-icon matSuffix (click)="starttimepicker.open()">schedule</mat-icon>
+    <ngx-material-timepicker  class="custom-timepicker1" #starttimepicker [format]="12"  [defaultTime]="'09:00 AM'" (closed)="onTimepickerClosed($event)"></ngx-material-timepicker>
+    <mat-error *ngIf="!eventForm.controls['startTime'].valid">
+      Start time is required
+    </mat-error>
+  </mat-form-field>
+  
 
+  <mat-form-field class="full-width" appearance="fill">
+    <mat-label>End Time</mat-label>
+    <input matInput formControlName="endTime" [ngxTimepicker]="endtimepicker"  readonly>
+    <mat-icon matSuffix (click)="endtimepicker.open()">schedule</mat-icon>
+    <ngx-material-timepicker  class="custom-timepicker2" #endtimepicker [format]="12"  [defaultTime]="'09:00 AM'" (closed)="onTimepickerClosed($event)"></ngx-material-timepicker>
+    <mat-error *ngIf="!eventForm.controls['endTime'].valid">
+      End time is required
+    </mat-error>
+  </mat-form-field>
+  
+  <mat-form-field class="full-width" appearance="fill">
+    <mat-label>Activity Level</mat-label>
+    <mat-select formControlName="activityLevelV" color="primary">
+      <mat-option *ngFor="let activity of activityLevels" [value]="activity.value">
+        {{activity.viewValue}}
+      </mat-option>
+    </mat-select>
+    <mat-error *ngIf="!eventForm.controls['activityLevelV'].valid">
+      Activity level is required
+    </mat-error>
+  </mat-form-field>
 
-  <mat-form-field class="description" appearance="fill">
+  <mat-form-field class="full-width" appearance="fill">
     <mat-label>Description</mat-label>
     <textarea matInput
     cdkTextareaAutosize
     #autosize="cdkTextareaAutosize"
-    ></textarea>
+    formControlName="description"
+    maxlength=150></textarea>
+    <mat-error *ngIf="!eventForm.controls['description'].valid">
+      Description is required
+    </mat-error>
   </mat-form-field>
+</form>
+
+  <section class="full-width"  [formGroup]="eventForm">
+    <mat-checkbox formControlName="21">21+</mat-checkbox>
+    <mat-checkbox class="boys" formControlName="boys" (click)="eventForm.get('girls')?.setValue(false)">Boys Only</mat-checkbox>
+    <mat-checkbox class ="girls" formControlName="girls" (click)="eventForm.get('boys')?.setValue(false)">Girls Only</mat-checkbox>
+  </section>
+  
+
+
+
 
 
 

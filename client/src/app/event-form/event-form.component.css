@@ -2,8 +2,8 @@
 
 .header{
   text-align: center;
-  font-size: 40px;
-  font-weight: 100;
+  font-size: 30px;
+  font-weight: 10;
   margin-top: 30px
 }
 
@@ -11,13 +11,14 @@
   flex: auto 1 1;
 }
 
-.calendar {
+.right {
   float: right;
   padding-right: 60px
 }
 
 .full-width {
-  width: 30%;
+  padding-top: 20px;
+  width: 40%;
   align-self: center;
   padding-left: 40px;
 }
@@ -25,4 +26,19 @@
 .description {
   width: 80%;
   padding-left: 50px;
+}
+
+.start-time {
+  width: 30%;
+  padding-left: 40px;
+}
+
+.end-time {
+  float: right;
+  padding-right: 60px;
+}
+
+.restrictions {
+  float: right;
+  padding-right: 10px;
 }

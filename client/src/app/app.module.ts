@@ -29,6 +29,11 @@ import { MatSelectModule } from '@angular/material/select'
 import { RegisterService } from './register/register.service';
 import {MatDatepickerModule} from '@angular/material/datepicker';
 import { MatNativeDateModule } from '@angular/material/core';
+import {NgxMaterialTimepickerModule} from 'ngx-material-timepicker';
+import {MatSliderModule} from '@angular/material/slider';
+import {MatCheckboxModule} from '@angular/material/checkbox';
+
+
 @NgModule({
   declarations: [
     AppComponent,
@@ -63,6 +68,9 @@ import { MatNativeDateModule } from '@angular/material/core';
     MatSelectModule,
     MatDatepickerModule,
     MatNativeDateModule,
+    NgxMaterialTimepickerModule,
+    MatSliderModule,
+    MatCheckboxModule,
     
   ],
   providers: [],

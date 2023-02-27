@@ -20,7 +20,7 @@ export class MapComponent  {
   openDialog(message: string ) {
     const dialogRef = this.dialog.open(EventFormComponent,{
       width: '600px', 
-      height: '1000px',
+      height: '600px',
       data: {message: message}
     });
 
@@ -52,12 +52,10 @@ onMapReady(map: L.Map) {
   
   const socialContent = `
   <h3 class="header">The Social at Midtown</h3>
-  Click Marker to Create an Event Here!
   `
 
   const DepotParkContent = `
-  <h3 class="header">The Social at Midtown</h3>
-  Click Marker to Create an Event Here!
+  <h3 class="header">Depot Park</h3>
   `
 
   const _this = this;
