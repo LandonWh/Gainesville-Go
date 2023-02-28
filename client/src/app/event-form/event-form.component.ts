@@ -32,12 +32,12 @@ export class EventFormComponent {
       21: false, 
       numPeople: ['', [Validators.required, Validators.maxLength(3), Validators.pattern("^[0-9]*$"),]],
       activity:  ['', [Validators.required],],
-      date: ['', Validators.required],
-      description: ['', Validators.required, Validators.maxLength(100)],
-      startTime: ['', Validators.required],
-      endTime: ['', Validators.required],
-      activityLevelV: ['', Validators.required],
-
+      date: ['', [Validators.required],],
+      description: ['', [Validators.required, Validators.maxLength(100)],],
+      startTime: ['', [Validators.required]],
+      endTime: ['', [Validators.required]],
+      activityLevelV: ['', [Validators.required]],
+      
   })  
 
   onTimeInputFocus(event: FocusEvent): void {

@@ -2,8 +2,7 @@ import { Component, ChangeDetectorRef, NgZone} from '@angular/core';
 import { MatDialog } from '@angular/material/dialog';
 import * as L from 'leaflet';
 import { EventFormComponent } from '../event-form/event-form.component';
-import { ElementRef } from '@angular/core';
-
+import { icon, Marker } from 'leaflet';
 
 
 @Component({
@@ -14,6 +13,8 @@ styleUrls: ['./map.component.css']
 
 
 export class MapComponent  {
+
+
 
   constructor(public dialog: MatDialog, private ngZone: NgZone) {}
 
@@ -86,17 +87,26 @@ onMapReady(map: L.Map) {
   .on("mouseout", () => {
     DepotPark.closePopup();
   })
+
+  
   }
-
-
-
-
-
 
 }
 
--82.321861
-29.6437363
+const iconRetinaUrl = 'assets/marker-icon-2x.png';
+  const iconUrl = 'assets/marker-icon.png';
+  const shadowUrl = 'assets/marker-shadow.png';
+  const iconDefault = icon({
+  iconRetinaUrl,
+  iconUrl,
+  shadowUrl,
+  iconSize: [25, 41],
+  iconAnchor: [12, 41],
+  popupAnchor: [1, -34],
+  tooltipAnchor: [16, -28],
+  shadowSize: [41, 41]
+});
+Marker.prototype.options.icon = iconDefault;
 
 
 
