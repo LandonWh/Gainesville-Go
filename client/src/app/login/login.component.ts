@@ -11,6 +11,8 @@ import { AuthService } from '../auth.service';
 
 
 export class LoginComponent {
+  submitted: boolean = false;
+
   ngOnit() {
     
   }
@@ -31,6 +33,18 @@ export class LoginComponent {
 
     if (val.email && val.password) {
       this.authService.login(val.email, val.password);
+    }
+  }
+
+  //Used for testing. 
+  onSubmit(accountData: any) {
+    this.submitted = true;
+    if (this.form.invalid) {
+      return;
+    }
+    const userAccountBody = {
+      email: accountData.email,
+      password: accountData.password
     }
   }
   
