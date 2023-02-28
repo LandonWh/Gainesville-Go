@@ -27,6 +27,7 @@ export class EventFormComponent {
   constructor(private formBuilder: FormBuilder,
     @Inject(MAT_DIALOG_DATA) public data: {message: string}) {}
   eventForm: FormGroup = this.formBuilder.group({
+      eventName: this.message,
       boys: false,
       girls: false,
       21: false, 
