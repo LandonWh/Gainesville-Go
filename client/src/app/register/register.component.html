@@ -80,37 +80,10 @@
         </mat-form-field>
         </div>
 
-        <!--Confirm Password-->
-        <div>
-            <mat-form-field class="full-width" appearance="outline">
-                <mat-label>Confirm Password</mat-label>
-                <input 
-                formControlName="confirmPassword" 
-                name="confirmPassword"
-                matInput [type]=" hide ? 'password' : 'text'" required  
-                id="confirmPassword"
-                type = "password"
-                class="form-control"
-                placeholder="Confirm Password" required
-                />
-                <!--<div *ngIf="f.confirmPassword.touched && f.confirmPassword.invalid" class="alert alert-danger">
-                  <div *ngIf="f.confirmPassword.errors?.required">Confirm Password is required.</div>
-                  <div *ngIf="f.confirmPassword.errors?.MustMatch">Password and Confirm Password must match.</div>
-                </div>-->
-                <button  mat-icon-button matSuffix (click)="hide = !hide" [attr.aria-label]="'Hide Password'"
-                [attr.aria-pressed]="hide">
-                <mat-icon>
-                    {{hide ? 'visibility_off' : 'visibility'}}
-                </mat-icon>
-            </button>
-            <mat-error *ngIf="!registerForm.controls['confirmPassword'].valid">
-                You must confirm your password
-            </mat-error>
-            </mat-form-field>
-        </div>
         <div class="createAccount">
         <button data-cy="submit" mat-flat-button color="primary" (click)="addAccount()">Create Account!</button>
         </div>
+      
       
       </form>
     </mat-card-content>
