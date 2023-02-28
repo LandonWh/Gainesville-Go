@@ -12,8 +12,18 @@ func TestSanity(t *testing.T) {
 }
 
 func TestAddEvent(t *testing.T) {
+	//get current num of events
 	ConnectDatabase()
 	var events []Event
 	DB.Find(&events)
-	print(len(events))
+	l1 := len(events)
+
+	//add event and get new num of events
+	AddEvent("utest", "utest", 5, 5)
+	DB.Find(&events)
+
+	//assert there is one more event than before
+	if l1 != len(events)-1 {
+		t.Errorf("error adding event")
+	}
 }

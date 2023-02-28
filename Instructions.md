@@ -18,14 +18,23 @@ Installs:
 Creating an event: 
 POST to http://localhost:8080/api/events
 {
-    "title":"Second Test 2",
-    "description":"The second test to create an entry in the event database for 15 people lasting 3 hours",
-    "capacity":15,
-    "duration":3
+    "title":"str",
+    "description":"str",
+    "capacity":int,
+    "duration":int
 }
+Returns the entire event
 
 Viewing all events:
 GET from http://localhost:8080/api/events
+Returns a list of all events
+
+Deleting an event:
+DELETE from http://localhost:8080/api/events
+{
+    "ID":uint
+}
+Returns the number of events deleted. Should be 0 if no matches were found or 1 if it was successfully deleted.
 
 Register an account to database:
 POST from http://localhost:8080/api/register and go to Body and insert:

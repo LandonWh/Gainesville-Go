@@ -11,6 +11,7 @@ func main() {
 	public.GET("/ping", PingGet)
 	public.GET("/events", GetEvents)
 	public.POST("/events", CreateEvent)
+	public.DELETE("/events", DeleteEventHandler)
 	protected := r.Group("/api/admin")
 	protected.Use(JwtAuthMiddleware())
 	protected.GET("/user", CurrentUser)
