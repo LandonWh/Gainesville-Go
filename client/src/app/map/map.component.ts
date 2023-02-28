@@ -76,17 +76,17 @@ onMapReady(map: L.Map) {
 
   
   var DepotPark = L.marker([29.6437363, -82.321861]).addTo(map)
-  .bindPopup(DepotParkContent).on("mouseover", () => {
+  .bindPopup(DepotParkContent).addEventListener("mouseover", () => {
     DepotPark.openPopup();
-  }).on("click", () => 
+  },{passive: true}).addEventListener("click", () => 
     {
       this.ngZone.run(() => {
         this.openDialog("Depot Park");
       });
-  })
-  .on("mouseout", () => {
+  }, {passive: true})
+  .addEventListener("mouseout", () => {
     DepotPark.closePopup();
-  })
+  }, {passive: true});
 
   
   }

@@ -63,10 +63,7 @@ export class EventFormComponent {
 
   ]
 
-  onTimepickerClosed(event: any) {
-    event.preventDefault();
-    event.stopPropagation();
-  }
+  
   
 
 }
