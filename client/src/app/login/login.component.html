@@ -3,7 +3,7 @@
       <div class="header">
         <header>READY TO GO?</header>
       </div>
-      <form (ngSubmit)="login()" name="loginForm" [formGroup]="form">
+      <form (ngSubmit)="login()" name="loginForm" [formGroup]="loginForm">
         <div class="emailInput">
           <mat-form-field class="full-width" appearance="outline">
             <mat-label>Email</mat-label>
@@ -12,7 +12,7 @@
               matInput
               placeholder="Enter email address" required
             />
-            <mat-error *ngIf="!form.controls['email'].valid">
+            <mat-error *ngIf="!loginForm.controls['email'].valid">
                 Email is required
               </mat-error>
           </mat-form-field>
@@ -31,7 +31,7 @@
                 {{hide ? 'visibility_off' : 'visibility'}}
             </mat-icon>
         </button>
-        <mat-error *ngIf="!form.controls['password'].valid">
+        <mat-error *ngIf="!loginForm.controls['password'].valid">
             Password is required
           </mat-error>
         </mat-form-field>
