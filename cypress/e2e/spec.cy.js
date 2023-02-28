@@ -1,7 +1,9 @@
-describe('My First Test', () => {
-  it('Gets, types and asserts', () => {
-    cy.visit('http://localhost:8080/register')
-
-    cy.get('firstName').type('kyle')
+describe('Register and login Page', () => {
+  it ('Should direct users to the registration page when pressing "Create Account"', () =>{
+    cy.visit('http://localhost:4200/login')
+    cy.get('[data-cy="createAccount"]').click();
+  })
+  it('Should show validation errors when leaving all fields blank', () => {
+    cy.visit('http://localhost:4200/register')
   })
 })
