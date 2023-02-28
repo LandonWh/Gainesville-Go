@@ -4,13 +4,14 @@ import (
 	"html"
 	"strings"
 	"errors"
-	"github.com/jinzhu/gorm"
+	//"github.com/jinzhu/gorm"
 	"golang.org/x/crypto/bcrypt"
 )
 
 type User struct {
-	gorm.Model
+	//gorm.Model
 	//Username string `gorm:"type:varchar;size:60;not null;unique" json:"username"`
+	ID uint `gorm:"primarykey"`
 	FirstName string `gorm:"type:varchar;size:60;not null;" json:"firstname"`
 	LastName string `gorm:"type:varchar;size:60;not null;" json:"lastname"`
 	Email string `gorm:"type:varchar;size:60;not null;unique" json:"email"`

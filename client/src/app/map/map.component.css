@@ -1,10 +1,9 @@
 .map-container {
     position: absolute;
-    margin-left: 29.5%;
-    size-adjust: 20%;
+    display: block;
+    transform: translateX(+46.5%);
     height: 45%;
-    width: 40%;
-    align-content: flex-end;
+    width: 50%;
 }
 
 .header {

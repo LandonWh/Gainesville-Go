@@ -55,11 +55,11 @@ export class EventFormComponent {
   }
 
   activityLevels: activityLevel[] = [
-    {value: '1', viewValue: '1 (movie)'},
-    {value: '2', viewValue: '2'},
-    {value: '3', viewValue: '3'},
-    {value: '4', viewValue: '4'},
-    {value: '5', viewValue: '5 (rock climbing)'}
+    {value: '1', viewValue: 'Very inactive'},
+    {value: '2', viewValue: 'Inactive'},
+    {value: '3', viewValue: 'Moderately Active'},
+    {value: '4', viewValue: 'Active'},
+    {value: '5', viewValue: 'Very Active'}
 
   ]
 
