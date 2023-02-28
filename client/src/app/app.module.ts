@@ -32,7 +32,6 @@ import { MatNativeDateModule } from '@angular/material/core';
 import {NgxMaterialTimepickerModule} from 'ngx-material-timepicker';
 import {MatSliderModule} from '@angular/material/slider';
 import {MatCheckboxModule} from '@angular/material/checkbox';
-
 import { MembersComponent } from './members/members.component';
 import { AuthInterceptorService } from './auth-interceptor.service';
 import { CanActivateViaAuthGuard } from './can-activate-via-auth.guard';

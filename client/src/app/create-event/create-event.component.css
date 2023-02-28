@@ -5,7 +5,8 @@
   
   
   .heading {
-     text-align: center;
+    text-align: center;
+     margin: 0 auto;
      flex: auto;
      margin-top: 5%;
      border: 10px;
@@ -16,6 +17,22 @@
   .heading1 {
    text-align: center;
    font-weight: 50;
+  }
+
+  .heading2 {
+   text-align: center;
+   margin-top: 50vh;
+   flex:auto;
+   font-weight: 200;
+  }
+
+  .button {
+   margin-right: 1vw;
+   font-size: 15px;
+   line-height: 36px;
+   height: 35px;
+   flex: auto;
+   width: 250px;
   }
   
   
