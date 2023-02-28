@@ -51,3 +51,18 @@ func DeleteEventHandler(c *gin.Context) {
 
 	c.JSON(http.StatusOK, gin.H{"numDeleted": numDeleted})
 }
+
+func GetEventHandler(c *gin.Context) {
+	// Validate input
+	var input deleteEventHandlerInput
+	if err := c.ShouldBindJSON(&input); err != nil {
+		c.JSON(http.StatusBadRequest, gin.H{"error": err.Error()})
+		return
+	}
+
+	//get from database
+	var event Event
+	DB.First(&event, input.ID)
+
+	c.JSON(http.StatusOK, gin.H{"event": event})
+}

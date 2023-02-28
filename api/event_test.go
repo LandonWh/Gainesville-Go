@@ -11,9 +11,10 @@ func TestSanity(t *testing.T) {
 	}
 }
 
+// Adds an event to the database and deletes it
 func TestAddDeleteEvent(t *testing.T) {
 	//get current num of events
-	ConnectDatabase()
+	ConnectDatabase("test.db")
 	var events []Event
 	DB.Find(&events)
 	l1 := len(events)
@@ -34,5 +35,22 @@ func TestAddDeleteEvent(t *testing.T) {
 	//assert event got deleted
 	if l1 != len(events) || deleted != 1 {
 		t.Errorf("error deleting event")
+	}
+}
+
+// Adds an event to the database and retrieves its information
+func TestAddRetrieveEvent(t *testing.T) {
+	ConnectDatabase("test.db")
+	_, ID := AddEvent(CreateRandEvent("TestAddRetrieveEvent"))
+
+	var event Event
+	DB.First(&event, ID)
+
+	if ID != event.ID || event.Title != "TestAddRetrieveEvent" {
+		t.Errorf("error finding added event")
+	}
+
+	if DeleteEvent(ID) != 1 {
+		t.Errorf("error removing event")
 	}
 }
