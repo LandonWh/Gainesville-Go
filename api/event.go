@@ -16,10 +16,13 @@ type Event struct {
 }
 
 // Adds an event with the given values to the database
-func AddEvent(title string, description string, capacity int, duration int) (Event, uint) {
-	event := Event{Title: title, Description: description, Capacity: capacity, Duration: duration}
+func AddEvent(event Event) (Event, uint) {
 	DB.Create(&event)
 	return event, event.ID
+}
+
+func ToEvent(title string, description string, capacity int, duration int) Event {
+	return Event{Title: title, Description: description, Capacity: capacity, Duration: duration}
 }
 
 // creates a random event used for testing purposes

@@ -20,7 +20,7 @@ type createEventInput struct {
 	Duration    int    `json:"duration" binding:"required"`
 }
 
-func CreateEvent(c *gin.Context) {
+func CreateEventHandler(c *gin.Context) {
 	// Validate input
 	var input createEventInput
 	if err := c.ShouldBindJSON(&input); err != nil {
@@ -29,7 +29,7 @@ func CreateEvent(c *gin.Context) {
 	}
 
 	// Add event to databse
-	event, _ := AddEvent(input.Title, input.Description, input.Capacity, input.Duration)
+	event, _ := AddEvent(ToEvent(input.Title, input.Description, input.Capacity, input.Duration))
 
 	c.JSON(http.StatusOK, gin.H{"data": event})
 }

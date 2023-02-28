@@ -10,7 +10,7 @@ func main() {
 	public.POST("/login", Login)
 	public.GET("/ping", PingGet)
 	public.GET("/events", GetEvents)
-	public.POST("/events", CreateEvent)
+	public.POST("/events", CreateEventHandler)
 	public.DELETE("/events", DeleteEventHandler)
 	protected := r.Group("/api/admin")
 	protected.Use(JwtAuthMiddleware())

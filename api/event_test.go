@@ -11,7 +11,7 @@ func TestSanity(t *testing.T) {
 	}
 }
 
-func TestAddEvent(t *testing.T) {
+func TestAddDeleteEvent(t *testing.T) {
 	//get current num of events
 	ConnectDatabase()
 	var events []Event
@@ -19,11 +19,20 @@ func TestAddEvent(t *testing.T) {
 	l1 := len(events)
 
 	//add event and get new num of events
-	AddEvent("utest", "utest", 5, 5)
+	_, ID := AddEvent(CreateRandEvent("TestAddDeleteEvent"))
 	DB.Find(&events)
 
 	//assert there is one more event than before
 	if l1 != len(events)-1 {
 		t.Errorf("error adding event")
+	}
+
+	//delete user and recalculate
+	deleted := DeleteEvent(ID)
+	DB.Find(&events)
+
+	//assert event got deleted
+	if l1 != len(events) || deleted != 1 {
+		t.Errorf("error deleting event")
 	}
 }
