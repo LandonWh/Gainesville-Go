@@ -2,10 +2,8 @@ package main
 
 import (
 	"net/http"
-	"fmt"
 
 	"github.com/gin-gonic/gin"
-	"gorm.io/driver/sqlite"
 	"gorm.io/gorm"
 )
 
@@ -26,25 +24,6 @@ type CreateEventInput struct {
 	Duration    int    `json:"duration" binding:"required"`
 }
 
-func ConnectDatabase() {
-
-	database, err := gorm.Open(sqlite.Open("test.db"), &gorm.Config{})
-
-	if err != nil {
-		panic("Failed to connect to database!")
-	} else {
-		fmt.Println("We are connected to the sqlitedatabase")
-	}
-
-	err = database.AutoMigrate(&Event{})
-	if err != nil {
-		return
-	}
-
-	DB = database
-	DB.AutoMigrate(&User{}) //Create database of users
-}
-
 func GetEvents(c *gin.Context) {
 	var events []Event
 	DB.Find(&events)
@@ -60,11 +39,16 @@ func CreateEvent(c *gin.Context) {
 		return
 	}
 
-	// Create event
-	event := Event{Title: input.Title, Description: input.Description, Capacity: input.Capacity, Duration: input.Duration}
-	DB.Create(&event)
+	// Add event to databse
+	event := AddEvent(input.Title, input.Description, input.Capacity, input.Duration)
 
 	c.JSON(http.StatusOK, gin.H{"data": event})
+}
+
+func AddEvent(title string, description string, capacity int, duration int) Event {
+	event := Event{Title: title, Description: description, Capacity: capacity, Duration: duration}
+	DB.Create(&event)
+	return event
 }
 
 func PingGet(c *gin.Context) {
