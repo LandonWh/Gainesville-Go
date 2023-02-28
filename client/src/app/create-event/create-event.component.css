@@ -5,12 +5,10 @@
   
   
   .heading {
-    text-align: center;
-     margin: 0 auto;
-     flex: auto;
-     margin-top: 5%;
-     border: 10px;
-     font-weight: 200;
+   text-align: center;
+   margin: 0 auto;
+   margin-top: 5%;
+   font-weight: 200;
   
   }
 
@@ -20,14 +18,17 @@
   }
 
   .heading2 {
-   text-align: center;
+   display: block;
+   margin-left: auto;
+   margin-right:auto;
    margin-top: 50vh;
-   flex:auto;
    font-weight: 200;
   }
 
   .button {
-   margin-right: 1vw;
+   display: block;
+   margin-left: auto;
+   margin-right:auto;
    font-size: 15px;
    line-height: 36px;
    height: 35px;
@@ -35,5 +36,6 @@
    width: 250px;
   }
   
+
   
   

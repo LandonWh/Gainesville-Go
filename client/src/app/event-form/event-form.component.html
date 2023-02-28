@@ -65,14 +65,17 @@
       Description is required
     </mat-error>
   </mat-form-field>
-</form>
+
 
   <section class="full-width"  [formGroup]="eventForm">
     <mat-checkbox formControlName="21">21+</mat-checkbox>
     <mat-checkbox class="boys" formControlName="boys" (click)="eventForm.get('girls')?.setValue(false)">Boys Only</mat-checkbox>
     <mat-checkbox class ="girls" formControlName="girls" (click)="eventForm.get('boys')?.setValue(false)">Girls Only</mat-checkbox>
   </section>
-  
+  <div class="submitEvent">
+    <button mat-flat-button color="primary" (click)="onSubmit()">Submit</button>
+  </div>
+</form>
 
 
 
