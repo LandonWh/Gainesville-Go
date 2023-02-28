@@ -41,12 +41,7 @@ export class EventFormComponent {
       
   })  
 
-  onTimeInputFocus(event: FocusEvent): void {
-    if (event?.target) {
-      const keyboardEvent = new KeyboardEvent('keypress', { key: ' ' });
-      event.target.dispatchEvent(keyboardEvent);
-    }
-  }
+  
 
   onSubmit(): void {
     if (!this.eventForm.valid) {
