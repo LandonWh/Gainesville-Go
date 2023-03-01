@@ -15,11 +15,15 @@ import { Account, RegisterService} from './register.service'
 })
 export class RegisterComponent{
   accounts: Account[] = [];
-
+  
   firstName: string = "";
   lastName: string = "";
   email: string = "";
   password: string = "";
+
+  added: boolean = false;
+  authError = false;
+  authErrorMsg: string;
 
   reactiveForm:FormGroup;
   hide: boolean = false;
@@ -34,7 +38,7 @@ export class RegisterComponent{
     lastName: ['', [Validators.required, Validators.pattern("^[a-zA-z']*$")]],
     email: ['', [Validators.required, Validators.email]],
     password: ['', [Validators.required, Validators.minLength(6)]],
-    confirmPassword: ['', [Validators.required, Validators.minLength(6)]]
+    //confirmPassword: ['', [Validators.required, Validators.minLength(6)]]
   },
   {
     //Validators: this.MustMatch('password', 'confirmPassword')
@@ -56,6 +60,20 @@ export class RegisterComponent{
     this.lastName = '',
     this.email = '',
     this.password = ''
+  }
+
+  //Used for testing. 
+  onSubmit(accountData: any) {
+    this.added = true;
+    if (this.registerForm.invalid) {
+      return;
+    }
+    const userAccountBody = {
+      firstName: accountData.firstName,
+      lastName: accountData.lastName,
+      email: accountData.email,
+      password: accountData.password
+    }
   }
 
   /*MustMatch(controlName: string, matchingControlName: string) {

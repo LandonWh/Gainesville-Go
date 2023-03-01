@@ -1,5 +1,5 @@
 
-<h1 class="header">{{ data.message }}</h1>
+<h1 class="header" >{{ data.message }}</h1>
 
 <form (ngSubmit)="onSubmit()" name="eventForm" [formGroup]="eventForm">
 <mat-form-field class="full-width" appearance="fill">
@@ -25,7 +25,7 @@
     <mat-label>Start Time</mat-label>
     <input matInput formControlName="startTime"[ngxTimepicker]="starttimepicker"  readonly required>
     <mat-icon matSuffix (click)="starttimepicker.open()">schedule</mat-icon>
-    <ngx-material-timepicker  class="custom-timepicker1" #starttimepicker [format]="12"  [defaultTime]="'09:00 AM'" (closed)="onTimepickerClosed($event)"></ngx-material-timepicker>
+    <ngx-material-timepicker  class="custom-timepicker1" #starttimepicker [format]="12"  [defaultTime]="'09:00 AM'"></ngx-material-timepicker>
     <mat-error *ngIf="!eventForm.controls['startTime'].valid">
       Start time is required
     </mat-error>
@@ -36,7 +36,7 @@
     <mat-label>End Time</mat-label>
     <input matInput formControlName="endTime" [ngxTimepicker]="endtimepicker"  readonly>
     <mat-icon matSuffix (click)="endtimepicker.open()">schedule</mat-icon>
-    <ngx-material-timepicker  class="custom-timepicker2" #endtimepicker [format]="12"  [defaultTime]="'09:00 AM'" (closed)="onTimepickerClosed($event)"></ngx-material-timepicker>
+    <ngx-material-timepicker  class="custom-timepicker2" #endtimepicker [format]="12"  [defaultTime]="'09:00 AM'"></ngx-material-timepicker>
     <mat-error *ngIf="!eventForm.controls['endTime'].valid">
       End time is required
     </mat-error>
@@ -65,14 +65,17 @@
       Description is required
     </mat-error>
   </mat-form-field>
-</form>
 
   <section class="full-width"  [formGroup]="eventForm">
     <mat-checkbox formControlName="21">21+</mat-checkbox>
     <mat-checkbox class="boys" formControlName="boys" (click)="eventForm.get('girls')?.setValue(false)">Boys Only</mat-checkbox>
     <mat-checkbox class ="girls" formControlName="girls" (click)="eventForm.get('boys')?.setValue(false)">Girls Only</mat-checkbox>
   </section>
-  
+  <div class="submitEvent">
+    <button type="submit" mat-flat-button color="primary" >Submit</button>
+  </div>
+
+</form>
 
 
 

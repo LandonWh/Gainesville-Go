@@ -1,74 +1,38 @@
 package main
 
 import (
-	"net/http"
-	"fmt"
-
-	"github.com/gin-gonic/gin"
-	"gorm.io/driver/sqlite"
 	"gorm.io/gorm"
+	"gorm.io/gorm/clause"
 )
 
 var DB *gorm.DB
 
 type Event struct {
-	gorm.Model
+	ID          uint   `gorm:"primarykey"`
 	Title       string `json:"title"`
 	Description string `json:"description"`
 	Capacity    int    `json:"capacity"`
 	Duration    int    `json:"duration"`
 }
 
-type CreateEventInput struct {
-	Title       string `json:"title" binding:"required"`
-	Description string `json:"description" binding:"required"`
-	Capacity    int    `json:"capacity" binding:"required"`
-	Duration    int    `json:"duration" binding:"required"`
-}
-
-func ConnectDatabase() {
-
-	database, err := gorm.Open(sqlite.Open("test.db"), &gorm.Config{})
-
-	if err != nil {
-		panic("Failed to connect to database!")
-	} else {
-		fmt.Println("We are connected to the sqlitedatabase")
-	}
-
-	err = database.AutoMigrate(&Event{})
-	if err != nil {
-		return
-	}
-
-	DB = database
-	DB.AutoMigrate(&User{}) //Create database of users
-}
-
-func GetEvents(c *gin.Context) {
-	var events []Event
-	DB.Find(&events)
-
-	c.JSON(http.StatusOK, gin.H{"data": events})
-}
-
-func CreateEvent(c *gin.Context) {
-	// Validate input
-	var input CreateEventInput
-	if err := c.ShouldBindJSON(&input); err != nil {
-		c.JSON(http.StatusBadRequest, gin.H{"error": err.Error()})
-		return
-	}
-
-	// Create event
-	event := Event{Title: input.Title, Description: input.Description, Capacity: input.Capacity, Duration: input.Duration}
+// Adds an event with the given values to the database
+func AddEvent(event Event) (Event, uint) {
 	DB.Create(&event)
-
-	c.JSON(http.StatusOK, gin.H{"data": event})
+	return event, event.ID
 }
 
-func PingGet(c *gin.Context) {
-	c.JSON(http.StatusOK, map[string]string{
-		"hello": "Found me",
-	})
+func ToEvent(title string, description string, capacity int, duration int) Event {
+	return Event{Title: title, Description: description, Capacity: capacity, Duration: duration}
+}
+
+// creates a random event used for testing purposes
+func CreateRandEvent(title string) Event {
+	return Event{Title: title, Description: "event for testing"}
+}
+
+// deletes entries with the specified ID. Returns the num of entries deleted (should be 0 or 1)
+func DeleteEvent(ID uint) int {
+	var events []Event
+	DB.Clauses(clause.Returning{}).Where("ID = ?", ID).Delete(&events)
+	return len(events)
 }

@@ -27,25 +27,21 @@ export class EventFormComponent {
   constructor(private formBuilder: FormBuilder,
     @Inject(MAT_DIALOG_DATA) public data: {message: string}) {}
   eventForm: FormGroup = this.formBuilder.group({
+      eventName: this.message,
       boys: false,
       girls: false,
       21: false, 
       numPeople: ['', [Validators.required, Validators.maxLength(3), Validators.pattern("^[0-9]*$"),]],
       activity:  ['', [Validators.required],],
-      date: ['', Validators.required],
-      description: ['', Validators.required, Validators.maxLength(100)],
-      startTime: ['', Validators.required],
-      endTime: ['', Validators.required],
-      activityLevelV: ['', Validators.required],
-
+      date: ['', [Validators.required],],
+      description: ['', [Validators.required, Validators.maxLength(100)],],
+      startTime: ['', [Validators.required]],
+      endTime: ['', [Validators.required]],
+      activityLevelV: ['', [Validators.required]],
+      
   })  
 
-  onTimeInputFocus(event: FocusEvent): void {
-    if (event?.target) {
-      const keyboardEvent = new KeyboardEvent('keypress', { key: ' ' });
-      event.target.dispatchEvent(keyboardEvent);
-    }
-  }
+  
 
   onSubmit(): void {
     if (!this.eventForm.valid) {
@@ -63,10 +59,7 @@ export class EventFormComponent {
 
   ]
 
-  onTimepickerClosed(event: any) {
-    event.preventDefault();
-    event.stopPropagation();
-  }
+  
   
 
 }

@@ -9,10 +9,10 @@ import { Router } from '@angular/router';
 })
 export class MembersComponent implements OnInit {
     accountData: any;
-    constructor(private authService: AuthService, private router: Router) { }
+    constructor(private AuthService: AuthService, private router: Router) { }
 
     ngOnInit() {
-        this.authService.getAccount().subscribe(
+        this.AuthService.getAccount().subscribe(
             (res: any) => {
                 this.accountData = res;
             }, (err: any) => {
