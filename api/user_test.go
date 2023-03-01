@@ -25,8 +25,6 @@ func respondWithJSON(w http.ResponseWriter, code int, payload interface{}) {
 }
 
 func CreateUser(w http.ResponseWriter, r *http.Request) {
-	ConnectDatabase("user_testing.db")
-
 	decoder := json.NewDecoder(r.Body)
 	var u User
 	err := decoder.Decode(&u)
@@ -45,6 +43,8 @@ func CreateUser(w http.ResponseWriter, r *http.Request) {
 }
 
 func TestCreateUser(t *testing.T) {
+	ConnectDatabase("user_testing.db") //Do this before first test
+
 	var jsonStr = []byte(`{"firstname":"Aidan","lastname":"Winney","email":"email@gmail.com","password":"password"}`)
 
 	req, err := http.NewRequest("POST", "/api/register", bytes.NewBuffer(jsonStr))
