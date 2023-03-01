@@ -43,7 +43,7 @@ func Login(c *gin.Context) {
 	u.Email = input.Email
 	u.Password = input.Password
 
-	token, err := LoginCheck(u.Email, u.Password)
+	token, err := LoginCheck(u.Email, u.Password, true)
 
 	if err != nil {
 		c.JSON(http.StatusBadRequest, gin.H{"error": "username or password is incorrect."})
@@ -78,7 +78,7 @@ func Register(c *gin.Context){
 	u.Email = input.Email
 	u.Password = input.Password
 
-	_,err := u.SaveUser()
+	_, err := u.SaveUser(true)
 
 	if err != nil{
 		c.JSON(http.StatusBadRequest, gin.H{"error": err.Error()})

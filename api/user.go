@@ -4,7 +4,6 @@ import (
 	"html"
 	"strings"
 	"errors"
-	//"github.com/jinzhu/gorm"
 	"golang.org/x/crypto/bcrypt"
 )
 
@@ -40,7 +39,7 @@ func VerifyPassword(password,hashedPassword string) error {
 	return bcrypt.CompareHashAndPassword([]byte(hashedPassword), []byte(password))
 }
 
-func LoginCheck(email string, password string) (string,error) {
+func LoginCheck(email string, password string, isHashed bool) (string,error) {
 	
 	var err error
 
@@ -51,9 +50,15 @@ func LoginCheck(email string, password string) (string,error) {
 		return "",err
 	}
 	
-	err = VerifyPassword(password, u.Password)
-	if err != nil && err == bcrypt.ErrMismatchedHashAndPassword {
-		return "", err
+	if(isHashed) {
+		err = VerifyPassword(password, u.Password)
+		if err != nil && err == bcrypt.ErrMismatchedHashAndPassword {
+			return "", err
+		}
+	} else {
+		if u.Password != password {
+			return "", errors.New("Incorrect password (unhashed)")
+		}
 	}
 
 	token,err := GenerateToken(u.ID)
@@ -66,16 +71,18 @@ func LoginCheck(email string, password string) (string,error) {
 	
 }
 
-func (u *User) SaveUser() (*User, error) {
+func (u *User) SaveUser(doHash bool) (*User, error) {
 	
 	var err error
 
 	//turn password into hash
-	hashedPassword, err := bcrypt.GenerateFromPassword([]byte(u.Password),bcrypt.DefaultCost)
-	if err != nil {
-		return &User{}, err
+	if(doHash) {
+		hashedPassword, err := bcrypt.GenerateFromPassword([]byte(u.Password),bcrypt.DefaultCost)
+		if err != nil {
+			return &User{}, err
+		}
+		u.Password = string(hashedPassword)
 	}
-	u.Password = string(hashedPassword)
 
 	//remove spaces in email 
 	u.Email = html.EscapeString(strings.TrimSpace(u.Email)) //Probably useless now, keep just in case for now
