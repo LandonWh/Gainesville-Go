@@ -25,7 +25,7 @@ func respondWithJSON(w http.ResponseWriter, code int, payload interface{}) {
 }
 
 func CreateUser(w http.ResponseWriter, r *http.Request) {
-	ConnectDatabase("unit_testing.db")
+	ConnectDatabase("user_testing.db")
 
 	decoder := json.NewDecoder(r.Body)
 	var u User
