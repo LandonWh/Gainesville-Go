@@ -39,7 +39,7 @@ func TestAddDeleteEvent(t *testing.T) {
 }
 
 // Adds an event to the database and retrieves its information
-func TestAddRetrieveEvent(t *testing.T) {
+func TestRetrieveEvent(t *testing.T) {
 	ConnectDatabase("test.db")
 	_, ID := AddEvent(CreateRandEvent("TestAddRetrieveEvent"))
 
@@ -52,5 +52,37 @@ func TestAddRetrieveEvent(t *testing.T) {
 
 	if DeleteEvent(ID) != 1 {
 		t.Errorf("error removing event")
+	}
+}
+
+func TestAddMultipleEvents(t *testing.T) {
+	ConnectDatabase("test.db")
+
+	event1 := CreateRandEvent("First Event")
+	event2 := CreateRandEvent("Second Event")
+	event3 := CreateRandEvent("Third Event")
+
+	_, ID1 := AddEvent(event1)
+	_, ID2 := AddEvent(event2)
+	_, ID3 := AddEvent(event3)
+
+	var events []Event
+	DB.Find(&events)
+
+	if len(events) != 3 {
+		t.Errorf("not all events found")
+	}
+
+	titles := make(map[string]bool)
+	titles[events[0].Title] = true
+	titles[events[1].Title] = true
+	titles[events[2].Title] = true
+
+	if !(titles["First Event"] == true && titles["Second Event"] == true && titles["Third Event"] == true && titles["Fourth Event"] != true) {
+		t.Errorf("error retrieving data")
+	}
+
+	if DeleteEvent(ID1) != 1 || DeleteEvent(ID2) != 1 || DeleteEvent(ID3) != 1 {
+		t.Errorf("error deleting data")
 	}
 }
