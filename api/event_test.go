@@ -40,7 +40,6 @@ func TestAddDeleteEvent(t *testing.T) {
 
 // Adds an event to the database and retrieves its information
 func TestRetrieveEvent(t *testing.T) {
-	ConnectDatabase("test.db")
 	_, ID := AddEvent(CreateRandEvent("TestAddRetrieveEvent"))
 
 	var event Event
@@ -56,8 +55,6 @@ func TestRetrieveEvent(t *testing.T) {
 }
 
 func TestAddMultipleEvents(t *testing.T) {
-	ConnectDatabase("test.db")
-
 	event1 := CreateRandEvent("First Event")
 	event2 := CreateRandEvent("Second Event")
 	event3 := CreateRandEvent("Third Event")
