@@ -30,15 +30,13 @@ export class EventFormComponent {
       eventName: this.message,
       boys: false,
       girls: false,
-      21: false, 
+      twentyOne: false, 
       numPeople: ['', [Validators.required, Validators.maxLength(3), Validators.pattern("^[0-9]*$"),]],
-      activity:  ['', [Validators.required],],
       date: ['', [Validators.required],],
       description: ['', [Validators.required, Validators.maxLength(100)],],
       startTime: ['', [Validators.required]],
       endTime: ['', [Validators.required]],
       activityLevelV: ['', [Validators.required]],
-      
   })  
 
   
