@@ -1,3 +1,15 @@
+## New this sprint
+
+updated the schema of users to inculde more information
+connected the front and back end, allowing accounts to be created through the client
+added unit tests for events and users databases
+cleaned up code and separated functionality
+added ability to delete events and retrieve a specific event
+added helper functions for unit tests such as creating an event with random features
+
+
+## Setup
+
 "npm run start" in the client folder starts the client on localhost:8080/
 
 "go run ." in the api folder starts the api on localhost 8080.
@@ -15,6 +27,7 @@ Installs in client folder:
 - npm install @angular/flex-layout
 - npm install ngx-material-timepicker
 
+## API
 
 Creating an event: 
 POST to http://localhost:8080/api/event  
