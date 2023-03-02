@@ -17,13 +17,13 @@ Installs in client folder:
 
 
 Creating an event: 
-POST to http://localhost:8080/api/event
-{
-    "title":"str",
-    "description":"str",
-    "capacity":int,
-    "duration":int
-}
+POST to http://localhost:8080/api/event  
+{  
+    "title":"str",  
+    "description":"str",  
+    "capacity":int,  
+    "duration":int  
+}  
 Returns the entire event
 
 Viewing all events:
@@ -31,32 +31,36 @@ GET from http://localhost:8080/api/events
 Returns a list of all events
 
 Deleting an event:
-DELETE from http://localhost:8080/api/event
-{
-    "ID":uint
-}
+DELETE from http://localhost:8080/api/event  
+{  
+    "ID":uint  
+}  
 Returns the number of events deleted. Should be 0 if no matches were found or 1 if it was successfully deleted.
 
 Getting an event:
-GET from http://localhost:8080/api/event
-{
-    "ID":uint
-}
+GET from http://localhost:8080/api/event  
+{  
+    "ID":uint  
+}  
 Returns the event
 
 Register an account to database:
-POST from http://localhost:8080/api/register and go to Body and insert:
-{
-    Username: "your username here"
-    Password: "your password here"
-}
+POST from http://localhost:8080/api/register and go to Body and insert:  
+{  
+    "firstname":"str"  
+    "lastname":"str"  
+    "email":"str"  
+    "password":"str"  
+}  
+Returns the user unless the email field is not unique, it will fail if that's the case
 
 Login and generate a token:
-POST from http://localhost:8080/api/login and go to Body and insert:
-{
-    Username: "your username here"
-    Password: "your password here"
-}
+POST from http://localhost:8080/api/login and go to Body and insert:  
+{  
+    "email":"str"  
+    "password":"str"  
+}  
+Returns the jwt token for the user unless the username/password is incorrect, it will fail if that's the case
 
 Fetch a user based on token:
 GET from http://localhost:8080/api/admin/user and select Authorization -> Bearer Token -> insert token (no quotes)
