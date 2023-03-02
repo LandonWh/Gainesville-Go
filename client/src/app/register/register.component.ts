@@ -51,10 +51,10 @@ export class RegisterComponent{
   async addAccount() {
     await firstValueFrom(
       this.httpClient.post('/api/register', {
-        Username: this.firstName,
-        //lastName: this.lastName,
-        //email: this.email,
-        Password: this.password
+        firstName: this.firstName,
+        lastName: this.lastName,
+        email: this.email,
+        password: this.password
       }));
     this.firstName = '',
     this.lastName = '',
