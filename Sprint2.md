@@ -1,11 +1,11 @@
 ## New this sprint
 
-updated the schema of users to inculde more information
-connected the front and back end, allowing accounts to be created through the client
-added unit tests for events and users databases
-cleaned up code and separated functionality
-added ability to delete events and retrieve a specific event
-added helper functions for unit tests such as creating an event with random features
+updated the schema of users to inculde more information    
+connected the front and back end, allowing accounts to be created through the client    
+added unit tests for events and users databases    
+cleaned up code and separated functionality    
+added ability to delete events and retrieve a specific event    
+added helper functions for unit tests such as creating an event with random features    
 
 
 ## Setup
