@@ -6,6 +6,9 @@ import { FormGroup, FormControl, Validators, FormBuilder} from '@angular/forms';
 import { HttpClient } from '@angular/common/http';
 import { firstValueFrom, lastValueFrom } from 'rxjs';
 import { Account, RegisterService} from './register.service'
+import { Router } from '@angular/router';
+
+import Swal from 'sweetalert2';
 
 
 @Component({
@@ -27,6 +30,9 @@ export class RegisterComponent{
 
   reactiveForm:FormGroup;
   hide: boolean = false;
+  router: Router;
+
+  invalidRegistration: Boolean = false;
 
   
   constructor(private fb: FormBuilder, private RegisterService: RegisterService, private httpClient: HttpClient) { 
@@ -38,11 +44,8 @@ export class RegisterComponent{
     lastName: ['', [Validators.required, Validators.pattern("^[a-zA-z']*$")]],
     email: ['', [Validators.required, Validators.email]],
     password: ['', [Validators.required, Validators.minLength(6)]],
-    //confirmPassword: ['', [Validators.required, Validators.minLength(6)]]
   },
-  {
-    //Validators: this.MustMatch('password', 'confirmPassword')
-  })
+  )
   
   get f () {
     return this.reactiveForm.controls
@@ -56,16 +59,21 @@ export class RegisterComponent{
         email: this.email,
         password: this.password
       }));
+    
     this.firstName = '',
     this.lastName = '',
     this.email = '',
     this.password = ''
   }
 
+
+  
+
   //Used for testing. 
   onSubmit(accountData: any) {
     this.added = true;
     if (this.registerForm.invalid) {
+      
       return;
     }
     const userAccountBody = {
@@ -74,39 +82,25 @@ export class RegisterComponent{
       email: accountData.email,
       password: accountData.password
     }
+    this.router.navigate(['/login']);
   }
-
-  /*MustMatch(controlName: string, matchingControlName: string) {
-    return(formGroup:FormGroup)=> {
-      const control = formGroup.controls[controlName];
-      const matchingControl = formGroup.controls[matchingControlName];
-      if (matchingControl.errors && !matchingControl.errors.MustMatch) {
-        return
-      }
-      if(control.value !== matchingControl.value) {
-        matchingControl.setErrors({MustMatch:true});
-      }
-      else {
-        matchingControl.setErrors(null);
-      }
-    }
-  }
-  */
   
 
-  onLogin() {
+  onRegister() {
     if (!this.registerForm.valid) {
+      this.registrationError();
       return;
     }
     console.log(this.registerForm.value);
   }
 
-  //Stuff to send account info to backend
+  registrationError() {
+    Swal.fire({
+      icon: 'error',
+      title: 'Oops...',
+      text: 'Account Creation Failed!',
+    });
+    this.invalidRegistration = false;
+  }
 
-  // //.promise replacement from https://stackoverflow.com/questions/67044273/rxjs-topromise-deprecated
-  // public async loadAccountInfo() {
-  //   const accountInfoItems$ = this.httpClient.get<IAccountInfo[]>('/api');
-  //   this.accountInfoItems = await lastValueFrom(accountInfoItems$);
-  //   //this.accountInfoItems = await this.httpClient.get<IAccountInfo[]>('/api/').toPromise //Make a new request type in main.go and toPromise is deprecated, find replacement 
-  // }
 }
