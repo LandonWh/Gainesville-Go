@@ -52,18 +52,25 @@ export class RegisterComponent{
   }
 
   async addAccount() {
-    await firstValueFrom(
-      this.httpClient.post('/api/register', {
-        firstName: this.firstName,
-        lastName: this.lastName,
-        email: this.email,
-        password: this.password
-      }));
+    try {
+      await firstValueFrom(
+        this.httpClient.post('/api/register', {
+          firstName: this.firstName,
+          lastName: this.lastName,
+          email: this.email,
+          password: this.password
+        }));
+      
+      this.firstName = '',
+      this.lastName = '',
+      this.email = '',
+      this.password = ''
+
+    }
+    catch (e) {
+      this.failedRegistration();
+    }
     
-    this.firstName = '',
-    this.lastName = '',
-    this.email = '',
-    this.password = ''
   }
 
 
@@ -88,19 +95,27 @@ export class RegisterComponent{
 
   onRegister() {
     if (!this.registerForm.valid) {
-      this.registrationError();
+      this.missingField();
       return;
     }
     console.log(this.registerForm.value);
   }
 
-  registrationError() {
+  missingField() {
     Swal.fire({
       icon: 'error',
       title: 'Oops...',
-      text: 'Account Creation Failed!',
+      text: 'Missing 1 or more required fields!',
     });
     this.invalidRegistration = false;
+  }
+
+  failedRegistration() {
+    Swal.fire({
+      icon: 'error',
+      title: 'Oops...',
+      text: 'Account creation failed, email is already associated with another account!',
+    })
   }
 
 }
