@@ -6,7 +6,7 @@ import { FormGroup, FormControl, Validators, FormBuilder} from '@angular/forms';
 import { HttpClient } from '@angular/common/http';
 import { firstValueFrom, lastValueFrom } from 'rxjs';
 import { Account, RegisterService} from './register.service'
-import { Router } from '@angular/router';
+import { Router, RouterLink } from '@angular/router';
 
 import Swal from 'sweetalert2';
 
@@ -32,9 +32,6 @@ export class RegisterComponent{
   hide: boolean = false;
   router: Router;
 
-  invalidRegistration: Boolean = false;
-
-  
   constructor(private fb: FormBuilder, private RegisterService: RegisterService, private httpClient: HttpClient) { 
     this.accounts = RegisterService.get();
   }
@@ -65,16 +62,42 @@ export class RegisterComponent{
       this.lastName = '',
       this.email = '',
       this.password = ''
-
     }
     catch (e) {
-      this.failedRegistration();
+      this.onRegister();
     }
     
   }
 
-
   
+  
+
+  onRegister() {
+    if (!this.registerForm.valid) {
+      this.missingField();
+      return;
+    }
+    else {
+      this.failedRegistration();
+    }
+  }
+
+  missingField() {
+    Swal.fire({
+      icon: 'error',
+      title: 'Oops...',
+      text: 'Missing 1 or more required field(s)!',
+    });
+    
+  }
+
+  failedRegistration() {
+    Swal.fire({
+      icon: 'error',
+      title: 'Oops...',
+      text: 'Account creation failed, email is already associated with another account!',
+    })
+  }
 
   //Used for testing. 
   onSubmit(accountData: any) {
@@ -89,33 +112,8 @@ export class RegisterComponent{
       email: accountData.email,
       password: accountData.password
     }
-    this.router.navigate(['/login']);
-  }
-  
-
-  onRegister() {
-    if (!this.registerForm.valid) {
-      this.missingField();
-      return;
-    }
-    console.log(this.registerForm.value);
-  }
-
-  missingField() {
-    Swal.fire({
-      icon: 'error',
-      title: 'Oops...',
-      text: 'Missing 1 or more required fields!',
-    });
-    this.invalidRegistration = false;
-  }
-
-  failedRegistration() {
-    Swal.fire({
-      icon: 'error',
-      title: 'Oops...',
-      text: 'Account creation failed, email is already associated with another account!',
-    })
   }
 
 }
+
+
