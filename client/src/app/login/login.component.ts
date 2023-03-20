@@ -15,9 +15,6 @@ export class LoginComponent {
   authError = false;
   authErrorMsg: string;
 
-  ngOnit() {
-    
-  }
 
   loginForm: FormGroup;
   

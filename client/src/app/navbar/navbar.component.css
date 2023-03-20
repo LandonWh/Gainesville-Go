@@ -6,12 +6,24 @@
  }
  
  .header {
-    text-align: center;
-    margin: 0 auto;
+    font-weight: 400;
+    flex: 1 1 auto;
  }
 
-.content {
-    height: 100%;
-    width: 100%;
-    overflow: auto
+.container {
+    background-color: transparent;
+}
+
+
+.menu-spacer {
+    flex: 1 1 auto;
+  }
+.navbar {
+    background-color: transparent;
+    margin-left: -1.2em;
+    background-color: transparent;
+}
+
+.label {
+    font-weight: 400;
 }

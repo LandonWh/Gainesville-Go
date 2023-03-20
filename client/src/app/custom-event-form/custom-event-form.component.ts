@@ -2,20 +2,19 @@ import { Component, Inject } from '@angular/core';
 import { FormBuilder, FormGroup, Validators, FormControl } from '@angular/forms';
 import { MAT_DIALOG_DATA } from '@angular/material/dialog';
 
+
 interface activityLevel {
   value: string;
   viewValue: string;
 }
 
-
-
 @Component({
-  selector: 'app-event-form',
-  templateUrl: './event-form.component.html',
-  styleUrls: ['./event-form.component.css'],
+  selector: 'app-custom-event-form',
+  templateUrl: './custom-event-form.component.html',
+  styleUrls: ['./custom-event-form.component.css']
 })
-export class EventFormComponent {
-  message: string = '';
+
+export class CustomEventFormComponent {
 
   ngOnit() {
     
@@ -23,9 +22,9 @@ export class EventFormComponent {
 
   hide: boolean = false;
   constructor(private formBuilder: FormBuilder,
-    @Inject(MAT_DIALOG_DATA) public data: {message: string}) {}
+    @Inject(MAT_DIALOG_DATA) public data: any) {}
   eventForm: FormGroup = this.formBuilder.group({
-      eventName: this.message,
+      event: ['', [Validators.required]],
       boys: false,
       girls: false,
       twentyOne: false, 
@@ -55,8 +54,4 @@ export class EventFormComponent {
 
   ]
 
-  
-  
-
 }
-

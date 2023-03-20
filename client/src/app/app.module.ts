@@ -36,6 +36,7 @@ import { MembersComponent } from './members/members.component';
 import { AuthInterceptorService } from './auth-interceptor.service';
 import { CanActivateViaAuthGuard } from './can-activate-via-auth.guard';
 import { AuthService } from './auth.service';
+import { CustomEventFormComponent } from './custom-event-form/custom-event-form.component';
 
 const routes = [
   { path: 'login', component: LoginComponent },
@@ -60,6 +61,7 @@ const routes = [
     RegisterComponent,
     EventFormComponent,
     MembersComponent,
+    CustomEventFormComponent,
   ],
   entryComponents: [EventFormComponent],
   imports: [
