@@ -28,7 +28,6 @@ describe('EventFormComponent', () => {
     component.eventForm.controls['startTime'].setValue(startTime);
     component.eventForm.controls['endTime'].setValue(endTime);
     component.eventForm.controls['activityLevelV'].setValue(activityLevelV);
-
   }
 
   beforeEach(async () => {
@@ -51,10 +50,13 @@ describe('EventFormComponent', () => {
     expect(component).toBeTruthy();
   });
 
+
+  // check to make sure the inputs match when submitting
   it('Should update the event form to inputs', () => {
     updateForm(validForm.eventName, validForm.boys, validForm.girls, validForm.twentyOne,
       validForm.numPeople, validForm.date, validForm.description, validForm.startTime, validForm.endTime,
       validForm.activityLevelV);
     expect(component.eventForm.value).toEqual(validForm);
   })
+
 });

@@ -34,6 +34,7 @@ describe('LoginComponent', () => {
     expect(component).toBeTruthy();
   });
 
+   // check form state of the login form (not submitted)
   it('component initial state', () => {
     expect(component.submitted).toBeFalsy();
     expect(component.loginForm).toBeDefined();
@@ -42,11 +43,14 @@ describe('LoginComponent', () => {
     expect(component.authErrorMsg).toBeUndefined();
   });
 
+  // check for submission attempt
   it('submitted should be true when addAccount()', () => {
     component.onSubmit(blankLogin);
     expect(component.submitted).toBeTruthy();
     expect(component.authError).toBeFalsy();
   });
+
+  // check to make sure the inputs match when submitting
   it('form value should update from when u change the input', (() => {
     updateForm(validLogin.email, validLogin.password);
     expect(component.loginForm.value).toEqual(validLogin);

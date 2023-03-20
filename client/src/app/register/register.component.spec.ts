@@ -52,6 +52,7 @@ describe('RegisterComponent', () => {
     expect(component).toBeTruthy();
   });
 
+  // check form state of the registration form (not submitted)
   it('component initial state', () => {
     expect(component.added).toBeFalsy();
     expect(component.registerForm).toBeDefined();
@@ -60,12 +61,14 @@ describe('RegisterComponent', () => {
     expect(component.authErrorMsg).toBeUndefined();
   });
 
+  // check for submission attempt
   it('submitted should be true when addAccount()', () => {
     component.onSubmit(blankUser);
     expect(component.added).toBeTruthy();
     expect(component.authError).toBeFalsy();
   });
 
+  // check to make sure the inputs match when submitting
   it('form value should update from when u change the input', (() => {
     updateForm(validUser.firstName, validUser.lastName, validUser.email, validUser.password);
     expect(component.registerForm.value).toEqual(validUser);
