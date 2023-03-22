@@ -3,7 +3,7 @@
 import { Component } from '@angular/core';
 import { OnInit} from '@angular/core';
 import { FormGroup, FormControl, Validators, FormBuilder} from '@angular/forms';
-import { HttpClient } from '@angular/common/http';
+import { HttpClient, HttpErrorResponse } from '@angular/common/http';
 import { firstValueFrom, lastValueFrom } from 'rxjs';
 import { Account, RegisterService} from './register.service'
 import { Router, RouterLink } from '@angular/router';
@@ -63,8 +63,12 @@ export class RegisterComponent{
       this.email = '',
       this.password = ''
     }
-    catch (e) {
-      this.onRegister();
+    catch (e: any) {
+      if (e.status === 400 && e.error.message === 'Email already exists') {
+        // Handle the case where the email is already used
+        this.failedRegistration();
+      }
+      
     }
     
   }
@@ -78,7 +82,7 @@ export class RegisterComponent{
       return;
     }
     else {
-      this.failedRegistration();
+      this.addAccount()
     }
   }
 
