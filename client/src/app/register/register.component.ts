@@ -49,7 +49,6 @@ export class RegisterComponent{
   }
 
   async addAccount() {
-    let success = true;
     try {
       await firstValueFrom(
         this.httpClient.post('/api/register', {
@@ -59,26 +58,20 @@ export class RegisterComponent{
           password: this.password
         }));
       
-      this.firstName = '',
-      this.lastName = '',
-      this.email = '',
-      this.password = ''
-      
     }
     catch (e: any) {
-      if (e.status === 400) {
+      if (e.status == 400) {
         // Handle the case where the email is already used
         this.failedRegistration();
-        success = false;
       }
+      this.success = false;
       
     }
-    
-    
+    if (this.success == true) {
+      console.log("here");
+      this.router.navigate(['/login']);
+    }
   }
-
-  
-  
 
   onRegister() {
     if (!this.registerForm.valid) {
@@ -88,17 +81,13 @@ export class RegisterComponent{
     else {
       this.addAccount()
     }
-    if (this.success && this.registerForm.valid) {
-      this.router.navigate(['/login']);
-    }
-    
   }
 
   missingField() {
     Swal.fire({
       icon: 'error',
       title: 'Oops...',
-      text: 'Missing 1 or more required field(s)!',
+      text: 'Missing 1 or more required field(s), or input validation failed!',
     });
     
   }
