@@ -1,7 +1,7 @@
 import { Injectable } from '@angular/core';
-
 import { HttpClient, HttpHeaders } from '@angular/common/http';
 import { Router } from '@angular/router';
+import { BehaviorSubject, Observable, from } from 'rxjs';
 
 @Injectable()
 export class AuthService {
@@ -9,7 +9,9 @@ export class AuthService {
     API_URL = 'http://localhost:8080';
     TOKEN_KEY = 'token';
 
-    constructor(private http: HttpClient, private router: Router) { }
+    constructor(private http: HttpClient, private router: Router) {
+        
+     }
 
     get token() {
         return localStorage.getItem(this.TOKEN_KEY);

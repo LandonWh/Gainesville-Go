@@ -30,9 +30,9 @@ export class RegisterComponent{
 
   reactiveForm:FormGroup;
   hide: boolean = false;
-  router: Router;
+  success: boolean = true;
 
-  constructor(private fb: FormBuilder, private RegisterService: RegisterService, private httpClient: HttpClient) { 
+  constructor(private fb: FormBuilder, private RegisterService: RegisterService, private httpClient: HttpClient, private router: Router) { 
     this.accounts = RegisterService.get();
   }
     
@@ -49,6 +49,7 @@ export class RegisterComponent{
   }
 
   async addAccount() {
+    let success = true;
     try {
       await firstValueFrom(
         this.httpClient.post('/api/register', {
@@ -62,14 +63,17 @@ export class RegisterComponent{
       this.lastName = '',
       this.email = '',
       this.password = ''
+      
     }
     catch (e: any) {
-      if (e.status === 400 && e.error.message === 'Email already exists') {
+      if (e.status === 400) {
         // Handle the case where the email is already used
         this.failedRegistration();
+        success = false;
       }
       
     }
+    
     
   }
 
@@ -84,6 +88,10 @@ export class RegisterComponent{
     else {
       this.addAccount()
     }
+    if (this.success && this.registerForm.valid) {
+      this.router.navigate(['/login']);
+    }
+    
   }
 
   missingField() {
