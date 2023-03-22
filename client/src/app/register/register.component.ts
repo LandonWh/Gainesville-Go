@@ -66,7 +66,7 @@ export class RegisterComponent{
       
     }
     catch (e: any) {
-      if (e.status === 400) {
+      if (e.status === 400 && e.error.message === 'Email already exists') {
         // Handle the case where the email is already used
         this.failedRegistration();
         success = false;
