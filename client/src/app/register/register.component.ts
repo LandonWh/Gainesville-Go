@@ -68,7 +68,6 @@ export class RegisterComponent{
         
       }
     }
-    console.log(this.success);
     if (this.success == true) {
       this.router.navigate(['/login']);
     }
