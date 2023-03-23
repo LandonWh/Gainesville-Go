@@ -8,6 +8,7 @@ import { firstValueFrom, lastValueFrom } from 'rxjs';
 import { Account, RegisterService} from './register.service'
 import { Router, RouterLink } from '@angular/router';
 
+
 import Swal from 'sweetalert2';
 
 
@@ -63,12 +64,12 @@ export class RegisterComponent{
       if (e.status == 400) {
         // Handle the case where the email is already used
         this.failedRegistration();
+        this.success = false;
+        
       }
-      this.success = false;
-      
     }
+    console.log(this.success);
     if (this.success == true) {
-      console.log("here");
       this.router.navigate(['/login']);
     }
   }
