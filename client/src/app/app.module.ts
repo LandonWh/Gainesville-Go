@@ -33,7 +33,7 @@ import { NgxMaterialTimepickerModule} from 'ngx-material-timepicker';
 import { MatSliderModule} from '@angular/material/slider';
 import { MatCheckboxModule} from '@angular/material/checkbox';
 import { MembersComponent } from './members/members.component';
-import { AuthInterceptorService } from './auth-interceptor.service';
+import { AuthInterceptor } from './auth-interceptor';
 import { CanActivateViaAuthGuard } from './can-activate-via-auth.guard';
 import { AuthService } from './auth.service';
 import { CustomEventFormComponent } from './custom-event-form/custom-event-form.component';
@@ -49,6 +49,7 @@ const routes = [
   },
   { path: '**', redirectTo: '' }
 ];
+
 
 @NgModule({
   declarations: [
@@ -95,7 +96,7 @@ const routes = [
     AuthService,
     {
       provide: HTTP_INTERCEPTORS,
-      useClass: AuthInterceptorService,
+      useClass: AuthInterceptor,
       multi: true
     },
     CanActivateViaAuthGuard

@@ -3,6 +3,12 @@ import { HttpClient, HttpHeaders } from '@angular/common/http';
 import { Router } from '@angular/router';
 import { BehaviorSubject, Observable, from } from 'rxjs';
 
+const AUTH_API = 'http://localhost:8080/api/'
+
+const httpOptions = {
+    headers: new HttpHeaders({ 'Content-Type': 'application/json', 'Cache-Control': 'no-cache' })
+};
+
 @Injectable()
 export class AuthService {
 
@@ -25,24 +31,25 @@ export class AuthService {
         localStorage.removeItem(this.TOKEN_KEY);
         this.router.navigateByUrl('/');
     }
-
+    
     login(email: string, pass: string) {
-        const headers = {
-            headers: new HttpHeaders({ 'Content-Type': 'application/json', 'Cache-Control': 'no-cache' })
-        };
+        
+        return this.http.post(AUTH_API + 'login', {
+            email,
+            pass
+        }, httpOptions);
+        // const data = {
+        //     email: email,
+        //     password: pass
+        // };
 
-        const data = {
-            email: email,
-            password: pass
-        };
+        // this.http.post(this.API_URL + '/api/login', data, headers).subscribe(
+        //     (res: any) => {
+        //         localStorage.setItem(this.TOKEN_KEY, res.token);
 
-        this.http.post(this.API_URL + '/api/login', data, headers).subscribe(
-            (res: any) => {
-                localStorage.setItem(this.TOKEN_KEY, res.token);
-
-                this.router.navigateByUrl('/members');
-            }
-        );
+        //         this.router.navigateByUrl('/home');
+        //     }
+        // );
     }
 
     getAccount() {
