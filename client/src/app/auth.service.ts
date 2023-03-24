@@ -3,7 +3,7 @@ import { HttpClient, HttpHeaders } from '@angular/common/http';
 import { Router } from '@angular/router';
 import { BehaviorSubject, Observable, from } from 'rxjs';
 
-const AUTH_API = 'http://localhost:8080/api/'
+const AUTH_API = '/api/'
 
 const httpOptions = {
     headers: new HttpHeaders({ 'Content-Type': 'application/json', 'Cache-Control': 'no-cache' })
@@ -32,12 +32,17 @@ export class AuthService {
         this.router.navigateByUrl('/');
     }
     
-    login(email: string, pass: string) {
+    login(email: string, password: string) {
         
-        return this.http.post(AUTH_API + 'login', {
+        const payload = {
             email,
-            pass
-        }, httpOptions);
+            password
+        };
+        
+        console.log("Request payload:", payload);
+        console.log("Request headers:", httpOptions.headers);
+    
+        return this.http.post(AUTH_API + 'login', payload, httpOptions);
         // const data = {
         //     email: email,
         //     password: pass
