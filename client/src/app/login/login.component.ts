@@ -12,7 +12,7 @@ import { TokenStorageService } from '../token-storage.service';
 })
 
 
-export class LoginComponent {
+export class LoginComponent implements OnInit{
   submitted: boolean = false;
   authError = false;
   authErrorMsg: string;
@@ -22,6 +22,12 @@ export class LoginComponent {
   loginForm: FormGroup;
   
   hide: boolean = false;
+
+  form: any = {
+    email: null,
+    password: null
+  };
+
   constructor(private fb: FormBuilder, private authService: AuthService, private router: Router, private tokenStorage: TokenStorageService) {
     this.loginForm = this.fb.group({
       email: ['', [Validators.required, Validators.email]],
@@ -29,10 +35,7 @@ export class LoginComponent {
     });
   }
 
-  form: any = {
-    email: null,
-    password: null
-  };
+  
 
   ngOnInit(): void {
     if (this.tokenStorage.getToken()) {
@@ -43,14 +46,16 @@ export class LoginComponent {
 
 
   login(): void {
-    const {email, password} = this.form;
+    const {email, password} = this.loginForm.value;
+
+    console.log(email, password)
 
     this.authService.login(email, password).subscribe(
       data => {
         //Not sure about this???
-        this.tokenStorage.saveToken((<any>data).data.accessToken);
+        this.tokenStorage.saveToken((<any>data).data);
         this.tokenStorage.saveUser(data);
-
+        console.log(data)
         this.isLoginFailed = false;
         this.isLoggedIn = true;
         this.roles = this.tokenStorage.getUser().roles;
