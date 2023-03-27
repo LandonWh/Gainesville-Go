@@ -6,6 +6,7 @@ import { CreateEventComponent } from './create-event/create-event.component';
 import { LoginComponent } from './login/login.component';
 import { RegisterComponent } from './register/register.component';
 import { MembersComponent } from './members/members.component';
+import { AccountPageComponent } from './account-page/account-page.component';
 
 const routes: Routes = [
   {path: '', pathMatch: 'full', redirectTo: 'login'},
@@ -28,6 +29,10 @@ const routes: Routes = [
   {
     path: 'members',
     component: MembersComponent
+  },
+  {
+    path: 'account-page',
+    component: AccountPageComponent
   }
 
     ]
