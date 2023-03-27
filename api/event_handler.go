@@ -3,6 +3,8 @@ package main
 import (
 	"net/http"
 
+	"time"
+
 	"github.com/gin-gonic/gin"
 )
 
@@ -14,10 +16,18 @@ func GetEvents(c *gin.Context) {
 }
 
 type createEventInput struct {
-	Title       string `json:"title" binding:"required"`
-	Description string `json:"description" binding:"required"`
-	Capacity    int    `json:"capacity" binding:"required"`
-	Duration    int    `json:"duration" binding:"required"`
+	Title       string    `json:"title" binding:"required"`
+	Description string    `json:"description" binding:"required"`
+	Capacity    int       `json:"capacity" binding:"required"`
+	Duration    int       `json:"duration" binding:"required"`
+	Activity    int8      `json:"activity"`
+	Date        time.Time `json:"date"`
+	Address     string    `json:"address"`
+	BoysOnly    bool      `json:"boysonly"`
+	GirlsOnly   bool      `json:"girlsonly"`
+	TwentyOne   bool      `json:"twentyone"`
+	Lat         float32   `json:"lat"`
+	Lon         float32   `json:"long"`
 }
 
 func CreateEventHandler(c *gin.Context) {
@@ -29,7 +39,9 @@ func CreateEventHandler(c *gin.Context) {
 	}
 
 	// Add event to databse
-	event, _ := AddEvent(ToEvent(input.Title, input.Description, input.Capacity, input.Duration))
+	event, _ := AddEvent(ToEvent(input.Title, input.Description, input.Capacity, input.Duration,
+		input.Activity, input.Date, input.Address, input.BoysOnly, input.GirlsOnly, input.TwentyOne,
+		input.Lat, input.Lon))
 
 	c.JSON(http.StatusOK, gin.H{"data": event})
 }
