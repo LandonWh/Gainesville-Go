@@ -43,18 +43,6 @@ export class AuthService {
         console.log("Request headers:", httpOptions.headers);
     
         return this.http.post(AUTH_API + 'login', payload, httpOptions);
-        // const data = {
-        //     email: email,
-        //     password: pass
-        // };
-
-        // this.http.post(this.API_URL + '/api/login', data, headers).subscribe(
-        //     (res: any) => {
-        //         localStorage.setItem(this.TOKEN_KEY, res.token);
-
-        //         this.router.navigateByUrl('/home');
-        //     }
-        // );
     }
 
     getAccount() {

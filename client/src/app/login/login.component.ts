@@ -5,6 +5,9 @@ import { AuthService } from '../auth.service';
 import { Router } from '@angular/router';
 import { TokenStorageService } from '../token-storage.service';
 
+import Swal from 'sweetalert2';
+
+
 @Component({
   selector: 'app-login',
   templateUrl: './login.component.html',
@@ -20,6 +23,7 @@ export class LoginComponent implements OnInit{
   isLoginFailed:boolean = false;
   roles: string[] = [];
   loginForm: FormGroup;
+  valiationFailed: boolean = false;
   
   hide: boolean = false;
 
@@ -46,22 +50,54 @@ export class LoginComponent implements OnInit{
 
 
   login(): void {
+    var count:number = 1;
     const {email, password} = this.loginForm.value;
-
     console.log(email, password)
-
-    this.authService.login(email, password).subscribe(
-      data => {
+    this.authService.login(email, password).subscribe({
+      next: data => {
         //Not sure about this???
         this.tokenStorage.saveToken((<any>data).data);
         this.tokenStorage.saveUser(data);
         console.log(data)
+        console.log(count);
         this.isLoginFailed = false;
         this.isLoggedIn = true;
         this.roles = this.tokenStorage.getUser().roles;
-        this.router.navigate(['/home']);
+      },
+      error: err => {
+        this.isLoginFailed = true;
+        this.isLoggedIn = false;
+        this.loginFailed();
+        console.log(this.isLoginFailed);
+        console.log(count);
+        count++;
       }
-    )
+      
+    }
+  )
+  console.log(this.isLoginFailed);
+  if (this.isLoginFailed == false && this.isLoggedIn == true) {
+    this.router.navigate(['/home']);
+  }
+  }
+
+  
+  loginFailed() {
+    Swal.fire({
+      icon: 'error',
+      title: 'Oops...',
+      text: 'Incorrect email or password!',
+    });
+    
+  }
+
+  missingField() {
+    Swal.fire({
+      icon: 'error',
+      title: 'Oops...',
+      text: 'Missing 1 or more required field(s), or input validation failed!',
+    });
+    
   }
 
 
