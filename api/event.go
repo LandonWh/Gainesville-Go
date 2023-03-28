@@ -16,9 +16,10 @@ type Event struct {
 	Title       string    `json:"title"`
 	Description string    `json:"description"`
 	Capacity    int       `json:"capacity"`
-	Duration    int       `json:"duration"`
 	Activity    int8      `json:"activity"`
-	Date        time.Time `json:"date"`
+	StartTime   time.Time `json:"starttime"`
+	EndTime     time.Time `json:"endtime"`
+	Birthdate   time.Time `json:"birthdate"`
 	Address     string    `json:"address"`
 	BoysOnly    bool      `json:"boysonly"`
 	GirlsOnly   bool      `json:"girlsonly"`
@@ -33,14 +34,16 @@ func AddEvent(event Event) (Event, uint) {
 	return event, event.ID
 }
 
-func ToEvent(title string, description string, capacity int, duration int, activity int8, date time.Time, address string, boysOnly bool, girlsOnly bool, twentyOne bool, lat float32, lon float32) Event {
+// casts event parameters to an event object
+func ToEvent(title string, description string, capacity int, activity int8, startTime time.Time, endTime time.Time, birthdate time.Time, address string, boysOnly bool, girlsOnly bool, twentyOne bool, lat float32, lon float32) Event {
 	return Event{
 		Title:       title,
 		Description: description,
 		Capacity:    capacity,
-		Duration:    duration,
 		Activity:    activity,
-		Date:        date,
+		StartTime:   startTime,
+		EndTime:     endTime,
+		Birthdate:   birthdate,
 		Address:     address,
 		BoysOnly:    boysOnly,
 		GirlsOnly:   girlsOnly,
@@ -56,9 +59,10 @@ func CreateRandEvent(title string) Event {
 		Title:       title,
 		Description: "event for testing",
 		Capacity:    rand.Intn(100) + 1,
-		Duration:    rand.Intn(240) + 30,
 		Activity:    int8(rand.Intn(3) + 1),
-		Date:        time.Now().Add(time.Hour * time.Duration(rand.Intn(24*7))),
+		StartTime:   time.Now().Add(time.Hour * time.Duration(rand.Intn(24*7))),
+		EndTime:     time.Now().Add(time.Hour * time.Duration(rand.Intn(24*7))),
+		Birthdate:   time.Date(1990, time.January, 1, 0, 0, 0, 0, time.UTC),
 		Address:     fmt.Sprintf("%d Main St.", rand.Intn(1000)+1),
 		BoysOnly:    rand.Intn(2) == 0,
 		GirlsOnly:   rand.Intn(2) == 0,
