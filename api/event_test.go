@@ -2,6 +2,7 @@ package main
 
 import (
 	"testing"
+	"time"
 )
 
 func TestSanity(t *testing.T) {
@@ -39,16 +40,34 @@ func TestAddDeleteEvent(t *testing.T) {
 }
 
 // Adds an event to the database and retrieves its information
+// Adds an event to the database and retrieves its information
 func TestRetrieveEvent(t *testing.T) {
-	_, ID := AddEvent(CreateRandEvent("TestAddRetrieveEvent"))
+	// Add event to database
+	event, ID := AddEvent(CreateRandEvent("TestAddRetrieveEvent"))
 
-	var event Event
-	DB.First(&event, ID)
+	// Retrieve event from database
+	var retrievedEvent Event
+	DB.First(&retrievedEvent, ID)
 
-	if ID != event.ID || event.Title != "TestAddRetrieveEvent" {
+	// Check if retrieved event matches added event
+	if event.ID != retrievedEvent.ID ||
+		event.Title != retrievedEvent.Title ||
+		event.Description != retrievedEvent.Description ||
+		event.Capacity != retrievedEvent.Capacity ||
+		event.Activity != retrievedEvent.Activity ||
+		event.StartTime.Format(time.RFC3339) != retrievedEvent.StartTime.Format(time.RFC3339) ||
+		event.EndTime.Format(time.RFC3339) != retrievedEvent.EndTime.Format(time.RFC3339) ||
+		event.Birthdate.Format(time.RFC3339) != retrievedEvent.Birthdate.Format(time.RFC3339) ||
+		event.Address != retrievedEvent.Address ||
+		event.BoysOnly != retrievedEvent.BoysOnly ||
+		event.GirlsOnly != retrievedEvent.GirlsOnly ||
+		event.TwentyOne != retrievedEvent.TwentyOne ||
+		event.Lat != retrievedEvent.Lat ||
+		event.Lon != retrievedEvent.Lon {
 		t.Errorf("error finding added event")
 	}
 
+	// Delete event from database
 	if DeleteEvent(ID) != 1 {
 		t.Errorf("error removing event")
 	}
@@ -81,5 +100,31 @@ func TestAddMultipleEvents(t *testing.T) {
 
 	if DeleteEvent(ID1) != 1 || DeleteEvent(ID2) != 1 || DeleteEvent(ID3) != 1 {
 		t.Errorf("error deleting data")
+	}
+}
+
+func TestAddDeleteEventWithNewFields(t *testing.T) {
+	var events []Event
+	DB.Find(&events)
+	l1 := len(events)
+
+	event := CreateRandEvent("TestAddDeleteEventWithNewFields")
+
+	// add event and get new num of events
+	_, ID := AddEvent(event)
+	DB.Find(&events)
+
+	// assert there is one more event than before
+	if l1 != len(events)-1 {
+		t.Errorf("error adding event")
+	}
+
+	// delete event and recalculate
+	deleted := DeleteEvent(ID)
+	DB.Find(&events)
+
+	// assert event got deleted
+	if l1 != len(events) || deleted != 1 {
+		t.Errorf("error deleting event")
 	}
 }

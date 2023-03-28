@@ -80,12 +80,21 @@ npm install ngx-material-timepicker
 ## API
 
 Creating an event: POST to http://localhost:8080/api/event  
-{  
-"title":"str",  
-"description":"str",  
-"capacity":int,  
-"duration":int  
-}  
+{
+"title": "string",
+"description": "string",
+"capacity": integer,
+"activity": integer,
+"start_time": "string (RFC3339)",
+"end_time": "string (RFC3339)",
+"birthdate": "string (RFC3339)",
+"address": "string",
+"boysOnly": boolean,
+"girlsOnly": boolean,
+"twentyOne": boolean,
+"lat": float,
+"lon": float
+}
 Returns the entire event
 
 Viewing all events: GET from http://localhost:8080/api/events Returns a list of all events
