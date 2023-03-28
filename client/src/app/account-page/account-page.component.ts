@@ -1,7 +1,7 @@
 import { Component } from '@angular/core';
 import { LoginComponent } from '../login/login.component';
 import { RegisterComponent } from '../register/register.component';
-import { AuthService } from '../auth.service';
+import { AuthService } from '../services/auth.service';
 import { Router } from '@angular/router';
 
 @Component({

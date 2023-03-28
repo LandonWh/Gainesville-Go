@@ -1,7 +1,8 @@
 import { Injectable } from '@angular/core';
 import { HttpClient, HttpHeaders } from '@angular/common/http';
 import { Router } from '@angular/router';
-import { BehaviorSubject, Observable, from } from 'rxjs';
+import { BehaviorSubject, Observable, from, tap } from 'rxjs';
+import { ApiService } from './api.service';
 
 const AUTH_API = '/api/'
 
@@ -11,12 +12,14 @@ const httpOptions = {
 
 @Injectable()
 export class AuthService {
-
+    private _isLoggedIn$ = new BehaviorSubject<boolean>(false);
+    isLoggedIn$ = this._isLoggedIn$.asObservable();
     API_URL = 'http://localhost:8080';
     TOKEN_KEY = 'token';
 
-    constructor(private http: HttpClient, private router: Router) {
-        
+    constructor(private http: HttpClient, private router: Router, private apiService: ApiService) {
+        const token = localStorage.getItem('account_auth');
+        this._isLoggedIn$.next(!!token);
      }
 
     get token() {
@@ -29,20 +32,18 @@ export class AuthService {
 
     logout() {
         localStorage.removeItem(this.TOKEN_KEY);
+        this._isLoggedIn$.next(false);
         this.router.navigateByUrl('/');
     }
     
     login(email: string, password: string) {
         
-        const payload = {
-            email,
-            password
-        };
-        
-        console.log("Request payload:", payload);
-        console.log("Request headers:", httpOptions.headers);
-    
-        return this.http.post(AUTH_API + 'login', payload, httpOptions);
+        return this.apiService.login(email, password).pipe(
+            tap((response: any) => {
+                localStorage.setItem('account_auth', response.token);
+                this._isLoggedIn$.next(true);
+            })
+        )
     }
 
     getAccount() {

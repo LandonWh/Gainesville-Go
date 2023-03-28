@@ -5,7 +5,7 @@ import {HttpClientTestingModule, HttpTestingController} from '@angular/common/ht
 import { CUSTOM_ELEMENTS_SCHEMA } from '@angular/core';
 import { HttpClientModule } from '@angular/common/http';
 import { RegisterComponent } from './register.component'
-import { AuthService } from '../auth.service';
+import { AuthService } from '../services/auth.service';
 import { ReactiveFormsModule } from '@angular/forms';
 import { blankUser, validUser } from 'src/mocks';
 

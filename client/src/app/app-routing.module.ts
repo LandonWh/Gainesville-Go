@@ -7,6 +7,9 @@ import { LoginComponent } from './login/login.component';
 import { RegisterComponent } from './register/register.component';
 import { MembersComponent } from './members/members.component';
 import { AccountPageComponent } from './account-page/account-page.component';
+import { AuthGuard } from './auth.guard';
+
+
 
 const routes: Routes = [
   {path: '', pathMatch: 'full', redirectTo: 'login'},
@@ -16,7 +19,8 @@ const routes: Routes = [
   },
   {
     path: 'home',
-    component: MainPageComponent
+    component: MainPageComponent,
+    //canActivate: [AuthGuard]
   },
   {
     path: 'create-event',
@@ -32,7 +36,8 @@ const routes: Routes = [
   },
   {
     path: 'account-page',
-    component: AccountPageComponent
+    component: AccountPageComponent,
+    //canActivate: [AuthGuard]
   }
 
     ]

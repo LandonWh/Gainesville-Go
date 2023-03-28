@@ -35,7 +35,7 @@ import { MatCheckboxModule} from '@angular/material/checkbox';
 import { MembersComponent } from './members/members.component';
 import { AuthInterceptor } from './auth-interceptor';
 import { CanActivateViaAuthGuard } from './can-activate-via-auth.guard';
-import { AuthService } from './auth.service';
+import { AuthService } from './services/auth.service';
 import { CustomEventFormComponent } from './custom-event-form/custom-event-form.component';
 import { AccountPageComponent } from './account-page/account-page.component';
 
