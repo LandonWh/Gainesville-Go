@@ -23,6 +23,7 @@ func main() {
 	public := r.Group("/api")
 	public.POST("/register", Register)
 	public.POST("/login", Login)
+	public.POST("/delete", Delete)
 	public.GET("/ping", PingGet)
 	public.GET("/events", GetEvents)
 	public.POST("/event", CreateEventHandler)

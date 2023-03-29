@@ -13,6 +13,7 @@ type User struct {
 	ID uint `gorm:"primarykey"`
 	FirstName string `gorm:"type:varchar;size:60;not null;" json:"firstname"`
 	LastName string `gorm:"type:varchar;size:60;not null;" json:"lastname"`
+	DateOfBirth string `gorm:"type:varchar;size:60;not null;" json:"dateofbirth"`
 	Email string `gorm:"type:varchar;size:60;not null;unique" json:"email"`
 	Password string `gorm:"type:varchar;size:60;not null;" json:"password"`
 }
@@ -95,5 +96,18 @@ func (u *User) SaveUser(doHash bool) (*User, error) {
 	if err != nil {
 		return &User{}, err
 	}
+	return u, nil
+}
+
+func (u *User) DeleteUser() (*User, error) {
+
+	var err error
+	
+	err = DB.Unscoped().Where("email = ?", u.Email).Delete(&User{}).Error
+
+	if err != nil {
+		return u,err
+	}
+
 	return u, nil
 }
