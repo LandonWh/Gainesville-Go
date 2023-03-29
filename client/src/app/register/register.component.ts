@@ -10,6 +10,8 @@ import { Router, RouterLink } from '@angular/router';
 
 
 import Swal from 'sweetalert2';
+import { Moment } from 'moment';
+import * as moment from 'moment';
 
 
 @Component({
@@ -17,11 +19,12 @@ import Swal from 'sweetalert2';
   templateUrl: './register.component.html',
   styleUrls: ['./register.component.css']
 })
-export class RegisterComponent{
+export class RegisterComponent {
   accounts: Account[] = [];
   
   firstName: string = "";
   lastName: string = "";
+  dateOfBirth: string =""
   email: string = "";
   password: string = "";
 
@@ -32,6 +35,12 @@ export class RegisterComponent{
   reactiveForm:FormGroup;
   hide: boolean = false;
   success: boolean = true;
+  
+  
+  maxDate: Date;
+  ngOnInit() {
+  this.maxDate = moment().toDate();
+  }
 
   constructor(private fb: FormBuilder, private RegisterService: RegisterService, private httpClient: HttpClient, private router: Router) { 
     this.accounts = RegisterService.get();
@@ -40,10 +49,15 @@ export class RegisterComponent{
     registerForm : FormGroup = this.fb.group({
     firstName: ['', [Validators.required, Validators.pattern("^[a-zA-z']*$")]],
     lastName: ['', [Validators.required, Validators.pattern("^[a-zA-z']*$")]],
+    dateOfBirth: ['', [Validators.required]],
     email: ['', [Validators.required, Validators.email]],
     password: ['', [Validators.required, Validators.minLength(6)]],
+
+    
   },
+  
   )
+  
   
   get f () {
     return this.reactiveForm.controls
@@ -55,6 +69,7 @@ export class RegisterComponent{
         this.httpClient.post('/api/register', {
           firstName: this.firstName,
           lastName: this.lastName,
+          dateOfBirth: this.dateOfBirth,
           email: this.email,
           password: this.password
         }));

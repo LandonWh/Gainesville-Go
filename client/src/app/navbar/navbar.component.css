@@ -8,10 +8,11 @@
  .header {
     font-weight: 400;
     flex: 1 1 auto;
+    cursor:pointer;
  }
 
 .container {
-    background-color: transparent;
+    
 }
 
 
@@ -20,7 +21,6 @@
   }
 .navbar {
     background-color: transparent;
-    margin-left: -1.2em;
     background-color: transparent;
 }
 

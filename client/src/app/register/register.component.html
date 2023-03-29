@@ -83,7 +83,18 @@
           </mat-error>
         </mat-form-field>
         </div>
-
+        <mat-form-field class="full-width" appearance="fill">
+          <mat-label>Date of Birth</mat-label>
+          <input matInput [max]="maxDate"  [matDatepicker]="picker" formControlName="dateOfBirth">
+          <mat-datepicker-toggle matIconSuffix [for]="picker"></mat-datepicker-toggle>
+          <mat-datepicker [startAt]="maxDate" #picker></mat-datepicker>
+          <mat-error *ngIf="!registerForm.controls['dateOfBirth'].valid">
+            Date is required
+          </mat-error>
+          <mat-error *ngIf="registerForm.get('dateOfBirth')?.hasError('matDatepickerMax')">
+            Invalid maximum date.
+          </mat-error>
+        </mat-form-field>
         <div class="createAccount">
         <button data-cy="submit" mat-flat-button color="primary" (click)="onRegister()">Create Account!</button>
         </div>

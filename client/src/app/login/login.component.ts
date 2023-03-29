@@ -4,8 +4,9 @@ import { FormGroup, Validators, FormBuilder} from '@angular/forms';
 import { AuthService } from '../services/auth.service';
 import { Router } from '@angular/router';
 import { TokenStorageService } from '../services/token-storage.service';
-
+import { UserService } from '../user.service';
 import Swal from 'sweetalert2';
+import { Token } from '@angular/compiler';
 
 
 @Component({
@@ -32,7 +33,7 @@ export class LoginComponent implements OnInit{
     password: null
   };
 
-  constructor(private fb: FormBuilder, private authService: AuthService, private router: Router, private tokenStorage: TokenStorageService) {
+  constructor(private fb: FormBuilder, private authService: AuthService, private router: Router, private tokenStorage: TokenStorageService, private userService: UserService) {
     this.loginForm = this.fb.group({
       email: ['', [Validators.required, Validators.email]],
       password: ['', [Validators.required, Validators.minLength(6)]]
@@ -58,9 +59,10 @@ export class LoginComponent implements OnInit{
       this.authService
       .login(this.loginForm.get('email')?.value, this.loginForm.get('password')?.value)
       .subscribe(
-        response => {this.router.navigate(['/home'])},
-        err => {this.loginFailed()}
+        response => {this.router.navigate(['/home']),  console.log(response), this.tokenStorage.getToken},
+        err => {this.loginFailed()},
     );
+   
     
   }
 
