@@ -4,6 +4,7 @@ import { AuthService } from '../services/auth.service';
 import { LoginComponent } from './login.component';
 import { ReactiveFormsModule } from '@angular/forms';
 import { blankLogin, validLogin } from 'src/mocks';
+import { AppModule } from '../app.module';
 
 describe('LoginComponent', () => {
   let component: LoginComponent;
@@ -17,7 +18,7 @@ describe('LoginComponent', () => {
   beforeEach(async () => {
     await TestBed.configureTestingModule({
       declarations: [ LoginComponent ],
-      imports: [ReactiveFormsModule],
+      imports: [ReactiveFormsModule, AppModule],
       schemas: [CUSTOM_ELEMENTS_SCHEMA],
       providers: [
         {provide: AuthService, useValue: {}},

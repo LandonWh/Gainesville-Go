@@ -3,6 +3,7 @@ import { AuthService } from '../services/auth.service';
 import { AccountPageComponent } from './account-page.component';
 import {HttpClientTestingModule, HttpTestingController} from '@angular/common/http/testing'
 import { CUSTOM_ELEMENTS_SCHEMA } from '@angular/core';
+import { AppModule } from '../app.module';
 
 describe('AccountPageComponent', () => {
   let component: AccountPageComponent;
@@ -11,6 +12,7 @@ describe('AccountPageComponent', () => {
   beforeEach(async () => {
     await TestBed.configureTestingModule({
       imports: [
+        AppModule,
         HttpClientTestingModule,
       ],
       declarations: [ 
