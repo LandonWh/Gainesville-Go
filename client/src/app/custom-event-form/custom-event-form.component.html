@@ -8,9 +8,9 @@
         <textarea matInput
         cdkTextareaAutosize
         #autosize="cdkTextareaAutosize"
-        formControlName="description"
+        formControlName="event"
         maxlength=35></textarea>
-        <mat-error *ngIf="!eventForm.controls['description'].valid">
+        <mat-error *ngIf="!eventForm.controls['event'].valid">
           Event title is required
         </mat-error>
       </mat-form-field>
