@@ -2,14 +2,16 @@ export const blankUser = {
     firstName: '',
     lastName: '',
     email: '',
-    password: ''
+    password: '',
+    dateOfBirth: ''
 }
 
 export const validUser = {
     firstName: 'John',
     lastName: 'Smith',
     email: 'j.smith@gmail.com',
-    password: 'password'
+    password: 'password',
+    dateOfBirth: '3/20/05'
 }
 
 export const blankLogin = {

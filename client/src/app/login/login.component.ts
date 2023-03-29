@@ -6,7 +6,8 @@ import { Router } from '@angular/router';
 import { TokenStorageService } from '../services/token-storage.service';
 import { UserService } from '../user.service';
 import Swal from 'sweetalert2';
-import { Token } from '@angular/compiler';
+import { User } from '../models/User';
+
 
 
 @Component({
@@ -56,6 +57,7 @@ export class LoginComponent implements OnInit{
       this.missingField();
       return
     }
+      this.tokenStorage.saveUser(User);
       this.authService
       .login(this.loginForm.get('email')?.value, this.loginForm.get('password')?.value)
       .subscribe(

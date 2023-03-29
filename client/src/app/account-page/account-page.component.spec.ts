@@ -1,6 +1,8 @@
 import { ComponentFixture, TestBed } from '@angular/core/testing';
-
+import { AuthService } from '../services/auth.service';
 import { AccountPageComponent } from './account-page.component';
+import {HttpClientTestingModule, HttpTestingController} from '@angular/common/http/testing'
+import { CUSTOM_ELEMENTS_SCHEMA } from '@angular/core';
 
 describe('AccountPageComponent', () => {
   let component: AccountPageComponent;
@@ -8,7 +10,19 @@ describe('AccountPageComponent', () => {
 
   beforeEach(async () => {
     await TestBed.configureTestingModule({
-      declarations: [ AccountPageComponent ]
+      imports: [
+        HttpClientTestingModule,
+      ],
+      declarations: [ 
+        AccountPageComponent 
+      ],
+      providers: [
+        {provide: AuthService, userValue: {}},
+        
+      ],
+      schemas: [
+        CUSTOM_ELEMENTS_SCHEMA
+      ]
     })
     .compileComponents();
 
