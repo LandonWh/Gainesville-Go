@@ -15,11 +15,12 @@ describe('RegisterComponent', () => {
   let component: RegisterComponent;
   let fixture: ComponentFixture<RegisterComponent>;
 
-  function updateForm(firstName: string, lastName: string, email: string, password: string) {
+  function updateForm(firstName: string, lastName: string, email: string, password: string, dateOfBirth: string) {
     component.registerForm.controls['firstName'].setValue(firstName);
     component.registerForm.controls['lastName'].setValue(lastName);
     component.registerForm.controls['email'].setValue(email);
     component.registerForm.controls['password'].setValue(password);
+    component.registerForm.controls['dateOfBirth'].setValue(dateOfBirth);
   }
 
   beforeEach(async () => {
@@ -71,7 +72,7 @@ describe('RegisterComponent', () => {
 
   // check to make sure the inputs match when submitting
   it('form value should update from when u change the input', (() => {
-    updateForm(validUser.firstName, validUser.lastName, validUser.email, validUser.password);
+    updateForm(validUser.firstName, validUser.lastName, validUser.email, validUser.password, validUser.dateOfBirth);
     expect(component.registerForm.value).toEqual(validUser);
   }));
 });

@@ -33,7 +33,7 @@ describe('EventFormComponent', () => {
   beforeEach(async () => {
     await TestBed.configureTestingModule({
       declarations: [ EventFormComponent ],
-      imports: [MatFormFieldModule, AppModule],
+      imports: [MatFormFieldModule, AppModule,],
       providers: [
         {provide: MAT_DIALOG_DATA, useValue: {}},
         {provide: MatDialogRef, useValue: {}},
