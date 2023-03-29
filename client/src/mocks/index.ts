@@ -20,8 +20,8 @@ export const blankLogin = {
 }
 
 export const validLogin = {
-    email: 'theBestEmail@gmail.com',
-    password: '123456'
+    email: 'admintestaccount@gmail.com',
+    password: 'admintest'
 }
 
 export const validForm = {

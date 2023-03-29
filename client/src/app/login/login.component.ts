@@ -61,8 +61,11 @@ export class LoginComponent implements OnInit{
       this.authService
       .login(this.loginForm.get('email')?.value, this.loginForm.get('password')?.value)
       .subscribe(
-        response => {this.router.navigate(['/home']),  console.log(response), this.tokenStorage.getToken},
-        err => {this.loginFailed()},
+        response => {this.router.navigate(['/home']),  console.log(response), this.tokenStorage.getToken, this.isLoggedIn = true;},
+        err => {
+          
+          this.loginFailed()
+        },
     );
    
     
@@ -94,10 +97,14 @@ export class LoginComponent implements OnInit{
     if (this.loginForm.invalid) {
       return;
     }
-    const userAccountBody = {
-      email: accountData.email,
-      password: accountData.password
+    if (this.isLoggedIn == true) {
+      const userAccountBody = {
+        email: accountData.email,
+        password: accountData.password
+      }
     }
+    else return;
+    
   }
   
 }

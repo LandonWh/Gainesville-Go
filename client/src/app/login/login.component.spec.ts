@@ -49,6 +49,7 @@ describe('LoginComponent', () => {
     component.onSubmit(blankLogin);
     expect(component.submitted).toBeTruthy();
     expect(component.authError).toBeFalsy();
+    expect(component.isLoggedIn).toBeFalsy();
   });
 
   // check to make sure the inputs match when submitting

@@ -85,7 +85,7 @@
         </div>
         <mat-form-field class="full-width" appearance="fill">
           <mat-label>Date of Birth</mat-label>
-          <input matInput [max]="maxDate"  [matDatepicker]="picker" formControlName="dateOfBirth">
+          <input data-cy = "dob" matInput [max]="maxDate"  [matDatepicker]="picker" formControlName="dateOfBirth">
           <mat-datepicker-toggle matIconSuffix [for]="picker"></mat-datepicker-toggle>
           <mat-datepicker [startAt]="maxDate" #picker></mat-datepicker>
           <mat-error *ngIf="!registerForm.controls['dateOfBirth'].valid">
