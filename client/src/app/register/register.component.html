@@ -11,6 +11,7 @@
             <mat-label>First Name</mat-label>
             
             <input
+            data-cy="firstName"
               [(ngModel)]="firstName"
               formControlName="firstName"
               matInput
@@ -26,6 +27,7 @@
           <mat-form-field class="full-width" appearance="outline">
             <mat-label>Last Name</mat-label>
             <input
+            data-cy="lastName"
             [(ngModel)]="lastName"
               formControlName="lastName"
               matInput
@@ -41,6 +43,7 @@
           <mat-form-field class="full-width" appearance="outline">
             <mat-label>Email</mat-label>
             <input
+            data-cy="email"
             [(ngModel)]="email"
               formControlName="email"
               matInput
@@ -56,6 +59,7 @@
           <mat-form-field class="full-width" appearance="outline">
             <mat-label>Password</mat-label>
             <input 
+            data-cy="password"
             [(ngModel)]="password"
             formControlName="password" 
             name="password"
