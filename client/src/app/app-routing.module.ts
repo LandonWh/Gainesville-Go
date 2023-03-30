@@ -21,7 +21,7 @@ const routes: Routes = [
   {
     path: 'home',
     component: MainPageComponent,
-    //canActivate: [AuthGuard]
+    canActivate: [AuthGuard]
   },
   {
     path: 'create-event',
