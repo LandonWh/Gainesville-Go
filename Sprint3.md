@@ -5,6 +5,9 @@ Video Link - TBD
 
 ## New this sprint
 
+* Added the ability to delete users from the database
+* Added more unit tests for the backend for both users and events
+* Updated the schema of users to contain a date of birth and a list of events they're participating in
 * 
 
 ## Unit Tests
@@ -121,6 +124,13 @@ Register an account to database: POST from http://localhost:8080/api/register an
 }  
 Returns the user unless the email field is not unique, it will fail if that's the case
 
+Delete an account to database: POST from http://localhost:8080/api/deleteuser and go to Body and insert:  
+{  
+"email":"str"  
+"password":"str"  
+}  
+Returns the deleted user with no password unless the user does not exist or if the password is incorrect, it will fail if that's the case
+
 Login and generate a token: POST from http://localhost:8080/api/login and go to Body and insert:  
 {  
 "email":"str"  
@@ -129,4 +139,4 @@ Login and generate a token: POST from http://localhost:8080/api/login and go to 
 Returns the jwt token for the user unless the username/password is incorrect, it will fail if that's the case
 
 Fetch a user based on token: GET from http://localhost:8080/api/admin/user and select Authorization -> Bearer Token -> insert token (no quotes)
-
+If token is valid, it will return the user connected to that token. If the token is invalid, it will throw a 401 code (unauthorized access)
