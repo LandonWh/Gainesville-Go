@@ -14,4 +14,10 @@ export class ApiService {
     login(email: string, password: string) {
         return this.http.post('api/login', {email, password});
     }
+
+    deleteAccount(email: string, password: string) {
+        console.log(email);
+        console.log(password);
+        return this.http.post('api/delete', {email, password});
+    }
 }

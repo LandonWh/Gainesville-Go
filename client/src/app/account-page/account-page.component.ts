@@ -64,4 +64,8 @@ export class AccountPageComponent implements OnInit {
     this.password = tokenInfo.password;
     return this.password;
   }
+
+  deleteAccount() {
+    this.router.navigate(['/delete']);
+  }
 }
