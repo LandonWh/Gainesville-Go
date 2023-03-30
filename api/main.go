@@ -29,6 +29,7 @@ func main() {
 	public.POST("/event", CreateEventHandler)
 	public.DELETE("/event", DeleteEventHandler)
 	public.GET("/event", GetEventHandler)
+	public.POST("/attend", AttendEvent)
 	protected := r.Group("/api/admin")
 	protected.Use(JwtAuthMiddleware())
 	protected.GET("/user", CurrentUser)

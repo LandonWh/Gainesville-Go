@@ -26,6 +26,7 @@ type Event struct {
 	TwentyOne   bool      `json:"twentyone"`
 	Lat         float32   `json:"lat"`
 	Lon         float32   `json:"long"`
+	Users       []User    `gorm:"many2many:user_events"`
 }
 
 // Adds an event with the given values to the database
