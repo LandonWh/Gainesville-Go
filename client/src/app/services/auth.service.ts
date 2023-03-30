@@ -49,4 +49,13 @@ export class AuthService {
     getAccount() {
         return this.http.get(this.API_URL + '/account');
     }
+
+    delete(email: string, password: string) {
+        return this.apiService.deleteAccount(email, password).pipe(
+            tap((response: any) => {
+                localStorage.removeItem(response.token);
+                this._isLoggedIn$.next(false);
+            }) 
+        )
+    }
 }

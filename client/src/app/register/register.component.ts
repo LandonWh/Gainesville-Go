@@ -126,7 +126,8 @@ export class RegisterComponent {
       firstName: accountData.firstName,
       lastName: accountData.lastName,
       email: accountData.email,
-      password: accountData.password
+      password: accountData.password,
+      dateOfBirth: accountData.dateOfBirth
     }
   }
 
