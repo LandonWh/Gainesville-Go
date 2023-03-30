@@ -63,39 +63,22 @@ export class RegisterComponent {
     return this.reactiveForm.controls
   }
 
-  async addAccount() {
-    try {
-      await firstValueFrom(
-        this.httpClient.post('/api/register', {
-          firstName: this.firstName,
+  addAccount(): void{
+
+    if(this.registerForm.invalid) {
+      this.missingField();
+      return;
+    }
+    this.httpClient.post('api/register', {
+      firstName: this.firstName,
           lastName: this.lastName,
           dateOfBirth: this.dateOfBirth,
           email: this.email,
           password: this.password
-        }));
-      
-    }
-    catch (e: any) {
-      if (e.status == 400) {
-        // Handle the case where the email is already used
-        this.failedRegistration();
-        this.success = false;
-        
-      }
-    }
-    if (this.success == true) {
-      this.router.navigate(['/login']);
-    }
-  }
-
-  onRegister() {
-    if (!this.registerForm.valid) {
-      this.missingField();
-      return;
-    }
-    else {
-      this.addAccount()
-    }
+    }).subscribe (
+        response => {this.router.navigate(['/login']);},
+        err => {this.failedRegistration()}
+    );
   }
 
   missingField() {
