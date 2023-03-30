@@ -20,7 +20,7 @@ type createEventInput struct {
 	Description string    `json:"description"`
 	Capacity    int       `json:"capacity"`
 	Activity    int8      `json:"activity"`
-	StartTime   time.Time `json:"start"`
+	StartTime   time.Time `json:"starttime"`
 	EndTime     time.Time `json:"endtime"`
 	Address     string    `json:"address"`
 	BoysOnly    bool      `json:"boysonly"`
