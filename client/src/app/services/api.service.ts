@@ -20,4 +20,8 @@ export class ApiService {
         console.log(password);
         return this.http.post('api/delete', {email, password});
     }
+
+    register(firstName: string, lastName: string, dateOfBirth: string, email: string, password: string) {
+        return this.http.post('api/register', {firstName, lastName, dateOfBirth, email, password});
+    }
 }

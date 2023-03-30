@@ -13,7 +13,9 @@ const httpOptions = {
 @Injectable()
 export class AuthService {
     private _isLoggedIn$ = new BehaviorSubject<boolean>(false);
+    private _isRegistered$ = new BehaviorSubject<boolean>(false);
     isLoggedIn$ = this._isLoggedIn$.asObservable();
+    isRegistered$ = this._isRegistered$.asObservable();
     API_URL = 'http://localhost:8080';
     TOKEN_KEY = 'token';
 
@@ -42,6 +44,14 @@ export class AuthService {
             tap((response: any) => {
                 localStorage.setItem('account_auth', response.token);
                 this._isLoggedIn$.next(true);
+            })
+        )
+    }
+
+    register(firstName: string, lastName: string, dateOfBirth: string, email: string, password: string) {
+        return this.apiService.register(firstName, lastName, dateOfBirth, email, password).pipe(
+            tap((response: any) => {
+                this._isRegistered$.next(true);
             })
         )
     }

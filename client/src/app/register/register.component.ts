@@ -7,6 +7,7 @@ import { HttpClient, HttpErrorResponse } from '@angular/common/http';
 import { firstValueFrom, lastValueFrom } from 'rxjs';
 import { Account, RegisterService} from './register.service'
 import { Router, RouterLink } from '@angular/router';
+import { AuthService } from '../services/auth.service';
 
 
 import Swal from 'sweetalert2';
@@ -42,7 +43,7 @@ export class RegisterComponent {
   this.maxDate = moment().toDate();
   }
 
-  constructor(private fb: FormBuilder, private RegisterService: RegisterService, private httpClient: HttpClient, private router: Router) { 
+  constructor(private fb: FormBuilder, private RegisterService: RegisterService, private httpClient: HttpClient, private router: Router, private authService: AuthService) { 
     this.accounts = RegisterService.get();
   }
     
@@ -69,13 +70,13 @@ export class RegisterComponent {
       this.missingField();
       return;
     }
-    this.httpClient.post('api/register', {
-      firstName: this.firstName,
-          lastName: this.lastName,
-          dateOfBirth: this.dateOfBirth,
-          email: this.email,
-          password: this.password
-    }).subscribe (
+    this.authService.register(
+      this.registerForm.get('firstName')?.value,
+      this.registerForm.get('lastName')?.value,
+      this.registerForm.get('dateOfBirth')?.value,
+      this.registerForm.get('email')?.value,
+      this.registerForm.get('password')?.value
+    ).subscribe (
         response => {this.router.navigate(['/login']);},
         err => {this.failedRegistration()}
     );
