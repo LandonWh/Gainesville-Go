@@ -87,7 +87,6 @@ Creating an event: POST to http://localhost:8080/api/event
 "activity": integer,
 "start_time": "string (RFC3339)",
 "end_time": "string (RFC3339)",
-"birthdate": "string (RFC3339)",
 "address": "string",
 "boysOnly": boolean,
 "girlsOnly": boolean,

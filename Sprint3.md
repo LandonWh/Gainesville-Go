@@ -17,6 +17,11 @@ Video Link - TBD
 * Added Functionality to custom event form
 * Implemented Date of Birth functionality on registration page
 * Started implementing function to remove accounts from the database
+* Expanded the struct of events to include coordinates, start time, end time, address, and whether various boxes such as 21+ were selected during creation.
+* Added a relational database representing a many-to-many relation between Users and Events to keep track of which user is planning on attending which events.
+* Added errors and error messages for attending an event that doesn’t exist, a user that doesn’t exist attending an event, and trying to add a relationship that already exists.
+* Implemented a CORS policy to allow requests that aren’t from the same address
+
 
 
 
@@ -92,6 +97,11 @@ Frontend Login Page Unit Tests
     * Creates an event, makes sure searching for the event key returns the event, checks the event data
 * Check creating multiple events
     * Creates multiple events, querying all events returns the number of events created, makes sure that each event is listed in the query, and deletes all retrieved events
+* Create user event relationship
+    * Creates a user and event, sets the user to be attending that event, and makes sure that that info can be retrieved from the database
+* Test user event relationship api
+    * Tests creating users and events through the api and makes sure errors are thrown when creating duplicate relationships and assigning users to nonexistant events and vice versa
+
 
 ## Setup
 
@@ -120,7 +130,6 @@ Creating an event: POST to http://localhost:8080/api/event
 "activity": integer,
 "start_time": "string (RFC3339)",
 "end_time": "string (RFC3339)",
-"birthdate": "string (RFC3339)",
 "address": "string",
 "boysOnly": boolean,
 "girlsOnly": boolean,
@@ -128,6 +137,8 @@ Creating an event: POST to http://localhost:8080/api/event
 "lat": float,
 "lon": float
 }
+note: RFC is the format for date and time stamps. Ex. ""2022-04-01T14:30:00Z"
+
 Returns the entire event
 
 Viewing all events: GET from http://localhost:8080/api/events Returns a list of all events
@@ -170,3 +181,9 @@ Returns the jwt token for the user unless the username/password is incorrect, it
 
 Fetch a user based on token: GET from http://localhost:8080/api/admin/user and select Authorization -> Bearer Token -> insert token (no quotes)
 If token is valid, it will return the user connected to that token. If the token is invalid, it will throw a 401 code (unauthorized access)
+
+Setting a user to be attending an event: POST to http://localhost:8080/api/attend
+{
+"user_id":int
+event_id:"int
+}
