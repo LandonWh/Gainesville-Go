@@ -8,13 +8,33 @@ Video Link - TBD
 * Added the ability to delete users from the database
 * Added more unit tests for the backend for both users and events
 * Updated the schema of users to contain a date of birth and a list of events they're participating in
-* 
+* Added alerts using SweetAlert2 for registration (invalid fields, pre-existing email address).
+* Added alerts using SweetAlert2 for login (invalid fields, incorrect login information) 
+* Login page is now fully integrated with the backend, allowing users to sign in with credentials located in the database, checking that both email and password match stored information.
+* Changed Navbar to reactive navbar based on window size (hamburger dropdown sidenav when the window is small, and buttons across the top when the window is large)
+* Added My Account Page skeleton 
+   * Future plans include displaying user information and making the logout button functional
+* Added Functionality to custom event form
+* Implemented Date of Birth functionality on registration page
+* Started implementing function to remove accounts from the database
+
+
+
+
+
+
 
 ## Unit Tests
 
-Simple Cypress Test 
+####Simple Cypress Test 
 * Test to ensure account creation button on login page routes to the registration page.
 
+####New Cypress Tests:
+* Users should be redirected to the login page following a successful registration.
+* Registrations with an already existing email address should fail.
+* Successful logins should route to the home page.
+* A login should fail if the email does not exist in the database.
+* A login should fail if the password does not match an existing email. 
 Frontend Login Page Unit Tests
 * Check login form for initial state (not submitted) 
     * Should show that the form is not submitted and the form is currently invalid
@@ -23,7 +43,7 @@ Frontend Login Page Unit Tests
 * Check inputs get through to the login form
     * Pass inputs of a complete login form, make sure those inputs match what is put through
 
-Frontend Registration Page Unit Tests
+####Frontend Registration Page Unit Tests
 * Check registration form for initial state (not submitted) 
     * Should show that the form is not submitted and the form is currently invalid
 * Check submission of registration form
@@ -31,11 +51,19 @@ Frontend Registration Page Unit Tests
 * Check inputs get through to the registration form
     * Pass inputs of a complete registration form, make sure those inputs match what is put through
 
-Frontend Event Unit Tests
+####Frontend Event Unit Tests
 * Check inputs get through to the event form
 * Pass inputs of a complete event form, make sure those inputs match what is put through
 
-Backend User Unit Tests
+####New Frontend Unit Tests
+* Check inputsget through to the custom event form
+   * Pass inputs of a complete custom event form, make sure those inputs match what is put through
+* Updated old registration unit test with date of birth input
+   * Pass inputs of a complete registration form, make sure those inputs match what is put through
+* All other old unit tests are still there (updated to fit new features)
+
+
+####Backend User Unit Tests
 * TestCreateUser
     * Adds a User entry to the database. Returns the User added with a http.StatusOK (200) code.
 * TestCreateDuplicateUser
@@ -55,7 +83,7 @@ Backend User Unit Tests
 * TestWipeUsers
     * Removes all of the Users in the database to reset the file. Returns an empty array of Users with a http.StatusOK (200) code.
 
-Backend Event Unit Tests
+####Backend Event Unit Tests
 * Check creation and deletion of events
     * Makes sure the event gets successfully created and deleted
 * Check searching for a specific event and retrieving data
