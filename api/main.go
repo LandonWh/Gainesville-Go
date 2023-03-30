@@ -27,11 +27,7 @@ func SetupRouter() *gin.Engine {
 	public := r.Group("/api")
 	public.POST("/register", Register)
 	public.POST("/login", Login)
-<<<<<<< Updated upstream
 	public.POST("/deleteuser", Delete)
-=======
-	public.DELETE("/register", Delete)
->>>>>>> Stashed changes
 	public.GET("/ping", PingGet)
 	public.GET("/events", GetEvents)
 	public.POST("/event", CreateEventHandler)
