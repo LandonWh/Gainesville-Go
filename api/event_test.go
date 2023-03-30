@@ -57,7 +57,6 @@ func TestRetrieveEvent(t *testing.T) {
 		event.Activity != retrievedEvent.Activity ||
 		event.StartTime.Format(time.RFC3339) != retrievedEvent.StartTime.Format(time.RFC3339) ||
 		event.EndTime.Format(time.RFC3339) != retrievedEvent.EndTime.Format(time.RFC3339) ||
-		event.Birthdate.Format(time.RFC3339) != retrievedEvent.Birthdate.Format(time.RFC3339) ||
 		event.Address != retrievedEvent.Address ||
 		event.BoysOnly != retrievedEvent.BoysOnly ||
 		event.GirlsOnly != retrievedEvent.GirlsOnly ||
@@ -127,4 +126,36 @@ func TestAddDeleteEventWithNewFields(t *testing.T) {
 	if l1 != len(events) || deleted != 1 {
 		t.Errorf("error deleting event")
 	}
+}
+
+func TestCreateUserEventRelationship(t *testing.T) {
+	// Create a user and add to the database
+	user := User{
+		FirstName:   "John",
+		LastName:    "Doe",
+		DateOfBirth: "1990-01-01",
+		Email:       "johndoe@example.com",
+		Password:    "password123",
+	}
+	DB.Create(&user)
+
+	// Create an event and add to the database
+	event := CreateRandEvent("TestCreateUserEventRelationship")
+	_, eventID := AddEvent(event)
+
+	// Create a relationship between the user and the event
+	DB.Model(&user).Association("Events").Append(&event)
+
+	// Check if the relationship exists
+	var relatedEvents []Event
+	DB.Model(&user).Association("Events").Find(&relatedEvents)
+
+	if len(relatedEvents) == 0 {
+		t.Errorf("error creating user-event relationship")
+	}
+
+	// Clean up: delete the user, event, and relationship
+	DB.Model(&user).Association("Events").Delete(&event)
+	DeleteEvent(eventID)
+	DB.Delete(&user)
 }

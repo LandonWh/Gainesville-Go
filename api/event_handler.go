@@ -22,7 +22,6 @@ type createEventInput struct {
 	Activity    int8      `json:"activity"`
 	StartTime   time.Time `json:"start"`
 	EndTime     time.Time `json:"endtime"`
-	Birthdate   time.Time `json:"birthdate"`
 	Address     string    `json:"address"`
 	BoysOnly    bool      `json:"boysonly"`
 	GirlsOnly   bool      `json:"girlsonly"`
@@ -40,7 +39,7 @@ func CreateEventHandler(c *gin.Context) {
 	}
 
 	// Add event to database
-	event, _ := AddEvent(ToEvent(input.Title, input.Description, input.Capacity, input.Activity, input.StartTime, input.EndTime, input.Birthdate,
+	event, _ := AddEvent(ToEvent(input.Title, input.Description, input.Capacity, input.Activity, input.StartTime, input.EndTime,
 		input.Address, input.BoysOnly, input.GirlsOnly, input.TwentyOne, input.Lat, input.Lon))
 
 	c.JSON(http.StatusOK, gin.H{"data": event})

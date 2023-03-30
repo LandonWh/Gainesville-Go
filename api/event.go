@@ -19,7 +19,6 @@ type Event struct {
 	Activity    int8      `json:"activity"`
 	StartTime   time.Time `json:"starttime"`
 	EndTime     time.Time `json:"endtime"`
-	Birthdate   time.Time `json:"birthdate"`
 	Address     string    `json:"address"`
 	BoysOnly    bool      `json:"boysonly"`
 	GirlsOnly   bool      `json:"girlsonly"`
@@ -36,7 +35,7 @@ func AddEvent(event Event) (Event, uint) {
 }
 
 // casts event parameters to an event object
-func ToEvent(title string, description string, capacity int, activity int8, startTime time.Time, endTime time.Time, birthdate time.Time, address string, boysOnly bool, girlsOnly bool, twentyOne bool, lat float32, lon float32) Event {
+func ToEvent(title string, description string, capacity int, activity int8, startTime time.Time, endTime time.Time, address string, boysOnly bool, girlsOnly bool, twentyOne bool, lat float32, lon float32) Event {
 	return Event{
 		Title:       title,
 		Description: description,
@@ -44,7 +43,6 @@ func ToEvent(title string, description string, capacity int, activity int8, star
 		Activity:    activity,
 		StartTime:   startTime,
 		EndTime:     endTime,
-		Birthdate:   birthdate,
 		Address:     address,
 		BoysOnly:    boysOnly,
 		GirlsOnly:   girlsOnly,
@@ -63,7 +61,6 @@ func CreateRandEvent(title string) Event {
 		Activity:    int8(rand.Intn(3) + 1),
 		StartTime:   time.Now().Add(time.Hour * time.Duration(rand.Intn(24*7))),
 		EndTime:     time.Now().Add(time.Hour * time.Duration(rand.Intn(24*7))),
-		Birthdate:   time.Date(1990, time.January, 1, 0, 0, 0, 0, time.UTC),
 		Address:     fmt.Sprintf("%d Main St.", rand.Intn(1000)+1),
 		BoysOnly:    rand.Intn(2) == 0,
 		GirlsOnly:   rand.Intn(2) == 0,
