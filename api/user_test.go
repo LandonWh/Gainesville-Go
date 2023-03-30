@@ -59,7 +59,7 @@ func TestCreateUser(t *testing.T) {
 		t.Errorf("handler returned wrong status code: got %v want %v",
 			status, http.StatusOK)
 	}
-	expected := `{"ID":1,"firstname":"Aidan","lastname":"Winney","dateofbirth":"02072003","email":"email@gmail.com","password":"password"}`
+	expected := `{"ID":1,"firstname":"Aidan","lastname":"Winney","dateofbirth":"02072003","email":"email@gmail.com","password":"password","Events":null}`
 	if rr.Body.String() != expected {
 		t.Errorf("handler returned unexpected body: got %v want %v",
 			rr.Body.String(), expected)
@@ -170,7 +170,7 @@ func TestGetUsers(t *testing.T) {
 	}
 
 	// Check the response body is what we expect.
-	expected := `[{"ID":1,"firstname":"Aidan","lastname":"Winney","dateofbirth":"02072003","email":"email@gmail.com","password":"password"}]`
+	expected := `[{"ID":1,"firstname":"Aidan","lastname":"Winney","dateofbirth":"02072003","email":"email@gmail.com","password":"password","Events":null}]`
 	if rr.Body.String() != expected {
 		t.Errorf("handler returned unexpected body: got %v want %v",
 			rr.Body.String(), expected)
@@ -255,7 +255,7 @@ func TestCreateUserAgain(t *testing.T) {
 		t.Errorf("handler returned wrong status code: got %v want %v",
 			status, http.StatusOK)
 	}
-	expected := `{"ID":1,"firstname":"Aidan","lastname":"Winney","dateofbirth":"02072003","email":"email@gmail.com","password":"password"}`
+	expected := `{"ID":1,"firstname":"Aidan","lastname":"Winney","dateofbirth":"02072003","email":"email@gmail.com","password":"password","Events":null}`
 	if rr.Body.String() != expected {
 		t.Errorf("handler returned unexpected body: got %v want %v",
 			rr.Body.String(), expected)
