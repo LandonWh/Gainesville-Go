@@ -9,6 +9,10 @@ import (
 
 func main() {
 	ConnectDatabase("main.db")
+	SetupRouter()
+}
+
+func SetupRouter() *gin.Engine {
 	r := gin.Default()
 
 	// Add CORS middleware
@@ -23,7 +27,11 @@ func main() {
 	public := r.Group("/api")
 	public.POST("/register", Register)
 	public.POST("/login", Login)
+<<<<<<< Updated upstream
 	public.POST("/deleteuser", Delete)
+=======
+	public.DELETE("/register", Delete)
+>>>>>>> Stashed changes
 	public.GET("/ping", PingGet)
 	public.GET("/events", GetEvents)
 	public.POST("/event", CreateEventHandler)
@@ -37,6 +45,8 @@ func main() {
 	//start the server
 	err := http.ListenAndServe(":8080", r)
 	if err != nil {
-		return
+		return nil
 	}
+
+	return r
 }

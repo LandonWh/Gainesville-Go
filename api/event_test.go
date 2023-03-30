@@ -159,3 +159,54 @@ func TestCreateUserEventRelationship(t *testing.T) {
 	DeleteEvent(eventID)
 	DB.Delete(&user)
 }
+
+/*
+func TestUserEventRelationshipAPI(t *testing.T) {
+	// Initialize test server and client
+	ConnectDatabase("test.db")
+	gin.SetMode(gin.TestMode)
+	r := SetupRouter()
+	ts := httptest.NewServer(r)
+	defer ts.Close()
+	client := ts.Client()
+
+	// Create test user and event
+	user := User{
+		FirstName:   "Test",
+		LastName:    "User",
+		DateOfBirth: "2000-01-01",
+		Email:       "test@example.com",
+		Password:    "password",
+	}
+	user, err := user.SaveUser(true)
+	if err != nil {
+		t.Fatalf("Failed to create user: %v", err)
+	}
+	event := CreateRandEvent("TestUserEventRelationshipAPI")
+	_, eventID := AddEvent(event)
+
+	// Make an HTTP request to create a relationship
+	data := map[string]uint{"user_id": user.ID, "event_id": eventID}
+	jsonData, _ := json.Marshal(data)
+	resp, err := client.Post(ts.URL+"/api/attend", "application/json", bytes.NewBuffer(jsonData))
+	if err != nil {
+		t.Fatalf("Failed to create user-event relationship: %v", err)
+	}
+	if resp.StatusCode != http.StatusOK {
+		t.Fatalf("Expected status 200, got %d", resp.StatusCode)
+	}
+
+	// Make another HTTP request to create the same relationship (expect an error)
+	resp, err = client.Post(ts.URL+"/api/attend", "application/json", bytes.NewBuffer(jsonData))
+	if err != nil {
+		t.Fatalf("Failed to create user-event relationship: %v", err)
+	}
+	if resp.StatusCode != http.StatusBadRequest {
+		t.Fatalf("Expected status 400, got %d", resp.StatusCode)
+	}
+
+	// Clean up
+	DeleteUser(user.Email)
+	DeleteEvent(eventID)
+}
+*/
