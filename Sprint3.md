@@ -29,7 +29,7 @@ Video Link - TBD
 #### Simple Cypress Test 
 * Test to ensure account creation button on login page routes to the registration page.
 
-####New Cypress Tests:
+#### New Cypress Tests:
 * Users should be redirected to the login page following a successful registration.
 * Registrations with an already existing email address should fail.
 * Successful logins should route to the home page.
