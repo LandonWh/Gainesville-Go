@@ -38,6 +38,7 @@ import { CanActivateViaAuthGuard } from './can-activate-via-auth.guard';
 import { AuthService } from './services/auth.service';
 import { CustomEventFormComponent } from './custom-event-form/custom-event-form.component';
 import { AccountPageComponent } from './account-page/account-page.component';
+import { DeleteComponent } from './delete/delete.component';
 
 const routes = [
   { path: 'login', component: LoginComponent },
@@ -65,6 +66,7 @@ const routes = [
     MembersComponent,
     CustomEventFormComponent,
     AccountPageComponent,
+    DeleteComponent,
   ],
   entryComponents: [EventFormComponent],
   imports: [

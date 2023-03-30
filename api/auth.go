@@ -75,7 +75,7 @@ func Delete(c *gin.Context) {
 		return
 	}
 
-	_, err = u.DeleteUser()
+	_, err = DeleteUser(u.Email)
 
 	if err != nil {
 		c.JSON(http.StatusBadRequest, gin.H{"error": "Could not delete user."})

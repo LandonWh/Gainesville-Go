@@ -8,6 +8,7 @@ import { RegisterComponent } from './register/register.component';
 import { MembersComponent } from './members/members.component';
 import { AccountPageComponent } from './account-page/account-page.component';
 import { AuthGuard } from './auth.guard';
+import { DeleteComponent } from './delete/delete.component';
 
 
 
@@ -38,6 +39,10 @@ const routes: Routes = [
     path: 'account-page',
     component: AccountPageComponent,
     //canActivate: [AuthGuard]
+  },
+  {
+    path: 'delete',
+    component: DeleteComponent
   }
 
     ]

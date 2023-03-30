@@ -45,7 +45,7 @@ func CreateUser(w http.ResponseWriter, r *http.Request) {
 func TestCreateUser(t *testing.T) {
 	ConnectDatabase("user_testing.db") //Do this before first test
 
-	var jsonStr = []byte(`{"firstname":"Aidan","lastname":"Winney","email":"email@gmail.com","password":"password"}`)
+	var jsonStr = []byte(`{"firstname":"Aidan","lastname":"Winney","dateofbirth":"02072003","email":"email@gmail.com","password":"password"}`)
 
 	req, err := http.NewRequest("POST", "/api/register", bytes.NewBuffer(jsonStr))
 	if err != nil {
@@ -59,7 +59,7 @@ func TestCreateUser(t *testing.T) {
 		t.Errorf("handler returned wrong status code: got %v want %v",
 			status, http.StatusOK)
 	}
-	expected := `{"ID":1,"firstname":"Aidan","lastname":"Winney","email":"email@gmail.com","password":"password"}`
+	expected := `{"ID":1,"firstname":"Aidan","lastname":"Winney","dateofbirth":"02072003","email":"email@gmail.com","password":"password"}`
 	if rr.Body.String() != expected {
 		t.Errorf("handler returned unexpected body: got %v want %v",
 			rr.Body.String(), expected)
@@ -67,7 +67,7 @@ func TestCreateUser(t *testing.T) {
 }
 
 func TestCreateDuplicateUser(t *testing.T) { //SHOULD NOT CREATE NEW USER
-	var jsonStr = []byte(`{"firstname":"Aidan","lastname":"Winney","email":"email@gmail.com","password":"password"}`)
+	var jsonStr = []byte(`{"firstname":"Aidan","lastname":"Winney","dateofbirth":"02072003","email":"email@gmail.com","password":"password"}`)
 
 	req, err := http.NewRequest("POST", "/api/register", bytes.NewBuffer(jsonStr))
 	if err != nil {
@@ -170,7 +170,92 @@ func TestGetUsers(t *testing.T) {
 	}
 
 	// Check the response body is what we expect.
-	expected := `[{"ID":1,"firstname":"Aidan","lastname":"Winney","email":"email@gmail.com","password":"password"}]`
+	expected := `[{"ID":1,"firstname":"Aidan","lastname":"Winney","dateofbirth":"02072003","email":"email@gmail.com","password":"password"}]`
+	if rr.Body.String() != expected {
+		t.Errorf("handler returned unexpected body: got %v want %v",
+			rr.Body.String(), expected)
+	}
+}
+
+func DeleteOneUser(w http.ResponseWriter, r *http.Request) {
+	decoder := json.NewDecoder(r.Body)
+	var u LoginInput
+	err := decoder.Decode(&u)
+	if err != nil {
+		respondWithError(w, http.StatusInternalServerError, "Some problem occurred.")
+		return
+	}
+	
+	_, err = DeleteUser(u.Email)
+	if err != nil {
+		respondWithJSON(w, http.StatusBadRequest, err)
+		return
+	}
+	respondWithJSON(w, http.StatusOK, u)
+}
+
+func TestDeleteOneUser(t *testing.T) {
+	var jsonStr = []byte(`{"email":"email@gmail.com"}`)
+
+	req, err := http.NewRequest("POST", "/api/delete", bytes.NewBuffer(jsonStr))
+	if err != nil {
+		t.Fatal(err)
+	}
+	req.Header.Set("Content-Type", "application/json")
+	rr := httptest.NewRecorder()
+	handler := http.HandlerFunc(DeleteOneUser)
+	handler.ServeHTTP(rr, req)
+	if status := rr.Code; status != http.StatusOK {
+		t.Errorf("handler returned wrong status code: got %v want %v",
+			status, http.StatusOK)
+	}
+	expected := `{"email":"email@gmail.com","password":""}`
+	if rr.Body.String() != expected {
+		t.Errorf("handler returned unexpected body: got %v want %v",
+			rr.Body.String(), expected)
+	}
+}
+
+func TestUserLoginAfterDelete(t *testing.T) {
+	var jsonStr = []byte(`{"email":"email@gmail.com","password":"password"}`)
+
+	req, err := http.NewRequest("POST", "/api/login", bytes.NewBuffer(jsonStr))
+	if err != nil {
+		t.Fatal(err)
+	}
+	req.Header.Set("Content-Type", "application/json")
+	rr := httptest.NewRecorder()
+	handler := http.HandlerFunc(UserLogin)
+	handler.ServeHTTP(rr, req)
+	if status := rr.Code; status != http.StatusBadRequest {
+		t.Errorf("handler returned wrong status code: got %v want %v",
+			status, http.StatusOK)
+	}
+	expected := `{}`
+	if rr.Body.String() != expected {
+		t.Errorf("handler returned unexpected body: got %v want %v",
+			rr.Body.String(), expected)
+	}
+}
+
+func TestCreateUserAgain(t *testing.T) {
+	ConnectDatabase("user_testing.db") //Do this before first test
+
+	var jsonStr = []byte(`{"firstname":"Aidan","lastname":"Winney","dateofbirth":"02072003","email":"email@gmail.com","password":"password"}`)
+
+	req, err := http.NewRequest("POST", "/api/register", bytes.NewBuffer(jsonStr))
+	if err != nil {
+		t.Fatal(err)
+	}
+	req.Header.Set("Content-Type", "application/json")
+	rr := httptest.NewRecorder()
+	handler := http.HandlerFunc(CreateUser)
+	handler.ServeHTTP(rr, req)
+	if status := rr.Code; status != http.StatusOK {
+		t.Errorf("handler returned wrong status code: got %v want %v",
+			status, http.StatusOK)
+	}
+	expected := `{"ID":1,"firstname":"Aidan","lastname":"Winney","dateofbirth":"02072003","email":"email@gmail.com","password":"password"}`
 	if rr.Body.String() != expected {
 		t.Errorf("handler returned unexpected body: got %v want %v",
 			rr.Body.String(), expected)

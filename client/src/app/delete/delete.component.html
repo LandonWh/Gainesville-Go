@@ -1,0 +1,51 @@
+<mat-card>
+    <mat-card-content>
+      <div class="header">
+        <h1>Delete Account?</h1>
+        <h3>Enter email and password to delete account.</h3>
+      </div>
+      <form name="loginForm" [formGroup]="deleteForm">
+        <div class="emailInput">
+          <mat-form-field class="full-width" appearance="outline">
+            <mat-label>Email</mat-label>
+            <input
+              data-cy="email"
+              formControlName="email"
+              matInput
+              placeholder="Enter email address" required
+            />
+            <mat-error *ngIf="!deleteForm.controls['email'].valid">
+                Email is required
+              </mat-error>
+          </mat-form-field>
+        </div>
+
+        <div>
+          <span>
+            <a class="text-link" class="forgot-password" routerLink="/auth/forgot-password">Forgot Password?</a>
+          </span>
+          <mat-form-field class="full-width" appearance="outline">
+            <mat-label>Password</mat-label>
+            <input data-cy="password" formControlName="password" matInput [type]=" hide ? 'password' : 'text'" required />
+            <button  mat-icon-button matSuffix (click)="hide = !hide" [attr.aria-label]="'Hide Password'"
+            [attr.aria-pressed]="hide">
+            <mat-icon>
+                {{hide ? 'visibility_off' : 'visibility'}}
+            </mat-icon>
+        </button>
+        <mat-error *ngIf="!deleteForm.controls['password'].valid">
+            Password is required
+          </mat-error>
+        </mat-form-field>
+        </div>
+        <div class="SubmitButton">
+          <button data-cy="delete" mat-flat-button color="primary" (click)="deleteAccount()">Delete Account</button>
+        </div>
+      </form>
+
+      <div class="register">
+        <a data-cy="createAccount" routerLink="/account-page">Cancel</a>
+      </div>
+    </mat-card-content>
+  </mat-card>
+

@@ -101,15 +101,15 @@ func (u *User) SaveUser(doHash bool) (*User, error) {
 	return u, nil
 }
 
-func (u *User) DeleteUser() (*User, error) {
+func DeleteUser(email string) (*User, error) {
 
 	var err error
 
-	err = DB.Unscoped().Where("email = ?", u.Email).Delete(&User{}).Error
+	err = DB.Unscoped().Where("email = ?", email).Delete(&User{}).Error
 
 	if err != nil {
-		return u, err
+		return nil, err
 	}
 
-	return u, nil
+	return nil, nil
 }
