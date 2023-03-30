@@ -1,4 +1,4 @@
-Sprint2.md 
+Sprint3.md 
 
 Video Link - TBD
 
@@ -36,13 +36,19 @@ Backend User Unit Tests
 * TestCreateUser
     * Adds a User entry to the database. Returns the User added with a http.StatusOK (200) code.
 * TestCreateDuplicateUser
-    * Adds a User entry with an already-present user to the database. Returns an empty with a http.StatusBadRequest (400) code.
+    * Adds a User entry with an already-present user to the database. Returns an empty User with a http.StatusBadRequest (400) code.
 * TestUserLogin
     * Logs in a User with a valid email and password. Returns the valid login with a http.StatusOK (200) code.
 * TestIncorrectUserLogin
     * Logs in a User with an invalid email and password. Returns an empty login with a http.BadRequest (400) code.
 * TestGetUsers
     * Retrieves all of the Users in the database. Returns an array of all of the Users in the database with a http.StatusOK (200) code.
+* TestDeleteOneUser
+    * Deletes the user with the specified email and password. Returns the valid deletion User schema with a http.StatusOK (200) code.
+* TestUserLoginAfterDelete
+    * Logs in a User with an email and password that was just deleted. Returns an empty login with a http.BadRequest (400) code.
+* TestCreateUserAgain
+    * Adds the User entry that was just deleted back to the database. Returns the User added with a http.StatusOK (200) code.
 * TestWipeUsers
     * Removes all of the Users in the database to reset the file. Returns an empty array of Users with a http.StatusOK (200) code.
 
@@ -109,6 +115,7 @@ Register an account to database: POST from http://localhost:8080/api/register an
 {  
 "firstname":"str"  
 "lastname":"str"  
+"dateofbirth":"str"
 "email":"str"  
 "password":"str"  
 }  
