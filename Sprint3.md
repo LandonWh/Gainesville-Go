@@ -58,7 +58,7 @@ Frontend Login Page Unit Tests
 * Pass inputs of a complete event form, make sure those inputs match what is put through
 
 #### New Frontend Unit Tests
-* Check inputsget through to the custom event form
+* Check inputs get through to the custom event form
    * Pass inputs of a complete custom event form, make sure those inputs match what is put through
 * Updated old registration unit test with date of birth input
    * Pass inputs of a complete registration form, make sure those inputs match what is put through
