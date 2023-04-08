@@ -1,6 +1,10 @@
 import { Component, Inject } from '@angular/core';
 import { FormBuilder, FormGroup, Validators, FormControl } from '@angular/forms';
 import { MAT_DIALOG_DATA } from '@angular/material/dialog';
+import Swal from 'sweetalert2';
+import { TokenStorageService } from '../services/token-storage.service';
+import { AuthService } from '../services/auth.service';
+import { Router } from '@angular/router';
 
 interface activityLevel {
   value: string;
@@ -15,6 +19,7 @@ interface activityLevel {
   styleUrls: ['./event-form.component.css'],
 })
 export class EventFormComponent {
+  isEventCreated: boolean = false;
   message: string = '';
 
   ngOnit() {
@@ -22,7 +27,7 @@ export class EventFormComponent {
   }
 
   hide: boolean = false;
-  constructor(private formBuilder: FormBuilder,
+  constructor(private formBuilder: FormBuilder, private tokenStorage: TokenStorageService, private router: Router, private authService: AuthService,
     @Inject(MAT_DIALOG_DATA) public data: {message: string}) {}
   eventForm: FormGroup = this.formBuilder.group({
       eventName: this.message,
@@ -40,10 +45,32 @@ export class EventFormComponent {
   
 
   onSubmit(): void {
-    if (!this.eventForm.valid) {
-      return;
+    if (this.eventForm.invalid) {
+      this.missingField();
+      return
     }
-    console.log(this.eventForm);
+      //Equivalent for event?
+      //this.tokenStorage.saveUser(User);
+      this.authService
+      .createEvent(
+        this.eventForm.get('eventName')?.value, 
+        this.eventForm.get('boys')?.value,
+        this.eventForm.get('girls')?.value,
+        this.eventForm.get('twentyOne')?.value,
+        this.eventForm.get('numPeople')?.value,
+        this.eventForm.get('date')?.value,
+        this.eventForm.get('description')?.value,
+        this.eventForm.get('startTime')?.value,
+        this.eventForm.get('endTime')?.value,
+        this.eventForm.get('activityLevel')?.value
+        )
+      .subscribe(
+        response => { console.log(response), this.isEventCreated = true;},
+        err => {
+          
+          this.createEventFailed()
+        },
+      );
   }
 
   activityLevels: activityLevel[] = [
@@ -54,6 +81,24 @@ export class EventFormComponent {
     {value: '5', viewValue: 'Very Active'}
 
   ]
+
+  missingField() {
+    Swal.fire({
+      icon: 'error',
+      title: 'Oops...',
+      text: 'Missing 1 or more required field(s), or event creation failed!',
+    });
+    
+  }
+
+  createEventFailed() {
+    Swal.fire({
+      icon: 'error',
+      title: 'Oops...',
+      text: 'Event creation failed, please try again.',
+    });
+    
+  }
 
   
   

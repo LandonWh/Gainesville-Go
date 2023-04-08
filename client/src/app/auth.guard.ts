@@ -3,7 +3,7 @@ import { Router, CanActivate, ActivatedRouteSnapshot, RouterStateSnapshot } from
 import { AuthService } from './services/auth.service';
 import { RegisterService } from './register/register.service';
 
-@Injectable({ providedIn: 'root' })
+@Injectable()
 export class AuthGuard implements CanActivate {
     constructor(
         private router: Router,
@@ -11,17 +11,19 @@ export class AuthGuard implements CanActivate {
         private authService: AuthService
     ) {}
 
-    canActivate(route: ActivatedRouteSnapshot, state: RouterStateSnapshot) {
-        // let isAuthenticated = this.authService.isAuthenticated();
-        // if (!isAuthenticated) {
-        //     this.router.navigate(['/login']);
-        // }
-        // console.log(isAuthenticated);
-        // return isAuthenticated;
-        if (localStorage.getItem('currentUser')) {
-            return true;
+    canActivate() {
+        let isAuthenticated = this.authService.isAuthenticated;
+        if (!isAuthenticated) {
+            this.router.navigate(['/login']);
         }
-        this.router.navigate(['/login'], { queryParams: {returnUrl: state.url}});
-        return false;
+        console.log(isAuthenticated);
+        return isAuthenticated;
+        //  if (!this.authService.isAuthenticated()) {
+        //     this.router.navigate(['/login']);
+        //     return false;
+        // }
+        //  else {
+        //     return true;
+        //  }
     }
 }

@@ -3,6 +3,7 @@ import { HttpClient, HttpHeaders } from '@angular/common/http';
 import { Router } from '@angular/router';
 import { BehaviorSubject, Observable, from, tap } from 'rxjs';
 import { ApiService } from './api.service';
+import { Time } from '@angular/common';
 
 const AUTH_API = '/api/'
 
@@ -14,8 +15,10 @@ const httpOptions = {
 export class AuthService {
     private _isLoggedIn$ = new BehaviorSubject<boolean>(false);
     private _isRegistered$ = new BehaviorSubject<boolean>(false);
+    private _isCreated$ = new BehaviorSubject<boolean>(false);
     isLoggedIn$ = this._isLoggedIn$.asObservable();
     isRegistered$ = this._isRegistered$.asObservable();
+    isCreated$ = this._isCreated$.asObservable();
     API_URL = 'http://localhost:8080';
     TOKEN_KEY = 'token';
 
@@ -68,4 +71,24 @@ export class AuthService {
             }) 
         )
     }
+    createEvent(
+        eventName: string, 
+        boys: boolean, 
+        girls: boolean, 
+        twentyOne: boolean, 
+        numPeople: number, 
+        date: string, 
+        description: string, 
+        startTime: Time,
+        endTime: Time,
+        activityLevel: number
+        ) {
+            return this.apiService.createEvent(eventName, boys, girls, twentyOne, numPeople, date, description, startTime, endTime, activityLevel).pipe(
+                tap((response: any) => {
+                    console.log(this.token);
+                    localStorage.setItem('event_auth', response.token);
+                    this._isCreated$.next(true);
+                })
+            )
+        }
 }

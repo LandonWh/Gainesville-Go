@@ -1,3 +1,4 @@
+import { Time } from "@angular/common";
 import { HttpClient } from "@angular/common/http";
 import { Injectable } from '@angular/core';
 import { Observable } from 'rxjs';
@@ -23,5 +24,20 @@ export class ApiService {
 
     register(firstName: string, lastName: string, dateOfBirth: string, email: string, password: string) {
         return this.http.post('api/register', {firstName, lastName, dateOfBirth, email, password});
+    }
+
+    createEvent(
+        eventName: string, 
+        boys: boolean, 
+        girls: boolean, 
+        twentyOne: boolean, 
+        numPeople: number, 
+        date: string, 
+        description: string, 
+        startTime: Time,
+        endTime: Time,
+        activityLevel: number
+    ) {
+        return this.http.post('api/event', {eventName, boys, girls, twentyOne, numPeople, date, description, startTime, endTime, activityLevel});
     }
 }
