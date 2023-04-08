@@ -81,9 +81,12 @@ export class AuthService {
         description: string, 
         startTime: Time,
         endTime: Time,
-        activityLevel: number
+        activityLevel: number,
+        latitude: string,
+        longitude: string,
+        address: string,
         ) {
-            return this.apiService.createEvent(eventName, boys, girls, twentyOne, numPeople, date, description, startTime, endTime, activityLevel).pipe(
+            return this.apiService.createEvent(eventName, boys, girls, twentyOne, numPeople, date, description, startTime, endTime, activityLevel, latitude, longitude, address).pipe(
                 tap((response: any) => {
                     console.log(this.token);
                     localStorage.setItem('event_auth', response.token);

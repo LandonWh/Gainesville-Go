@@ -36,8 +36,11 @@ export class ApiService {
         description: string, 
         startTime: Time,
         endTime: Time,
-        activityLevel: number
+        activityLevel: number,
+        latitude: string,
+        longitude: string,
+        address: string,
     ) {
-        return this.http.post('api/event', {eventName, boys, girls, twentyOne, numPeople, date, description, startTime, endTime, activityLevel});
+        return this.http.post('api/event', {eventName, boys, girls, twentyOne, numPeople, date, description, startTime, endTime, activityLevel, latitude, longitude, address});
     }
 }

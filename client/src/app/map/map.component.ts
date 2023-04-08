@@ -18,11 +18,17 @@ export class MapComponent  {
 
   constructor(public dialog: MatDialog, private ngZone: NgZone) {}
 
-  openDialog(message: string ) {
+  openDialog(message: string, latitude: string, longitude: string, address: string, ) {
     const dialogRef = this.dialog.open(EventFormComponent,{
       width: '600px', 
       height: '600px',
-      data: {message: message}
+      data: {
+        message: message,
+        latitude: latitude,
+        longitude: longitude,
+        address: address,
+        }
+
     });
 
     dialogRef.afterOpened().subscribe(() => {
@@ -67,7 +73,7 @@ onMapReady(map: L.Map) {
   }).on("click", () => 
     {
       this.ngZone.run(() => {
-        this.openDialog("The Social");
+        this.openDialog("The Social", "29.652630", "-82.345551", "1728 W University Ave, Gainesville, FL 32603");
       });
   })
   .on("mouseout", () => {
@@ -81,7 +87,7 @@ onMapReady(map: L.Map) {
   },{passive: true}).addEventListener("click", () => 
     {
       this.ngZone.run(() => {
-        this.openDialog("Depot Park");
+        this.openDialog("Depot Park", "29.6437363", "-82.321861", "874 SE 4th St, Gainesville, FL 32601" );
       });
   }, {passive: true})
   .addEventListener("mouseout", () => {

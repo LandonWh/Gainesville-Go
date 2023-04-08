@@ -20,7 +20,7 @@ interface activityLevel {
 })
 export class EventFormComponent {
   isEventCreated: boolean = false;
-  message: string = '';
+  
 
   ngOnit() {
     
@@ -28,9 +28,14 @@ export class EventFormComponent {
 
   hide: boolean = false;
   constructor(private formBuilder: FormBuilder, private tokenStorage: TokenStorageService, private router: Router, private authService: AuthService,
-    @Inject(MAT_DIALOG_DATA) public data: {message: string}) {}
+    @Inject(MAT_DIALOG_DATA) public data: {
+      message: string,
+      latitude: string,
+      longitude: string,
+      address: string,
+    }) {}
   eventForm: FormGroup = this.formBuilder.group({
-      eventName: this.message,
+      eventName: this.data.message,
       boys: false,
       girls: false,
       twentyOne: false, 
@@ -40,6 +45,9 @@ export class EventFormComponent {
       startTime: ['', [Validators.required]],
       endTime: ['', [Validators.required]],
       activityLevelV: ['', [Validators.required]],
+      latitude: this.data.latitude,
+      longitude: this.data.longitude,
+      address: this.data.address,
   })  
 
   
@@ -62,7 +70,10 @@ export class EventFormComponent {
         this.eventForm.get('description')?.value,
         this.eventForm.get('startTime')?.value,
         this.eventForm.get('endTime')?.value,
-        this.eventForm.get('activityLevel')?.value
+        this.eventForm.get('activityLevel')?.value,
+        this.eventForm.get('latitude')?.value,
+        this.eventForm.get('longtitude')?.value,
+        this.eventForm.get('address')?.value,
         )
       .subscribe(
         response => { console.log(response), this.isEventCreated = true;},
