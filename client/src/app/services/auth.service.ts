@@ -72,26 +72,39 @@ export class AuthService {
         )
     }
     createEvent(
-        eventName: string, 
-        boys: boolean, 
-        girls: boolean, 
-        twentyOne: boolean, 
-        numPeople: number, 
-        date: string, 
-        description: string, 
-        startTime: Time,
-        endTime: Time,
-        activityLevel: number,
-        latitude: string,
-        longitude: string,
-        address: string,
-        ) {
-            return this.apiService.createEvent(eventName, boys, girls, twentyOne, numPeople, date, description, startTime, endTime, activityLevel, latitude, longitude, address).pipe(
-                tap((response: any) => {
-                    console.log(this.token);
-                    localStorage.setItem('event_auth', response.token);
-                    this._isCreated$.next(true);
-                })
-            )
-        }
+        title: string,
+        boysOnly: boolean,
+        girlsOnly: boolean,
+        twentyOne: boolean,
+        capacity: number,
+        description: string,
+        //startTime: string,
+        //endTime: string,
+        activity: number,
+        //lat: string,
+        //lon: string,
+        address: string
+      ) {
+        const payload = {
+          title: title,
+          boysOnly: boysOnly,
+          girlsOnly: girlsOnly,
+          twentyOne: twentyOne,
+          capacity: capacity,
+          description: description,
+          //startTime: startTime,
+          //endTime: endTime,
+          activity: activity,
+          //lat: lat,
+          //lon: lon,
+          address: address
+          //date: date,
+        };
+      
+        return this.apiService.createEvent(payload.title, payload.boysOnly, payload.girlsOnly, payload.twentyOne, payload.capacity, payload.description, payload.activity, payload.address).pipe(tap((response: any) => { 
+            console.log(this.token); 
+            localStorage.setItem('event_auth', response.token); 
+            this._isCreated$.next(true); 
+        }));
+      }
 }

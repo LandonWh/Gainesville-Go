@@ -66,13 +66,13 @@ export class EventFormComponent {
         this.eventForm.get('girls')?.value,
         this.eventForm.get('twentyOne')?.value,
         this.eventForm.get('numPeople')?.value,
-        this.eventForm.get('date')?.value,
+        //this.eventForm.get('date')?.value,
         this.eventForm.get('description')?.value,
-        this.eventForm.get('startTime')?.value,
-        this.eventForm.get('endTime')?.value,
+        //this.eventForm.get('startTime')?.value,
+        //this.eventForm.get('endTime')?.value,
         this.eventForm.get('activityLevel')?.value,
-        this.eventForm.get('latitude')?.value,
-        this.eventForm.get('longtitude')?.value,
+        //this.eventForm.get('latitude')?.value,
+        //this.eventForm.get('longitude')?.value,
         this.eventForm.get('address')?.value,
         )
       .subscribe(

@@ -27,20 +27,20 @@ export class ApiService {
     }
 
     createEvent(
-        eventName: string, 
-        boys: boolean, 
-        girls: boolean, 
-        twentyOne: boolean, 
-        numPeople: number, 
-        date: string, 
-        description: string, 
-        startTime: Time,
-        endTime: Time,
-        activityLevel: number,
-        latitude: string,
-        longitude: string,
-        address: string,
+        title: string,
+        boysOnly: boolean,
+        girlsOnly: boolean,
+        twentyOne: boolean,
+        capacity: number,
+        description: string,
+        //startTime: string,
+        //endTime: string,
+        activity: number,
+        //lat: string,
+        //long: string,
+        address: string
+        //date: string,
     ) {
-        return this.http.post('api/event', {eventName, boys, girls, twentyOne, numPeople, date, description, startTime, endTime, activityLevel, latitude, longitude, address});
+        return this.http.post('api/event', { title, boysOnly, girlsOnly, twentyOne, capacity, description, activity, address });
     }
 }

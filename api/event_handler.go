@@ -1,6 +1,7 @@
 package main
 
 import (
+	"fmt"
 	"net/http"
 
 	"time"
@@ -16,31 +17,43 @@ func GetEvents(c *gin.Context) {
 }
 
 type createEventInput struct {
-	Title       string    `json:"title"`
-	Description string    `json:"description"`
-	Capacity    int       `json:"capacity"`
-	Activity    int8      `json:"activity"`
-	StartTime   time.Time `json:"starttime"`
-	EndTime     time.Time `json:"endtime"`
-	Address     string    `json:"address"`
-	BoysOnly    bool      `json:"boysonly"`
-	GirlsOnly   bool      `json:"girlsonly"`
-	TwentyOne   bool      `json:"twentyone"`
-	Lat         float32   `json:"lat"`
-	Lon         float32   `json:"long"`
+	Title       string `json:"title"`
+	Description string `json:"description"`
+	Capacity    string `json:"capacity"`
+	Activity    int8   `json:"activity"`
+	//StartTime   time.Time `json:"starttime"`
+	//EndTime     time.Time `json:"endtime"`
+	Address   string `json:"address"`
+	BoysOnly  bool   `json:"boysonly"`
+	GirlsOnly bool   `json:"girlsonly"`
+	TwentyOne bool   `json:"twentyone"`
+	//Lat         float32   `json:"lat"`
+	//Lon         float32   `json:"long"`
 }
 
 func CreateEventHandler(c *gin.Context) {
+	fmt.Println("CreateEventHandler called")
 	// Validate input
 	var input createEventInput
 	if err := c.ShouldBindJSON(&input); err != nil {
-		c.JSON(http.StatusBadRequest, gin.H{"error": err.Error()})
+		fmt.Printf("Error binding JSON: %v\n", err)
+		c.JSON(http.StatusBadRequest, gin.H{"error creating event": err.Error()})
 		return
 	}
 
+	// Hardcoded values for StartTime, EndTime, Lat, and Lon
+	hardcodedStartTime := time.Now()
+	hardcodedEndTime := time.Now().Add(2 * time.Hour)
+	hardcodedLat := float32(40.7128)
+	hardcodedLon := float32(-74.0060)
+	fmt.Printf("Received input: %+v\n", input)
+
+	var capacity int
+	fmt.Sscanf(input.Capacity, "%d")
+
 	// Add event to database
-	event, _ := AddEvent(ToEvent(input.Title, input.Description, input.Capacity, input.Activity, input.StartTime, input.EndTime,
-		input.Address, input.BoysOnly, input.GirlsOnly, input.TwentyOne, input.Lat, input.Lon))
+	event, _ := AddEvent(ToEvent(input.Title, input.Description, capacity, input.Activity, hardcodedStartTime, hardcodedEndTime,
+		input.Address, input.BoysOnly, input.GirlsOnly, input.TwentyOne, hardcodedLat, hardcodedLon))
 
 	c.JSON(http.StatusOK, gin.H{"data": event})
 }
