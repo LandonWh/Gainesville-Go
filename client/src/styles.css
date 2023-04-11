@@ -43,4 +43,9 @@ overflow: hidden; }
   font-size: 0.8em!important;
 }
 
+@font-face {
+  font-family: avenir;
+  src: url("/assets/font/avenir1.ttf");
+}
+
 

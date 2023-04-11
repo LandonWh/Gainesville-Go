@@ -8,7 +8,8 @@
    text-align: center;
    margin: 0 auto;
    margin-top: 5em;
-   font-weight: 20;
+   font-weight: 300;
+   font: bold;
   
   }
 
@@ -18,11 +19,9 @@
   }
 
   .heading2 {
-   display: block;
-   margin-left: auto;
-   margin-right:auto;
-   margin-top: 50vh;
-   font-weight: 200;
+   text-align: center;
+   margin-top: -1em;
+   font-weight: 50;
   }
 
   .button {

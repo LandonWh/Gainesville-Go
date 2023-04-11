@@ -36,7 +36,6 @@ import { MembersComponent } from './members/members.component';
 import { AuthInterceptor } from './auth-interceptor';
 import { CanActivateViaAuthGuard } from './can-activate-via-auth.guard';
 import { AuthService } from './services/auth.service';
-import { CustomEventFormComponent } from './custom-event-form/custom-event-form.component';
 import { AccountPageComponent } from './account-page/account-page.component';
 import { DeleteComponent } from './delete/delete.component';
 
@@ -64,7 +63,6 @@ const routes = [
     RegisterComponent,
     EventFormComponent,
     MembersComponent,
-    CustomEventFormComponent,
     AccountPageComponent,
     DeleteComponent,
   ],

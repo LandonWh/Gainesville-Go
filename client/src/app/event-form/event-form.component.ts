@@ -39,7 +39,7 @@ export class EventFormComponent {
       boys: false,
       girls: false,
       twentyOne: false, 
-      capacity: [null, [Validators.required, Validators.maxLength(3), Validators.pattern("^[0-9]*$"),]],
+      capacity: ['', [Validators.required, Validators.maxLength(3), Validators.pattern("^[0-9]*$"),]],
       date: ['', [Validators.required],],
       description: ['', [Validators.required, Validators.maxLength(100)],],
       startTime: ['', [Validators.required]],
