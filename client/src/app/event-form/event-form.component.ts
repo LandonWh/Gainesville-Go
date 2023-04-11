@@ -70,7 +70,7 @@ export class EventFormComponent {
         this.eventForm.get('description')?.value,
         //this.eventForm.get('startTime')?.value,
         //this.eventForm.get('endTime')?.value,
-        this.eventForm.get('activityLevel')?.value,
+        this.eventForm.get('activityLevelV')?.value,
         this.eventForm.get('lat')?.value,
         this.eventForm.get('lng')?.value,
         this.eventForm.get('address')?.value,
