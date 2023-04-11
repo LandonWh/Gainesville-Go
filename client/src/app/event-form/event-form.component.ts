@@ -7,7 +7,7 @@ import { AuthService } from '../services/auth.service';
 import { Router } from '@angular/router';
 
 interface activityLevel {
-  value: string;
+  value: number;
   viewValue: string;
 }
 
@@ -87,11 +87,11 @@ export class EventFormComponent {
   }
 
   activityLevels: activityLevel[] = [
-    {value: '1', viewValue: 'Very inactive'},
-    {value: '2', viewValue: 'Inactive'},
-    {value: '3', viewValue: 'Moderately Active'},
-    {value: '4', viewValue: 'Active'},
-    {value: '5', viewValue: 'Very Active'}
+    {value: 1, viewValue: 'Very inactive'},
+    {value: 2, viewValue: 'Inactive'},
+    {value: 3, viewValue: 'Moderately Active'},
+    {value: 4, viewValue: 'Active'},
+    {value: 5, viewValue: 'Very Active'}
 
   ]
 
