@@ -3,7 +3,7 @@ import { FormBuilder, FormGroup, Validators } from '@angular/forms';
 import { Router } from '@angular/router';
 import { AuthService } from '../services/auth.service';
 import { TokenStorageService } from '../services/token-storage.service';
-import { UserService } from '../user.service';
+import { UserService } from '../services/user.service';
 import Swal from 'sweetalert2';
 
 @Component({
