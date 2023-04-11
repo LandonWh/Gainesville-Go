@@ -13,7 +13,7 @@ export class MapComponent {
 
   constructor(public dialog: MatDialog, private ngZone: NgZone) {}
 
-  openDialog(message: string, latitude: string, longitude: string, address: string) {
+  openDialog(message: string, latitude: number, longitude: number, address: string) {
     const dialogRef = this.dialog.open(EventFormComponent, {
       width: '600px',
       height: '600px',
@@ -64,7 +64,7 @@ export class MapComponent {
         TheSocial.openPopup();
       }).on("click", () => {
         this.ngZone.run(() => {
-          this.openDialog("The Social", "29.652630", "-82.345551", "1728 W University Ave, Gainesville, FL 32603");
+          this.openDialog("The Social", 29.652630, -82.345551, "1728 W University Ave, Gainesville, FL 32603");
         });
       })
       .on("mouseout", () => {
@@ -76,7 +76,7 @@ export class MapComponent {
         DepotPark.openPopup();
       }).on("click", () => {
         this.ngZone.run(() => {
-          this.openDialog("Depot Park", "29.6437363", "-82.321861", "874 SE 4th St, Gainesville, FL 32601");
+          this.openDialog("Depot Park", 29.6437363, -82.321861, "874 SE 4th St, Gainesville, FL 32601");
         });
       })
       .on("mouseout", () => {
@@ -93,7 +93,7 @@ export class MapComponent {
   
     // Open the form immediately after clicking on the map
     this.ngZone.run(() => {
-      const dialogRef = this.openDialog('New Event', lat.toString(), lng.toString(), '');
+      const dialogRef = this.openDialog('New Event', lat, lng, '');
   
       dialogRef.afterClosed().subscribe((result) => {
         // Check if the event was successfully created
@@ -104,7 +104,7 @@ export class MapComponent {
           // Attach click event to the new marker
           marker.on('click', () => {
             this.ngZone.run(() => {
-              this.openDialog('New Event', lat.toString(), lng.toString(), '');
+              this.openDialog('New Event', lat, lng, '');
             });
           });
         }

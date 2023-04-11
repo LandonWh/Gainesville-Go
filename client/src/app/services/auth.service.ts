@@ -81,8 +81,8 @@ export class AuthService {
         //startTime: string,
         //endTime: string,
         activity: number,
-        //lat: string,
-        //lon: string,
+        lat: number,
+        lng: number,
         address: string
       ) {
         const payload = {
@@ -95,13 +95,13 @@ export class AuthService {
           //startTime: startTime,
           //endTime: endTime,
           activity: activity,
-          //lat: lat,
-          //lon: lon,
+          lat: lat,
+          lng: lng,
           address: address
           //date: date,
         };
       
-        return this.apiService.createEvent(payload.title, payload.boysOnly, payload.girlsOnly, payload.twentyOne, payload.capacity, payload.description, payload.activity, payload.address).pipe(tap((response: any) => { 
+        return this.apiService.createEvent(payload.title, payload.boysOnly, payload.girlsOnly, payload.twentyOne, payload.capacity, payload.description, payload.activity, payload.lat, payload.lng, payload.address, ).pipe(tap((response: any) => { 
             console.log(this.token); 
             localStorage.setItem('event_auth', response.token); 
             this._isCreated$.next(true); 

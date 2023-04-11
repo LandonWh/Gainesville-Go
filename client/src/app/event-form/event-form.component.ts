@@ -30,8 +30,8 @@ export class EventFormComponent {
   constructor(private formBuilder: FormBuilder, private tokenStorage: TokenStorageService, private router: Router, private authService: AuthService, public dialogRef: MatDialogRef<EventFormComponent>,
     @Inject(MAT_DIALOG_DATA) public data: {
       message: string,
-      latitude: string,
-      longitude: string,
+      latitude: number,
+      longitude: number,
       address: string,
     }) {}
   eventForm: FormGroup = this.formBuilder.group({
@@ -71,8 +71,8 @@ export class EventFormComponent {
         //this.eventForm.get('startTime')?.value,
         //this.eventForm.get('endTime')?.value,
         this.eventForm.get('activityLevel')?.value,
-        //this.eventForm.get('latitude')?.value,
-        //this.eventForm.get('longitude')?.value,
+        this.eventForm.get('latitude')?.value,
+        this.eventForm.get('longitude')?.value,
         this.eventForm.get('address')?.value,
         )
       .subscribe(

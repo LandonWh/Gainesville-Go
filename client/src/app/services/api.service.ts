@@ -36,11 +36,11 @@ export class ApiService {
         //startTime: string,
         //endTime: string,
         activity: number,
-        //lat: string,
-        //long: string,
+        lat: number,
+        lng: number,
         address: string
         //date: string,
     ) {
-        return this.http.post('api/event', { title, boysOnly, girlsOnly, twentyOne, capacity, description, activity, address });
+        return this.http.post('api/event', { title, boysOnly, girlsOnly, twentyOne, capacity, description, activity, address, lat, lng });
     }
 }
