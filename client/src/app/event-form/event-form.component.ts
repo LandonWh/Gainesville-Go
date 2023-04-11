@@ -1,6 +1,6 @@
 import { Component, Inject } from '@angular/core';
 import { FormBuilder, FormGroup, Validators, FormControl } from '@angular/forms';
-import { MAT_DIALOG_DATA } from '@angular/material/dialog';
+import { MatDialogRef, MAT_DIALOG_DATA } from '@angular/material/dialog'; // Import MatDialogRef here
 import Swal from 'sweetalert2';
 import { TokenStorageService } from '../services/token-storage.service';
 import { AuthService } from '../services/auth.service';
@@ -27,7 +27,7 @@ export class EventFormComponent {
   }
 
   hide: boolean = false;
-  constructor(private formBuilder: FormBuilder, private tokenStorage: TokenStorageService, private router: Router, private authService: AuthService,
+  constructor(private formBuilder: FormBuilder, private tokenStorage: TokenStorageService, private router: Router, private authService: AuthService, public dialogRef: MatDialogRef<EventFormComponent>,
     @Inject(MAT_DIALOG_DATA) public data: {
       message: string,
       latitude: string,
@@ -76,9 +76,11 @@ export class EventFormComponent {
         this.eventForm.get('address')?.value,
         )
       .subscribe(
-        response => { console.log(response), this.isEventCreated = true;},
+        response => {
+          console.log(response);
+          this.isEventCreated = true;
+          this.dialogRef.close({ eventCreated: true });},
         err => {
-          
           this.createEventFailed()
         },
       );

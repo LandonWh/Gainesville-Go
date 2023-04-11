@@ -33,6 +33,7 @@ export class MapComponent {
         }
       }, 100);
     });
+    return dialogRef;
   }
 
   options = {
@@ -89,23 +90,28 @@ export class MapComponent {
   onMapClick(e: L.LeafletMouseEvent, map: L.Map): void {
     const lat = e.latlng.lat;
     const lng = e.latlng.lng;
-
-    // Add a marker to the map
-    const marker = L.marker([lat, lng]).addTo(map);
-
-    // Attach click event to the new marker
-    marker.on('click', () => {
-      this.ngZone.run(() => {
-        this.openDialog('New Event', lat.toString(), lng.toString(), '');
+  
+    // Open the form immediately after clicking on the map
+    this.ngZone.run(() => {
+      const dialogRef = this.openDialog('New Event', lat.toString(), lng.toString(), '');
+  
+      dialogRef.afterClosed().subscribe((result) => {
+        // Check if the event was successfully created
+        if (result && result.eventCreated) {
+          // Add a marker to the map
+          const marker = L.marker([lat, lng]).addTo(map);
+  
+          // Attach click event to the new marker
+          marker.on('click', () => {
+            this.ngZone.run(() => {
+              this.openDialog('New Event', lat.toString(), lng.toString(), '');
+            });
+          });
+        }
       });
     });
-
-    // Open the form immediately after placing the marker
-    this.ngZone.run(() => {
-      this.openDialog('New Event', lat.toString(), lng.toString(), '');
-    });
   }
-}
+}  
 
 const iconRetinaUrl = 'assets/marker-icon-2x.png';
 const iconUrl = 'assets/marker-icon.png';
