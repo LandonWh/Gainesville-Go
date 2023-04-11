@@ -35,7 +35,7 @@ export class EventFormComponent {
       address: string,
     }) {}
   eventForm: FormGroup = this.formBuilder.group({
-      eventName: this.data.message,
+      eventName: ['', [Validators.required, Validators.maxLength(50)]],
       boys: false,
       girls: false,
       twentyOne: false, 

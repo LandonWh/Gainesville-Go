@@ -2,9 +2,9 @@
 
 .header{
   text-align: center;
-  font-size: 30px;
   font-weight: 10;
-  margin-top: 30px
+  margin-top: 30px;
+  margin-left: 195px;
 }
 
 .select {

@@ -39,5 +39,8 @@ overflow: hidden; }
   background-color: #3F51B5 !important;
 }
 
+.mat-form-field-label {
+  font-size: 0.8em!important;
+}
 
 
