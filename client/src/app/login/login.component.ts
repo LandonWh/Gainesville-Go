@@ -4,7 +4,7 @@ import { FormGroup, Validators, FormBuilder} from '@angular/forms';
 import { AuthService } from '../services/auth.service';
 import { Router } from '@angular/router';
 import { TokenStorageService } from '../services/token-storage.service';
-import { UserService } from '../user.service';
+import { UserService } from '../services/user.service';
 import Swal from 'sweetalert2';
 import { User } from '../models/User';
 

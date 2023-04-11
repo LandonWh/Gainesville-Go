@@ -1,25 +1,8 @@
 import { Component, OnInit } from '@angular/core';
-import { LoginComponent } from '../login/login.component';
-import { RegisterComponent } from '../register/register.component';
 import { AuthService } from '../services/auth.service';
 import { Router } from '@angular/router';
 import { TokenStorageService } from '../services/token-storage.service';
-
-import jwt_decode from 'jwt-decode';
-import { first } from 'rxjs';
-
-interface myToken {
-  firstName: string;
-  lastName: string;
-  email: string;  
-  password: string; 
-}
-
-//const decodedToken = jwt_decode<myToken>(JSON.parse(localStorage.getItem('account_auth') || '{}'));
-// const firstName = decodedToken.firstName;
-// const lastName = decodedToken.lastName;
-// const email = decodedToken.email;
-// const password = decodedToken.password;
+import { UserService } from '../services/user.service';
 
 @Component({
   selector: 'app-account-page',
@@ -27,31 +10,44 @@ interface myToken {
   styleUrls: ['./account-page.component.css']
 })
 export class AccountPageComponent implements OnInit {
-  
-  
-
-  constructor(private authService: AuthService, private router: Router, public tokenStorage: TokenStorageService) {
-    
-  }
+  constructor(
+    private authService: AuthService,
+    private userService: UserService,
+    private router: Router,
+    public tokenStorage: TokenStorageService
+  ) {}
 
   user: any;
 
   logout(): void {
     this.authService.logout();
-    this.router.navigate(['/login'])
+    this.router.navigate(['/login']);
   }
 
   ngOnInit(): void {
-    this.user = this.tokenStorage.getUser();
+    this.getUserInfo();
   }
 
-  getDecodedAccessToken(token: string): any {
-    try {
-      return jwt_decode(token);
-    } catch(Error) {
-      return null;
-    }
+  getUserInfo() {
+    const token = this.tokenStorage.getToken();
+    if (token != null) {
+    this.userService.getUserByToken(token).subscribe(
+      data => {
+        console.log('User data:', data);
+        this.user = data;
+      },
+      error => {
+        console.log('Error:', error);
+      }
+    );
   }
+}
+
+  deleteAccount() {
+    this.router.navigate(['/delete']);
+  }
+}
+
 
   // getFirstName(token: string): string {
     
@@ -79,7 +75,7 @@ export class AccountPageComponent implements OnInit {
   //   return this.password;
   // }
 
-  deleteAccount() {
-    this.router.navigate(['/delete']);
-  }
-}
+  //deleteAccount() {
+  //  this.router.navigate(['/delete']);
+  //}
+//}
