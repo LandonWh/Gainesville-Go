@@ -17,8 +17,8 @@
 
 <mat-form-field class="full-width" appearance="fill">
     <mat-label>Amount of People</mat-label>
-    <input matInput formControlName="numPeople">
-    <mat-error *ngIf="!eventForm.controls['numPeople'].valid">
+    <input matInput formControlName="capacity" type="number">
+    <mat-error *ngIf="!eventForm.controls['capacity'].valid">
       Must have between 1-999 people
     </mat-error>
   </mat-form-field>

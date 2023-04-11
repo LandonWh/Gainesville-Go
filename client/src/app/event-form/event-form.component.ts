@@ -7,7 +7,7 @@ import { AuthService } from '../services/auth.service';
 import { Router } from '@angular/router';
 
 interface activityLevel {
-  value: string;
+  value: number;
   viewValue: string;
 }
 
@@ -39,14 +39,14 @@ export class EventFormComponent {
       boys: false,
       girls: false,
       twentyOne: false, 
-      numPeople: ['', [Validators.required, Validators.maxLength(3), Validators.pattern("^[0-9]*$"),]],
+      capacity: [null, [Validators.required, Validators.maxLength(3), Validators.pattern("^[0-9]*$"),]],
       date: ['', [Validators.required],],
       description: ['', [Validators.required, Validators.maxLength(100)],],
       startTime: ['', [Validators.required]],
       endTime: ['', [Validators.required]],
       activityLevelV: ['', [Validators.required]],
-      latitude: this.data.latitude,
-      longitude: this.data.longitude,
+      lat: this.data.latitude,
+      lng: this.data.longitude,
       address: this.data.address,
   })  
 
@@ -65,14 +65,14 @@ export class EventFormComponent {
         this.eventForm.get('boys')?.value,
         this.eventForm.get('girls')?.value,
         this.eventForm.get('twentyOne')?.value,
-        this.eventForm.get('numPeople')?.value,
+        this.eventForm.get('capacity')?.value,
         //this.eventForm.get('date')?.value,
         this.eventForm.get('description')?.value,
         //this.eventForm.get('startTime')?.value,
         //this.eventForm.get('endTime')?.value,
-        this.eventForm.get('activityLevel')?.value,
-        this.eventForm.get('latitude')?.value,
-        this.eventForm.get('longitude')?.value,
+        this.eventForm.get('activityLevelV')?.value,
+        this.eventForm.get('lat')?.value,
+        this.eventForm.get('lng')?.value,
         this.eventForm.get('address')?.value,
         )
       .subscribe(
@@ -87,11 +87,11 @@ export class EventFormComponent {
   }
 
   activityLevels: activityLevel[] = [
-    {value: '1', viewValue: 'Very inactive'},
-    {value: '2', viewValue: 'Inactive'},
-    {value: '3', viewValue: 'Moderately Active'},
-    {value: '4', viewValue: 'Active'},
-    {value: '5', viewValue: 'Very Active'}
+    {value: 1, viewValue: 'Very inactive'},
+    {value: 2, viewValue: 'Inactive'},
+    {value: 3, viewValue: 'Moderately Active'},
+    {value: 4, viewValue: 'Active'},
+    {value: 5, viewValue: 'Very Active'}
 
   ]
 
