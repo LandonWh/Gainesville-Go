@@ -50,7 +50,10 @@ func Login(c *gin.Context) {
 		return
 	}
 
-	c.JSON(http.StatusOK, gin.H{"token":token})
+	var user User
+	DB.Model(User{}).Where("email = ?", u.Email).Take(&user)
+	user.Password = "[HIDDEN]"
+	c.JSON(http.StatusOK, gin.H{"token":token, "user":user})
 
 }
 
