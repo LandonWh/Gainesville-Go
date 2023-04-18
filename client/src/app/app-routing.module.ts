@@ -9,6 +9,7 @@ import { MembersComponent } from './members/members.component';
 import { AccountPageComponent } from './account-page/account-page.component';
 import { AuthGuard } from './auth.guard';
 import { DeleteComponent } from './delete/delete.component';
+import { FindEventsComponent } from './find-events/find-events.component';
 
 
 
@@ -42,7 +43,11 @@ const routes: Routes = [
   },
   {
     path: 'delete',
-    component: DeleteComponent
+    component: DeleteComponent,
+  },
+  {
+    path: 'find-events',
+    component: FindEventsComponent,
   }
 
     ]

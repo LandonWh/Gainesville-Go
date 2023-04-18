@@ -1,0 +1,13 @@
+.map-container {
+    position: absolute;
+    display: block;
+    transform: translateX(+46.5%);
+    height: 45%;
+    width: 50%;
+    margin-top: 20em;
+}
+
+.header {
+    flex: auto 1 1;
+    align-content: center;
+}

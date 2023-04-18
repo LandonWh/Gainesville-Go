@@ -1,21 +1,29 @@
 
   
   .Iam {
-    padding: 12em 10em;
+    padding: 12em 8em;
     font: normal 40px/50px avenir;
     color: black;
     font-weight: 20;
+    display: flex;
+    width: 100%;
+    
   }
   .Iam p {
     height: 20px;
     float: left;
     margin-right: .4em;
+    display: flex;
+    
   }
   .Iam b {
     float: left;
     overflow: hidden;
     position: relative;
     height: 50px;
+    display: flex;
+    
+
   }
   .Iam .innerIam {
     display: inline-block;
