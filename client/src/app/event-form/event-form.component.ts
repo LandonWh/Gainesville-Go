@@ -35,13 +35,13 @@ export class EventFormComponent {
       address: string,
     }) {}
   eventForm: FormGroup = this.formBuilder.group({
-      eventName: ['', [Validators.required, Validators.maxLength(50)]],
+      eventName: ['', [Validators.required, Validators.maxLength(51)]],
       boys: false,
       girls: false,
       twentyOne: false, 
       capacity: ['', [Validators.required, Validators.maxLength(3), Validators.pattern("^[0-9]*$"),]],
       date: ['', [Validators.required],],
-      description: ['', [Validators.required, Validators.maxLength(100)],],
+      description: ['', [Validators.required, Validators.maxLength(151)],],
       startTime: ['', [Validators.required]],
       endTime: ['', [Validators.required]],
       activityLevelV: ['', [Validators.required]],
@@ -66,14 +66,14 @@ export class EventFormComponent {
         this.eventForm.get('girls')?.value,
         this.eventForm.get('twentyOne')?.value,
         this.eventForm.get('capacity')?.value,
-        //this.eventForm.get('date')?.value,
         this.eventForm.get('description')?.value,
-        //this.eventForm.get('startTime')?.value,
-        //this.eventForm.get('endTime')?.value,
+        this.eventForm.get('startTime')?.value,
+        this.eventForm.get('endTime')?.value,
         this.eventForm.get('activityLevelV')?.value,
         this.eventForm.get('lat')?.value,
         this.eventForm.get('lng')?.value,
         this.eventForm.get('address')?.value,
+        this.eventForm.get('date')?.value,
         )
       .subscribe(
         response => {

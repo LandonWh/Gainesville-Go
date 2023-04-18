@@ -33,14 +33,14 @@ export class ApiService {
         twentyOne: boolean,
         capacity: number,
         description: string,
-        //startTime: string,
-        //endTime: string,
+        startTime: string,
+        endTime: string,
         activity: number,
         lat: number,
         lng: number,
-        address: string
-        //date: string,
+        address: string,
+        date: string,
     ) {
-        return this.http.post('api/event', { title, boysOnly, girlsOnly, twentyOne, capacity, description, activity, address, lat, lng });
+        return this.http.post('api/event', { title, boysOnly, girlsOnly, twentyOne, capacity, description, startTime, endTime, activity, address, lat, lng, date });
     }
 }
