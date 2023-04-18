@@ -10,6 +10,7 @@ import { AccountPageComponent } from './account-page/account-page.component';
 import { AuthGuard } from './auth.guard';
 import { DeleteComponent } from './delete/delete.component';
 import { FindEventsComponent } from './find-events/find-events.component';
+import { ContactComponent } from './contact/contact.component';
 
 
 
@@ -48,6 +49,10 @@ const routes: Routes = [
   {
     path: 'find-events',
     component: FindEventsComponent,
+  },
+  {
+    path: 'contact',
+    component: ContactComponent,
   }
 
     ]
