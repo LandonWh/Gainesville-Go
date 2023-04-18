@@ -38,8 +38,12 @@ import { CanActivateViaAuthGuard } from './can-activate-via-auth.guard';
 import { AuthService } from './services/auth.service';
 import { AccountPageComponent } from './account-page/account-page.component';
 import { DeleteComponent } from './delete/delete.component';
+<<<<<<< Updated upstream
 import { FindEventsComponent } from './find-events/find-events.component';
 import { EventMapComponent } from './event-map/event-map.component';
+=======
+import { ContactComponent } from './contact/contact.component';
+>>>>>>> Stashed changes
 
 const routes = [
   { path: 'login', component: LoginComponent },
@@ -67,8 +71,12 @@ const routes = [
     MembersComponent,
     AccountPageComponent,
     DeleteComponent,
+<<<<<<< Updated upstream
     FindEventsComponent,
     EventMapComponent,
+=======
+    ContactComponent,
+>>>>>>> Stashed changes
   ],
   entryComponents: [EventFormComponent],
   imports: [

@@ -4,6 +4,22 @@ import { Router } from '@angular/router';
 import { TokenStorageService } from '../services/token-storage.service';
 import { UserService } from '../services/user.service';
 
+// import jwt_decode from 'jwt-decode';
+// import { first } from 'rxjs';
+
+// interface myToken {
+//   firstName: string;
+//   lastName: string;
+//   email: string;  
+// }
+
+
+
+// const decodedToken = jwt_decode<myToken>(JSON.parse(localStorage.getItem('account_auth') || '{}'));
+// const firstName = decodedToken.firstName;
+// const lastName = decodedToken.lastName;
+// const email = decodedToken.email;
+
 @Component({
   selector: 'app-account-page',
   templateUrl: './account-page.component.html',
@@ -18,6 +34,14 @@ export class AccountPageComponent implements OnInit {
   ) {}
 
   user: any;
+
+  // getDecodedAccessToken(token: string): any {
+  //   try {
+  //     return jwt_decode(token);
+  //   } catch(Error) {
+  //     return null;
+  //   }
+  // }
 
   logout(): void {
     this.authService.logout();
@@ -46,11 +70,8 @@ export class AccountPageComponent implements OnInit {
   deleteAccount() {
     this.router.navigate(['/delete']);
   }
-}
-
-
+  
   // getFirstName(token: string): string {
-    
   //   const tokenInfo = this.getDecodedAccessToken(token);
   //   this.firstName = tokenInfo.firstName;
   //   console.log(this.firstName);
@@ -68,14 +89,4 @@ export class AccountPageComponent implements OnInit {
   //   this.email = tokenInfo.email;
   //   return this.email;
   // }
-
-  // getPassword(token: string): string {
-  //   const tokenInfo = this.getDecodedAccessToken(token);
-  //   this.password = tokenInfo.password;
-  //   return this.password;
-  // }
-
-  //deleteAccount() {
-  //  this.router.navigate(['/delete']);
-  //}
-//}
+}
