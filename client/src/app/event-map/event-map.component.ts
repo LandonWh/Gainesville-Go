@@ -1,6 +1,6 @@
 import { Component, NgZone } from '@angular/core';
 import { OnInit } from '@angular/core';
-import { EventService, Event } from '../event.service';
+import { EventService, Event } from '../services/event.service';
 import * as L from 'leaflet';
 
 @Component({
