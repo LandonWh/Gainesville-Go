@@ -5,10 +5,13 @@ import (
   	"github.com/gin-gonic/gin"
 )
 
-func CurrentUser(c *gin.Context){
+type CurrUserInput struct {
+	Token string `json:"token" binding:"required"`
+}
 
+func CurrentUser(c *gin.Context){
 	user_id, err := ExtractTokenID(c)
-	
+
 	if err != nil {
 		c.JSON(http.StatusBadRequest, gin.H{"error": err.Error()})
 		return
