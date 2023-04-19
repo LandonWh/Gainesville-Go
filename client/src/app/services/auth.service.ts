@@ -21,6 +21,8 @@ export class AuthService {
     isCreated$ = this._isCreated$.asObservable();
     API_URL = 'http://localhost:8080';
     TOKEN_KEY = 'token';
+    private currentUserSubject: BehaviorSubject<any> = new BehaviorSubject<any>(null);
+    currentUser$ = this.currentUserSubject.asObservable();
 
     constructor(private http: HttpClient, private router: Router, private apiService: ApiService) {
         const token = localStorage.getItem('account_auth');
@@ -42,10 +44,10 @@ export class AuthService {
     }
     
     login(email: string, password: string) {
-        
         return this.apiService.login(email, password).pipe(
             tap((response: any) => {
                 localStorage.setItem('account_auth', response.token);
+                this.currentUserSubject.next(response.user); // Store user data
                 this._isLoggedIn$.next(true);
             })
         )
@@ -61,6 +63,10 @@ export class AuthService {
 
     getAccount() {
         return this.http.get(this.API_URL + '/account');
+    }
+
+    getCurrentUser(): any {
+        return this.currentUserSubject.value;
     }
 
     delete(email: string, password: string) {

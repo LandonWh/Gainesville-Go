@@ -52,30 +52,27 @@ export class LoginComponent implements OnInit{
 
 
   login(): void {
-    
     if (this.loginForm.invalid) {
       this.missingField();
-      return
+      return;
     }
-      this.tokenStorage.saveUser(User);
-      this.authService
+  
+    this.authService
       .login(this.loginForm.get('email')?.value, this.loginForm.get('password')?.value)
       .subscribe(
-        response => {
-          this.router.navigate(['/home']),  
-          console.log(response), 
-          this.tokenStorage.getToken, 
+        (response) => {
+          this.tokenStorage.saveToken(response.token);
+          this.tokenStorage.saveUser(response.user);
+          this.router.navigate(['/home']);
+          console.log(response);
           this.isLoggedIn = true;
         },
-        err => {
-          
-          this.loginFailed()
-        },
+        (err) => {
+          this.loginFailed();
+        }
       );
-   
-    
   }
-
+  
   
   loginFailed() {
     Swal.fire({

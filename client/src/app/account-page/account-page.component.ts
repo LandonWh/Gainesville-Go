@@ -1,3 +1,5 @@
+// account-page.component.ts
+
 import { Component, OnInit } from '@angular/core';
 import { AuthService } from '../services/auth.service';
 import { Router } from '@angular/router';
@@ -29,24 +31,17 @@ export class AccountPageComponent implements OnInit {
   }
 
   getUserInfo() {
-    const token = this.tokenStorage.getToken();
-    if (token != null) {
-    this.userService.getUserByToken(token).subscribe(
-      data => {
-        console.log('User data:', data);
-        this.user = data;
-      },
-      error => {
-        console.log('Error:', error);
-      }
-    );
+    this.user = this.authService.getCurrentUser();
+    if (!this.user) {
+      console.error('Error: User data not found');
+    }
   }
-}
 
   deleteAccount() {
     this.router.navigate(['/delete']);
   }
 }
+
 
 
   // getFirstName(token: string): string {
