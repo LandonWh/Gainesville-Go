@@ -15,6 +15,8 @@ export class DeleteComponent {
 
   deleteForm: FormGroup;
   hide: boolean = false;
+  deleted: boolean = false;
+  authError: boolean = false;
 
   constructor(private fb: FormBuilder, private authService: AuthService, private router: Router, private tokenStorage: TokenStorageService, private userService: UserService) {
     this.deleteForm = this.fb.group({
@@ -31,9 +33,9 @@ export class DeleteComponent {
     this.authService
       .delete(this.deleteForm.get('email')?.value, this.deleteForm.get('password')?.value)
       .subscribe(
-        response => {this.router.navigate(['/login']),  console.log(response), this.tokenStorage.signOut()},
+        response => {this.router.navigate(['/login']),  console.log(response), this.tokenStorage.signOut(), this.deleted = true},
         err => {
-          
+          this.authError = true;
           this.deleteFailed()
         },
       );
