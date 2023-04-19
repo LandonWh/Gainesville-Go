@@ -1,27 +1,94 @@
+.title {
+  font-size: 24px;
+  text-align: center;
+  margin-top: 20px;
+  font-weight: 100;
+}
 
-  .title {
-    font-size: 24px;
-    text-align: center;
-    margin-top: 20px;
-    font-weight: 100;
-  }
-  
+.activity-level-tags-container {
+  margin-top: 30px;
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  align-items: center;
+  grid-gap: 20px;
+}
 
-  
-  .time-label {
-    display: inline;
-    font-size: 18px;
-    font-weight: 100;
-    margin-right: 5px; /* Adjust this value to control the space between the label and the time */
-  }
-  
-  .starttime {
-    display: inline;
-    white-space: nowrap;
-    font-size: 18px;
-    font-weight: 100;
-    margin-bottom: 200px;
-  }
+.tags {
+  display: flex;
+  flex-direction: column;
+  align-items: flex-start;
+}
+
+
+.tagLabel {
+  font-size: 18px;
+  margin-left: 120px;
+  font-weight: 100;
+}
+
+
+.activitylabel {
+  font-size: 18px;
+  margin-left: 130px;
+  font-weight: 100;
+}
+
+.event-icons {
+  display: flex;
+  gap: 10px; /* Adjust the gap between icons */
+  margin-top: 10px;
+  margin-left: 50px;
+}
+
+mat-icon {
+  font-size: 24px; /* Adjust the font size of icons */
+}
+
+.activity-level {
+  display: flex;
+  flex-direction: column;
+  align-items: flex-start;
+  margin-top: 30px;
+}
+
+.custom-progress-bar {
+  display: flex;
+  height: 20px;
+  width: 200px;
+  margin-left: 80px;
+  border: 1px solid #ccc;
+  border-radius: 10px;
+  overflow: hidden;
+}
+
+.progress-segment {
+  flex: 1;
+  background-color: #f5f5f5;
+  border-right: 1px solid #ccc;
+}
+
+.progress-segment:last-child {
+  border-right: none;
+}
+
+.progress-segment.active {
+  background-color: #3f51b5; /* Change this to your preferred active color */
+}
+
+.time-label {
+  display: inline;
+  font-size: 18px;
+  font-weight: 100;
+  margin-right: 5px; /* Adjust this value to control the space between the label and the time */
+}
+
+.starttime {
+  display: inline;
+  white-space: nowrap;
+  font-size: 18px;
+  font-weight: 100;
+  margin-bottom: 200px;
+}
 
 .start-time {
   margin-bottom: 10px;
@@ -31,39 +98,37 @@
   margin-bottom: -80px;
 }
 
+.endtime {
+  display: inline;
+  white-space: nowrap;
+  font-size: 18px;
+  font-weight: 100;
+}
 
-  .endtime {
-    display: inline;
-    white-space: nowrap;
-    font-size: 18px;
-    font-weight: 100;
-  }
+.content-container {
+  display: flex;
+  grid-template-columns: auto auto;
+  align-items: center;
+  gap: 0px;
+}
 
-  .content-container {
-    display: flex;
-    grid-template-columns: auto auto;
-    align-items: center;
-    gap: 0px;
-  }
-  
-  .description-container {
-    flex: 1;
-    flex-shrink: 0;
-    flex-basis: 90%;
-    max-width: 100%;
-  }
-  
-  .time-container {
-    padding-top: 15px;
-    padding-left: 20px;
-    padding-right: 20px;
-    padding-bottom: 65px;
-    margin-left: -200px;
-    margin-right: 400px;
-    border: 1px solid;
-    border-radius: 5px;
-  }
+.description-container {
+  flex: 1;
+  flex-shrink: 0;
+  flex-basis: 90%;
+  max-width: 100%;
+}
 
+.time-container {
+  padding-top: 15px;
+  padding-left: 20px;
+  padding-right: 20px;
+  padding-bottom: 65px;
+  margin-left: -200px;
+  margin-right: 400px;
+  border: 1px solid;
+  border-radius: 5px;
+}
 
 .capacity {
   margin-left: 308px;
@@ -73,27 +138,27 @@
 }
 
 .button {
-    margin-top: 420px;
-    margin-left: 310px;
+  margin-top: 350px;
+  margin-left: 310px;
 }
 
-  .description {
-    padding-top: 10px;
-    padding-left: 10px;
-    padding-right: 10px;
-    padding-bottom: 10px;
-    margin-top: 30px;
-    margin-left: 50px;
-    text-align: center;
-    margin-right: 300px;
-    font-size: 18px;
-    font-weight: 30;
-    border: 1px solid;
-    border-radius: 5px;
-  }
+.description {
+  padding-top: 10px;
+  padding-left: 10px;
+  padding-right: 10px;
+  padding-bottom: 10px;
+  margin-top: 30px;
+  margin-left: 50px;
+  text-align: center;
+  margin-right: 300px;
+  font-size: 18px;
+  font-weight: 30;
+  border: 1px solid;
+  border-radius: 5px;
+}
 
-  .event-detail {
-    font-size: 16px;
-    margin-bottom: 5px;
-    margin-left: 20px;
-  }
+.event-detail {
+  font-size: 16px;
+  margin-bottom: 5px;
+  margin-left: 20px;
+}

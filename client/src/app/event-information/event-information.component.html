@@ -1,33 +1,66 @@
-
 <ng-container *ngIf="event">
-    <h2 class="title">{{ event.title }}</h2>
-    <div class="content-container">
-        <div class="description-container">
-            <p class="description">{{ event?.description }}</p>
-        </div>
-        <div class="time-container">
-            <div class="start-time">
-            <p><span class="time-label">Start:</span><span class="starttime">{{ event?.starttime | date:'h:mm a' }}</span></p>
-            </div>
-            <div class="end-time">
-            <p><span class="time-label">End:</span><span class="endtime">{{ event?.endtime | date:'h:mm a' }}</span></p>
-            </div>
-        </div>
+  <h2 class="title">{{ event.title }}</h2>
+  <div class="content-container">
+    <div class="description-container">
+      <p class="description">{{ event.description }}</p>
     </div>
-    <p class="event-detail"> {{ event.address }}</p>
-    <ng-container *ngIf="event.Users; else noUsers">
-        <p class="capacity">{{event.Users.length}} / {{ event.capacity }} spots taken</p>
-        <p class="spots-left">{{ event.capacity - event.Users.length }} spots left</p>
-    </ng-container>
-    <ng-template #noUsers>
-    </ng-template>
-    <button mat-flat-button class="button" color="primary">
-        Sign up
-    </button>
-    <p class="capacity">{{ event.capacity }} spots left</p>
-
-
-
-
-        <!-- Add more fields as needed -->
+    <div class="time-container">
+      <div class="start-time">
+        <p>
+          <span class="time-label">Start:</span
+          ><span class="starttime">{{
+            event.starttime | date : "h:mm a"
+          }}</span>
+        </p>
+      </div>
+      <div class="end-time">
+        <p>
+          <span class="time-label">End:</span
+          ><span class="endtime">{{ event.endtime | date : "h:mm a" }}</span>
+        </p>
+      </div>
+    </div>
+  </div>
+  <div class="activity-level-tags-container">
+    <div class="activity-level">
+      <p class="activitylabel">Activity level:</p>
+      <div class="custom-progress-bar">
+        <div
+          class="progress-segment"
+          [ngClass]="{ active: event.activity >= 1 }"
+        ></div>
+        <div
+          class="progress-segment"
+          [ngClass]="{ active: event.activity >= 2 }"
+        ></div>
+        <div
+          class="progress-segment"
+          [ngClass]="{ active: event.activity >= 3 }"
+        ></div>
+      </div>
+    </div>
+      <div class="tags">
+        <p class="tagLabel">Tags:</p>
+        <div class="tags-container">
+        <div class="event-icons">
+          <mat-icon *ngIf="event.boysonly">male</mat-icon>
+          <mat-icon *ngIf="event.girlsonly">female</mat-icon>
+          <mat-icon *ngIf="event.twentyone">local_bar</mat-icon>
+        </div>
+        </div>
+      </div>
+  </div>
+  <p class="event-detail">{{ event.address }}</p>
+  <ng-container *ngIf="event.Users; else noUsers">
+    <p class="capacity">
+      {{ event.Users.length }} / {{ event.capacity }} spots taken
+    </p>
+    <p class="spots-left">
+      {{ event.capacity - event.Users.length }} spots left
+    </p>
+  </ng-container>
+  <ng-template #noUsers> </ng-template>
+  <button mat-flat-button class="button" color="primary">Sign up</button>
+  <p class="capacity">{{ event.capacity }} spots left</p>
+  <!-- Add more fields as needed -->
 </ng-container>

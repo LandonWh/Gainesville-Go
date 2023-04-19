@@ -42,6 +42,7 @@ import { EventMapComponent } from './event-map/event-map.component';
 import { ContactComponent } from './contact/contact.component';
 import { EventInformationComponent } from './event-information/event-information.component';
 import { DatePipe } from '@angular/common';
+import { MatProgressBarModule } from '@angular/material/progress-bar';
 
 const routes = [
   { path: 'login', component: LoginComponent },
@@ -95,6 +96,7 @@ const routes = [
     NgxMaterialTimepickerModule,
     MatSliderModule,
     MatCheckboxModule,
+    MatProgressBarModule,
     
   ],
   providers: [

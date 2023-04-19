@@ -2,6 +2,7 @@ import { ComponentFixture, TestBed } from '@angular/core/testing';
 import { MAT_DIALOG_DATA, MatDialogRef } from '@angular/material/dialog'
 import { EventFormComponent } from './event-form.component';
 import { MatFormFieldModule } from '@angular/material/form-field';
+import { ReactiveFormsModule } from '@angular/forms';
 import { AppModule } from '../app.module';
 import { validForm } from 'src/mocks';
 
@@ -9,14 +10,20 @@ describe('EventFormComponent', () => {
   let component: EventFormComponent;
   let fixture: ComponentFixture<EventFormComponent>;
 
-  function updateForm( eventName: string, 
-    boys: boolean, girls: boolean, twentyOne: boolean,
+  function updateForm( 
+    eventName: string, 
+    boys: boolean, 
+    girls: boolean, 
+    twentyOne: boolean,
     numPeople: number,
     date: string,
     description: string,
     startTime: string,
     endTime: string,
-    activityLevelV: string ) {
+    activityLevelV: string,
+    lat: number,
+    lng: number,
+    address: string, ) {
 
     component.eventForm.controls['eventName'].setValue(eventName);
     component.eventForm.controls['boys'].setValue(boys);
@@ -28,12 +35,15 @@ describe('EventFormComponent', () => {
     component.eventForm.controls['startTime'].setValue(startTime);
     component.eventForm.controls['endTime'].setValue(endTime);
     component.eventForm.controls['activityLevelV'].setValue(activityLevelV);
+    component.eventForm.controls['lat'].setValue(lat);
+    component.eventForm.controls['lng'].setValue(lng);
+    component.eventForm.controls['address'].setValue(address);
   }
 
   beforeEach(async () => {
     await TestBed.configureTestingModule({
       declarations: [ EventFormComponent ],
-      imports: [MatFormFieldModule, AppModule,],
+      imports: [MatFormFieldModule, AppModule, ReactiveFormsModule],
       providers: [
         {provide: MAT_DIALOG_DATA, useValue: {}},
         {provide: MatDialogRef, useValue: {}},
@@ -53,9 +63,10 @@ describe('EventFormComponent', () => {
 
   // check to make sure the inputs match when submitting
   it('Should update the event form to inputs', () => {
+    fixture.detectChanges();
     updateForm(validForm.eventName, validForm.boys, validForm.girls, validForm.twentyOne,
       validForm.numPeople, validForm.date, validForm.description, validForm.startTime, validForm.endTime,
-      validForm.activityLevelV);
+      validForm.activityLevelV, validForm.lat, validForm.lng, validForm.address);
     expect(component.eventForm.value).toEqual(validForm);
   })
 

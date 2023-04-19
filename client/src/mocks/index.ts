@@ -34,7 +34,10 @@ export const validForm = {
     description: "Fun time at the Social",
     startTime: "9:30 PM",
     endTime: "2:00 AM",
-    activityLevelV: "Active"
+    activityLevelV: "Active",
+    lat: 0,
+    lng: 0,
+    address: "123 Main St",
 }
 
 export const validFormCustom = {

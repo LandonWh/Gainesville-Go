@@ -31,4 +31,8 @@ export class EventInformationComponent {
     private datePipe: DatePipe,
   ) {}
 
+
+
+
+
 }
