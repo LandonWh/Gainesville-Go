@@ -1,7 +1,6 @@
 package main
 
 import (
-	"fmt"
 	"net/http"
 
 	"github.com/gin-gonic/gin"
@@ -12,7 +11,6 @@ type CurrUserInput struct {
 }
 
 func CurrentUser(c *gin.Context) {
-	fmt.Println("testing")
 	user_id, err := ExtractTokenID(c)
 
 	if err != nil {
