@@ -84,13 +84,13 @@ export class AuthService {
         twentyOne: boolean,
         capacity: number,
         description: string,
-        startTime: string,
-        endTime: string,
+        startTime: Date,
+        endTime: Date,
         activity: number,
         lat: number,
         lng: number,
         address: string,
-        date: string,
+        date: Date,
       ) {
         const payload = {
           title: title,

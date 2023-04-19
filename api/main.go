@@ -37,6 +37,7 @@ func SetupRouter() *gin.Engine {
 	protected := r.Group("/api/admin")
 	protected.Use(JwtAuthMiddleware())
 	protected.GET("/user", CurrentUser)
+	protected.GET("/active-events", GetActiveEvents)
 
 	//start the server
 	err := http.ListenAndServe(":8080", r)
