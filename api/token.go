@@ -13,7 +13,7 @@ import (
 
 func GenerateToken(user_id uint) (string, error) {
 
-	token_lifespan, err := strconv.Atoi("10")
+	token_lifespan, err := strconv.Atoi("1")
 
 	if err != nil {
 		return "", err
@@ -57,7 +57,6 @@ func ExtractToken(c *gin.Context) string {
 
 func ExtractTokenID(c *gin.Context) (uint, error) {
 	tokenString := ExtractToken(c)
-	fmt.Println(tokenString)
 	token, err := jwt.Parse(tokenString, func(token *jwt.Token) (interface{}, error) {
 		if _, ok := token.Method.(*jwt.SigningMethodHMAC); !ok {
 			return nil, fmt.Errorf("Unexpected signing method: %v", token.Header["alg"])
