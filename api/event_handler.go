@@ -41,13 +41,8 @@ func CreateEventHandler(c *gin.Context) {
 		return
 	}
 
-	// Hardcoded values for StartTime, EndTime, Lat, and Lon
-	hardcodedStartTime := time.Now()
-	hardcodedEndTime := time.Now().Add(2 * time.Hour)
-	fmt.Printf("Received input: %+v\n", input)
-
 	// Add event to database
-	event, _ := AddEvent(ToEvent(input.Title, input.Description, input.Capacity, input.Activity, hardcodedStartTime, hardcodedEndTime,
+	event, _ := AddEvent(ToEvent(input.Title, input.Description, input.Capacity, input.Activity, input.StartTime, input.EndTime,
 		input.Address, input.BoysOnly, input.GirlsOnly, input.TwentyOne, input.Lat, input.Lon))
 
 	c.JSON(http.StatusOK, gin.H{"data": event})
