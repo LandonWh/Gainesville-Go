@@ -55,36 +55,51 @@ export class EventFormComponent {
   onSubmit(): void {
     if (this.eventForm.invalid) {
       this.missingField();
-      return
+      return;
     }
-      //Equivalent for event?
-      //this.tokenStorage.saveUser(User);
-      this.authService
+  
+    // Get the date object
+    const eventDate = new Date(this.eventForm.get('date')?.value);
+  
+    // Convert startTime and endTime to Date objects and combine with the event date
+    const startTimeInput = this.eventForm.get('startTime')?.value;
+    const startTime = new Date(eventDate);
+    const [startHours, startMinutes] = startTimeInput.split(/[:\s]/).map(Number);
+    startTime.setHours(startHours, startMinutes);
+
+    const endTimeInput = this.eventForm.get('endTime')?.value;
+    const endTime = new Date(eventDate);
+    const [endHours, endMinutes] = endTimeInput.split(/[:\s]/).map(Number);
+    endTime.setHours(endHours, endMinutes);
+  
+    this.authService
       .createEvent(
-        this.eventForm.get('eventName')?.value, 
+        this.eventForm.get('eventName')?.value,
         this.eventForm.get('boys')?.value,
         this.eventForm.get('girls')?.value,
         this.eventForm.get('twentyOne')?.value,
         this.eventForm.get('capacity')?.value,
         this.eventForm.get('description')?.value,
-        this.eventForm.get('startTime')?.value,
-        this.eventForm.get('endTime')?.value,
+        startTime,
+        endTime,
         this.eventForm.get('activityLevelV')?.value,
         this.eventForm.get('lat')?.value,
         this.eventForm.get('lng')?.value,
         this.eventForm.get('address')?.value,
         this.eventForm.get('date')?.value,
-        )
+      )
       .subscribe(
-        response => {
+        (response) => {
           console.log(response);
           this.isEventCreated = true;
-          this.dialogRef.close({ eventCreated: true });},
-        err => {
-          this.createEventFailed()
+          this.dialogRef.close({ eventCreated: true });
+        },
+        (err) => {
+          this.createEventFailed();
         },
       );
   }
+  
 
   activityLevels: activityLevel[] = [
     {value: 1, viewValue: 'Very inactive'},

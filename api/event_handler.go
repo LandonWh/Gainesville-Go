@@ -17,18 +17,18 @@ func GetEvents(c *gin.Context) {
 }
 
 type createEventInput struct {
-	Title       string `json:"title"`
-	Description string `json:"description"`
-	Capacity    int    `json:"capacity"`
-	Activity    int8   `json:"activity"`
-	//StartTime   time.Time `json:"starttime"`
-	//EndTime     time.Time `json:"endtime"`
-	Address   string  `json:"address"`
-	BoysOnly  bool    `json:"boysonly"`
-	GirlsOnly bool    `json:"girlsonly"`
-	TwentyOne bool    `json:"twentyone"`
-	Lat       float32 `json:"lat"`
-	Lon       float32 `json:"lng"`
+	Title       string    `json:"title"`
+	Description string    `json:"description"`
+	Capacity    int       `json:"capacity"`
+	Activity    int8      `json:"activity"`
+	StartTime   time.Time `json:"starttime"`
+	EndTime     time.Time `json:"endtime"`
+	Address     string    `json:"address"`
+	BoysOnly    bool      `json:"boysonly"`
+	GirlsOnly   bool      `json:"girlsonly"`
+	TwentyOne   bool      `json:"twentyone"`
+	Lat         float32   `json:"lat"`
+	Lon         float32   `json:"lng"`
 }
 
 func CreateEventHandler(c *gin.Context) {
@@ -41,13 +41,8 @@ func CreateEventHandler(c *gin.Context) {
 		return
 	}
 
-	// Hardcoded values for StartTime, EndTime, Lat, and Lon
-	hardcodedStartTime := time.Now()
-	hardcodedEndTime := time.Now().Add(2 * time.Hour)
-	fmt.Printf("Received input: %+v\n", input)
-
 	// Add event to database
-	event, _ := AddEvent(ToEvent(input.Title, input.Description, input.Capacity, input.Activity, hardcodedStartTime, hardcodedEndTime,
+	event, _ := AddEvent(ToEvent(input.Title, input.Description, input.Capacity, input.Activity, input.StartTime, input.EndTime,
 		input.Address, input.BoysOnly, input.GirlsOnly, input.TwentyOne, input.Lat, input.Lon))
 
 	c.JSON(http.StatusOK, gin.H{"data": event})
