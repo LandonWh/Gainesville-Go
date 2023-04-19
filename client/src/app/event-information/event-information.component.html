@@ -6,11 +6,14 @@
             <p class="description">{{ event?.description }}</p>
         </div>
         <div class="time-container">
-            <p class="starttime">Start: {{ event?.starttime | date:'h:mm a' }}</p>
-            <p class="endttime">End: {{ event?.endtime | date:'h:mm a' }}</p>
+            <div class="start-time">
+            <p><span class="time-label">Start:</span><span class="starttime">{{ event?.starttime | date:'h:mm a' }}</span></p>
+            </div>
+            <div class="end-time">
+            <p><span class="time-label">End:</span><span class="endtime">{{ event?.endtime | date:'h:mm a' }}</span></p>
+            </div>
         </div>
     </div>
-    <p class="event-detail"> {{ event.activity }}</p>
     <p class="event-detail"> {{ event.address }}</p>
     <ng-container *ngIf="event.Users; else noUsers">
         <p class="capacity">{{event.Users.length}} / {{ event.capacity }} spots taken</p>
