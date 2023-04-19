@@ -32,7 +32,6 @@ import { MatNativeDateModule } from '@angular/material/core';
 import { NgxMaterialTimepickerModule} from 'ngx-material-timepicker';
 import { MatSliderModule} from '@angular/material/slider';
 import { MatCheckboxModule} from '@angular/material/checkbox';
-import { MembersComponent } from './members/members.component';
 import { AuthInterceptor } from './auth-interceptor';
 import { CanActivateViaAuthGuard } from './can-activate-via-auth.guard';
 import { AuthService } from './services/auth.service';
@@ -41,15 +40,12 @@ import { DeleteComponent } from './delete/delete.component';
 import { FindEventsComponent } from './find-events/find-events.component';
 import { EventMapComponent } from './event-map/event-map.component';
 import { ContactComponent } from './contact/contact.component';
+import { EventInformationComponent } from './event-information/event-information.component';
 
 const routes = [
   { path: 'login', component: LoginComponent },
   {
-      path: 'members',
-      component: MembersComponent,
-      canActivate: [
-          CanActivateViaAuthGuard
-      ]
+      
   },
   { path: '**', redirectTo: '' }
 ];
@@ -65,12 +61,12 @@ const routes = [
     LoginComponent,
     RegisterComponent,
     EventFormComponent,
-    MembersComponent,
     AccountPageComponent,
     DeleteComponent,
     FindEventsComponent,
     EventMapComponent,
-    ContactComponent
+    ContactComponent,
+    EventInformationComponent
   ],
   entryComponents: [EventFormComponent],
   imports: [

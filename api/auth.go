@@ -1,39 +1,42 @@
 package main
 
 import (
+	"fmt"
 	"net/http"
-  	"github.com/gin-gonic/gin"
+
+	"github.com/gin-gonic/gin"
 )
 
 type CurrUserInput struct {
 	Token string `json:"token" binding:"required"`
 }
 
-func CurrentUser(c *gin.Context){
+func CurrentUser(c *gin.Context) {
+	fmt.Println("testing")
 	user_id, err := ExtractTokenID(c)
 
 	if err != nil {
 		c.JSON(http.StatusBadRequest, gin.H{"error": err.Error()})
 		return
 	}
-	
-	u,err := GetUserByID(user_id)
-	
+
+	u, err := GetUserByID(user_id)
+
 	if err != nil {
 		c.JSON(http.StatusBadRequest, gin.H{"error": err.Error()})
 		return
 	}
 
-	c.JSON(http.StatusOK, gin.H{"message":"success","data":u})
+	c.JSON(http.StatusOK, gin.H{"message": "success", "data": u})
 }
 
 type LoginInput struct {
-	Email string `json:"email" binding:"required"`
+	Email    string `json:"email" binding:"required"`
 	Password string `json:"password" binding:"required"`
 }
 
 func Login(c *gin.Context) {
-	
+
 	var input LoginInput
 
 	if err := c.ShouldBindJSON(&input); err != nil {
@@ -56,12 +59,12 @@ func Login(c *gin.Context) {
 	var user User
 	DB.Model(User{}).Where("email = ?", u.Email).Take(&user)
 	user.Password = "[HIDDEN]"
-	c.JSON(http.StatusOK, gin.H{"token":token, "user":user})
+	c.JSON(http.StatusOK, gin.H{"token": token, "user": user})
 
 }
 
 func Delete(c *gin.Context) {
-	
+
 	var input LoginInput
 
 	if err := c.ShouldBindJSON(&input); err != nil {
@@ -88,20 +91,19 @@ func Delete(c *gin.Context) {
 		return
 	}
 
-	c.JSON(http.StatusOK, gin.H{"message":"successfully deleted user with the email: " + u.Email})
+	c.JSON(http.StatusOK, gin.H{"message": "successfully deleted user with the email: " + u.Email})
 }
-
 
 type RegisterInput struct {
-	FirstName string `json:"firstname" binding:"required"`
-	LastName string `json:"lastname" binding:"required"`
+	FirstName   string `json:"firstname" binding:"required"`
+	LastName    string `json:"lastname" binding:"required"`
 	DateOfBirth string `json:"dateofbirth" binding:"required"`
-	Email string `json:"email" binding:"required"`
-	Password string `json:"password" binding:"required"`
+	Email       string `json:"email" binding:"required"`
+	Password    string `json:"password" binding:"required"`
 }
 
-func Register(c *gin.Context){
-	
+func Register(c *gin.Context) {
+
 	var input RegisterInput
 
 	if err := c.ShouldBindJSON(&input); err != nil {
@@ -119,11 +121,11 @@ func Register(c *gin.Context){
 
 	_, err := u.SaveUser(true)
 
-	if err != nil{
+	if err != nil {
 		c.JSON(http.StatusBadRequest, gin.H{"error": err.Error()})
 		return
 	}
 
-	c.JSON(http.StatusOK, gin.H{"message":"registration success"})
+	c.JSON(http.StatusOK, gin.H{"message": "registration success"})
 
 }

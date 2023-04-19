@@ -17,6 +17,7 @@ export interface Event {
 	twentyone: boolean;
 	starttime: string;
 	endtime: string;
+	date: string;
 	lat: number;
 	long: number; 
 	Users: any; 

@@ -1,6 +1,9 @@
 import { Component, NgZone } from '@angular/core';
 import { OnInit } from '@angular/core';
 import { EventService, Event } from '../services/event.service';
+import { MatDialogModule } from '@angular/material/dialog';
+import { MatDialog } from '@angular/material/dialog';
+import { EventInformationComponent } from '../event-information/event-information.component';
 import * as L from 'leaflet';
 
 @Component({
@@ -13,7 +16,7 @@ export class EventMapComponent implements OnInit {
 
   private map: L.Map | null = null;
 
-  constructor(private eventService: EventService) {}
+  constructor(private eventService: EventService, private dialog: MatDialog) {}
 
   ngOnInit(): void {
     this.eventService.getEvents().subscribe((events: Event[]) => {
@@ -46,19 +49,25 @@ export class EventMapComponent implements OnInit {
   }
 
   addMarkersToMap(map: L.Map): void {
-    console.log('Adding markers:', this.events);
     this.events.forEach((event: Event) => {
       if (event.lat != null && event.long != null) {
         const marker = L.marker([event.lat, event.long]).addTo(map);
-        marker.bindPopup(`<h3>${event.title}</h3><p>${event.description}</p>`);
+        marker.on('click', () => {
+          this.openEventInformationDialog(event);
+        });
       } else {
         console.error('Invalid LatLng object:', event);
       }
     });
   }
 
-} 
+  openEventInformationDialog(event: Event): void {
+    const dialogRef = this.dialog.open(EventInformationComponent, {
+      width: '700px',
+      height: '800px',
+    });
+    dialogRef.componentInstance.event = event;
+  }
 
 
-
-
+}

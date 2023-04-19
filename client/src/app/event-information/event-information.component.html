@@ -1,0 +1,19 @@
+
+<ng-container *ngIf="event">
+    <h2 class="title">{{ event?.title }}</h2>
+    <p class="description">{{ event?.description }}</p>
+    <p class="event-detail"> {{ event?.capacity }}</p>
+    <p class="event-detail"> {{ event?.activity }}</p>
+    <p class="event-detail"> {{ event?.date }}</p>
+    <p class="event-detail"> {{ event?.starttime }}</p>
+    <p class="event-detail"> {{ event?.endtime }}</p>
+    <p class="event-detail"> {{ event?.address }}</p>
+    <button mat-flat-button class="button" color="primary">
+        Sign up
+    </button>
+
+
+
+
+        <!-- Add more fields as needed -->
+</ng-container>
