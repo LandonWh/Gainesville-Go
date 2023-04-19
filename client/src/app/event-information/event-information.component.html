@@ -3,14 +3,14 @@
     <h2 class="title">{{ event.title }}</h2>
     <div class="content-container">
         <div class="description-container">
-            <p class="description">{{ event?.description }}</p>
+            <p class="description">{{ event.description }}</p>
         </div>
         <div class="time-container">
             <div class="start-time">
-            <p><span class="time-label">Start:</span><span class="starttime">{{ event?.starttime | date:'h:mm a' }}</span></p>
+            <p><span class="time-label">Start:</span><span class="starttime">{{ event.starttime | date:'h:mm a' }}</span></p>
             </div>
             <div class="end-time">
-            <p><span class="time-label">End:</span><span class="endtime">{{ event?.endtime | date:'h:mm a' }}</span></p>
+            <p><span class="time-label">End:</span><span class="endtime">{{ event.endtime | date:'h:mm a' }}</span></p>
             </div>
         </div>
     </div>
