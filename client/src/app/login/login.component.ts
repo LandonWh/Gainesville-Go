@@ -66,13 +66,7 @@ export class LoginComponent implements OnInit{
           this.tokenStorage.saveToken(response.token);
           this.tokenStorage.saveUser(response.user);
           this.router.navigate(['/home']);
-          console.log(response);
           this.isLoggedIn = true;
-          //localStorage.setItem('token', response.tokn);
-          // localStorage.setItem('firstName', response.user.firstName);
-          // localStorage.setItem('lastName', response.user.lastName);
-          // localStorage.setItem('email', response.user.email);
-          
         },
         (err) => {
           this.loginFailed();
