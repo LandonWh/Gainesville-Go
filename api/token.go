@@ -13,7 +13,7 @@ import (
 
 func GenerateToken(user_id uint) (string, error) {
 
-	token_lifespan, err := strconv.Atoi("10")
+	token_lifespan, err := strconv.Atoi("100")
 
 	if err != nil {
 		return "", err
