@@ -16,6 +16,17 @@ func GetEvents(c *gin.Context) {
 	c.JSON(http.StatusOK, gin.H{"data": events})
 }
 
+// only returns events that are eiter active or upcoming
+func GetActiveEvents(c *gin.Context) {
+	var events []Event
+	currentTime := time.Now()
+
+	// Filter events that have not expired
+	DB.Where("end_time > ?", currentTime).Find(&events)
+
+	c.JSON(http.StatusOK, gin.H{"data": events})
+}
+
 type createEventInput struct {
 	Title       string    `json:"title"`
 	Description string    `json:"description"`
