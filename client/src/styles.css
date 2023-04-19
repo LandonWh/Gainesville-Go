@@ -48,4 +48,9 @@ overflow: hidden; }
   src: url("/assets/font/avenir1.ttf");
 }
 
+@font-face {
+  font-family: dongle;
+  src: url("/assets/font/dongle.ttf");
+}
+
 

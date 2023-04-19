@@ -1,6 +1,7 @@
 import { Component, Input, ChangeDetectorRef } from '@angular/core';
 import { MatDialogRef } from '@angular/material/dialog';
 import { Event } from '../services/event.service';
+import { DatePipe } from '@angular/common';
 
 @Component({
   selector: 'app-event-information',
@@ -22,6 +23,8 @@ export class EventInformationComponent {
 
   constructor(
     public dialogRef: MatDialogRef<EventInformationComponent>,
-    private changeDetectorRef: ChangeDetectorRef
+    private changeDetectorRef: ChangeDetectorRef,
+    private datePipe: DatePipe,
   ) {}
+
 }
