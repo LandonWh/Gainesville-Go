@@ -58,9 +58,19 @@ export class EventFormComponent {
       return;
     }
   
-    // Convert startTime and endTime to Date objects
+    // Get the date object
+    const eventDate = new Date(this.eventForm.get('date')?.value);
+  
+    // Convert startTime and endTime to Date objects and combine with the event date
     const startTime = new Date(this.eventForm.get('startTime')?.value);
+    startTime.setFullYear(eventDate.getFullYear());
+    startTime.setMonth(eventDate.getMonth());
+    startTime.setDate(eventDate.getDate());
+  
     const endTime = new Date(this.eventForm.get('endTime')?.value);
+    endTime.setFullYear(eventDate.getFullYear());
+    endTime.setMonth(eventDate.getMonth());
+    endTime.setDate(eventDate.getDate())
   
     this.authService
       .createEvent(

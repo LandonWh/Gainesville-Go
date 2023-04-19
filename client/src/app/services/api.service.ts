@@ -39,13 +39,12 @@ export class ApiService {
         address: string,
         date: Date,
     ) {
-        const startTimeDate = new Date(startTime);
-        const endTimeDate = new Date(endTime);
         const startTimeString = startTime.toISOString();
         const endTimeString = endTime.toISOString();
         //const dateString = date.toISOString();
-        return this.http.post('api/event', { title, boysOnly, girlsOnly, twentyOne, capacity, description, startTime, endTime, activity, address, lat, lng, date });
+        return this.http.post('api/event', { title, boysOnly, girlsOnly, twentyOne, capacity, description, startTime: startTimeString, endTime: endTimeString, activity, address, lat, lng, date });
     }
+    
 
     getUser(token: string) {
         return this.http.post('api/admin/user', {token});
