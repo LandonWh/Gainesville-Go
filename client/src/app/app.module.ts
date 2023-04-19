@@ -41,6 +41,7 @@ import { FindEventsComponent } from './find-events/find-events.component';
 import { EventMapComponent } from './event-map/event-map.component';
 import { ContactComponent } from './contact/contact.component';
 import { EventInformationComponent } from './event-information/event-information.component';
+import { DatePipe } from '@angular/common';
 
 const routes = [
   { path: 'login', component: LoginComponent },
@@ -97,6 +98,7 @@ const routes = [
     
   ],
   providers: [
+    DatePipe,
     AuthService,
     {
       provide: HTTP_INTERCEPTORS,
