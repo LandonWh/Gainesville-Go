@@ -41,13 +41,9 @@ export class ApiService {
     ) {
         const startTimeDate = new Date(startTime);
         const endTimeDate = new Date(endTime);
-        console.log('startTimeDate:', startTimeDate);
-        console.log('endTimeDate:', endTimeDate);
-      
+
         const startTimeString = startTimeDate.toISOString();
         const endTimeString = endTimeDate.toISOString();
-        console.log('startTimeString:', startTimeString);
-        console.log('endTimeString:', endTimeString);
       
         //const dateString = date.toISOString();
         return this.http.post('api/event', { title, boysOnly, girlsOnly, twentyOne, capacity, description, startTime, endTime, activity, address, lat, lng, date });

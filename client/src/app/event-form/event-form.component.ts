@@ -71,20 +71,6 @@ export class EventFormComponent {
     const endTime = new Date(eventDate);
     const [endHours, endMinutes] = endTimeInput.split(/[:\s]/).map(Number);
     endTime.setHours(endHours, endMinutes);
-
-    console.log('eventDate:', eventDate);
-    console.log('startTime:', startTime);
-    console.log('endTime:', endTime);
-
-    console.log('startTimeInput:', startTimeInput);
-    console.log('startHours:', startHours);
-    console.log('startMinutes:', startMinutes);
-
-    console.log('endTimeInput:', endTimeInput);
-    console.log('endHours:', endHours);
-    console.log('endMinutes:', endMinutes);
-
-
   
     this.authService
       .createEvent(
