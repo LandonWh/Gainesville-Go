@@ -1,59 +1,54 @@
-
-  .title {
-    font-size: 24px;
-    text-align: center;
-    margin-top: 20px;
-    font-weight: 100;
-  }
-  
-  .content-container {
-    display: flex;
-    justify-content: flex-start;
-    align-items: center;
-  }
-  
-  .description-container {
-    flex: 1;
-  }
-  
-  .time-container {
-    margin-left: 5px;
-    text-align: right;
-  }
-
-  .starttime {
-    margin-right: 150px;
-  }
-
-.capacity {
-  margin-left: 308px;
-  position: fixed;
-  font-size: 18px;
-  margin-top: 10px;
+.header {
+  text-align: center;
+  margin-top: 30px;
+  margin-bottom: 15px;
 }
 
-  .button {
-    margin-top: 120px;
-    margin-left: 310px;
-  }
+.time-container {
+  font-size: 1.1em;
+  margin-bottom: 10px;
+}
 
-  .description {
-    padding-top: 10px;
-    padding-left: 10px;
-    padding-right: 10px;
-    padding-bottom: 10px;
-    margin-top: 30px;
-    margin-left: 50px;
-    text-align: center;
-    margin-right: 300px;
-    font-size: 18px;
-    font-weight: 30;
-    border: 1px solid;
-    border-radius: 5px;
-  }
+.starttime,
+.endtime {
+  margin: 0;
+}
 
-  .event-detail {
-    font-size: 16px;
-    margin-bottom: 5px;
-    margin-left: 20px;
-  }
+.content-container {
+  display: flex;
+  flex-direction: row;
+  justify-content: space-between;
+  margin-bottom: 15px;
+}
+
+.extra-details {
+  display: flex;
+  flex-direction: column;
+  padding-left: 40px;
+}
+
+.description-container {
+  padding-right: 60px;
+}
+
+.description-title {
+  font-weight: bold;
+  margin-bottom: 5px;
+}
+
+.description-box {
+  border: 1px solid #ccc;
+  border-radius: 4px;
+  padding: 10px;
+  background-color: #f9f9f9;
+  width: 80%;
+}
+
+.capacity-container {
+  text-align: center;
+  margin-bottom: 15px;
+}
+
+.submitEvent {
+  text-align: center;
+}
