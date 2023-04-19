@@ -62,15 +62,29 @@ export class EventFormComponent {
     const eventDate = new Date(this.eventForm.get('date')?.value);
   
     // Convert startTime and endTime to Date objects and combine with the event date
-    const startTime = new Date(this.eventForm.get('startTime')?.value);
-    startTime.setFullYear(eventDate.getFullYear());
-    startTime.setMonth(eventDate.getMonth());
-    startTime.setDate(eventDate.getDate());
-  
-    const endTime = new Date(this.eventForm.get('endTime')?.value);
-    endTime.setFullYear(eventDate.getFullYear());
-    endTime.setMonth(eventDate.getMonth());
-    endTime.setDate(eventDate.getDate())
+    const startTimeInput = this.eventForm.get('startTime')?.value;
+    const startTime = new Date(eventDate);
+    const [startHours, startMinutes] = startTimeInput.split(/[:\s]/).map(Number);
+    startTime.setHours(startHours, startMinutes);
+
+    const endTimeInput = this.eventForm.get('endTime')?.value;
+    const endTime = new Date(eventDate);
+    const [endHours, endMinutes] = endTimeInput.split(/[:\s]/).map(Number);
+    endTime.setHours(endHours, endMinutes);
+
+    console.log('eventDate:', eventDate);
+    console.log('startTime:', startTime);
+    console.log('endTime:', endTime);
+
+    console.log('startTimeInput:', startTimeInput);
+    console.log('startHours:', startHours);
+    console.log('startMinutes:', startMinutes);
+
+    console.log('endTimeInput:', endTimeInput);
+    console.log('endHours:', endHours);
+    console.log('endMinutes:', endMinutes);
+
+
   
     this.authService
       .createEvent(
