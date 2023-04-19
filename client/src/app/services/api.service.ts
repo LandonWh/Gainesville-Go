@@ -17,8 +17,6 @@ export class ApiService {
     }
 
     deleteAccount(email: string, password: string) {
-        console.log(email);
-        console.log(password);
         return this.http.post('api/deleteuser', {email, password});
     }
 
@@ -42,5 +40,9 @@ export class ApiService {
         date: string,
     ) {
         return this.http.post('api/event', { title, boysOnly, girlsOnly, twentyOne, capacity, description, startTime, endTime, activity, address, lat, lng, date });
+    }
+
+    getUser(token: string) {
+        return this.http.post('api/admin/user', {token});
     }
 }

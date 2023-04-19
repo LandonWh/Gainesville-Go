@@ -3,10 +3,9 @@
   var token = tokenStorage.getToken();
 </script> -->
 <!--{{getFirstname(token)}}-->
-<h4 class="userInformation1" > First Name: </h4>
-<h4 class="userInformation1"> Last Name: </h4>
-<h4 class="userInformation1"> Email: </h4>
-<h4 class="userInformation1"> Password: </h4>
+<h4 class="userInformation1" > First Name: {{firstName}}</h4>
+<h4 class="userInformation1"> Last Name: {{lastName}}</h4>
+<h4 class="userInformation1"> Email: {{email}}</h4>
 <div class="logoutButton">
   <button mat-flat-button color="primary" (click)="logout()">Log Out</button>
 </div>

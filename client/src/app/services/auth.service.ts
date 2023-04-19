@@ -108,4 +108,10 @@ export class AuthService {
             this._isCreated$.next(true); 
         }));
       }
+
+      getUser(token: string)  {
+        return this.apiService.getUser(token).pipe(
+            tap((response: any) => {})
+        )
+      }
 }
