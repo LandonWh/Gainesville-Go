@@ -26,6 +26,7 @@ export class LoginComponent implements OnInit{
   roles: string[] = [];
   loginForm: FormGroup;
   valiationFailed: boolean = false;
+  token: string = '';
   
   hide: boolean = false;
 
@@ -66,6 +67,7 @@ export class LoginComponent implements OnInit{
           console.log(response), 
           this.tokenStorage.getToken, 
           this.isLoggedIn = true;
+          localStorage.setItem('token', response.token);
         },
         err => {
           

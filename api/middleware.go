@@ -1,13 +1,16 @@
 package main
 
 import (
-	"net/http"
 	"fmt"
+	"net/http"
+
 	"github.com/gin-gonic/gin"
 )
 
 func JwtAuthMiddleware() gin.HandlerFunc {
+
 	return func(c *gin.Context) {
+		fmt.Println(c)
 		err := TokenValid(c)
 		if err != nil {
 			fmt.Println(err)

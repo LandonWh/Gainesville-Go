@@ -5,7 +5,6 @@ import { MainPageComponent } from './main-page/main-page.component';
 import { CreateEventComponent } from './create-event/create-event.component';
 import { LoginComponent } from './login/login.component';
 import { RegisterComponent } from './register/register.component';
-import { MembersComponent } from './members/members.component';
 import { AccountPageComponent } from './account-page/account-page.component';
 import { AuthGuard } from './auth.guard';
 import { DeleteComponent } from './delete/delete.component';
@@ -32,10 +31,6 @@ const routes: Routes = [
   {
     path: 'register',
     component: RegisterComponent
-  },
-  {
-    path: 'members',
-    component: MembersComponent
   },
   {
     path: 'account-page',

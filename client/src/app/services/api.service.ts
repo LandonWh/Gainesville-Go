@@ -17,8 +17,6 @@ export class ApiService {
     }
 
     deleteAccount(email: string, password: string) {
-        console.log(email);
-        console.log(password);
         return this.http.post('api/deleteuser', {email, password});
     }
 

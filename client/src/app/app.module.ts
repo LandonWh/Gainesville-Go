@@ -32,7 +32,6 @@ import { MatNativeDateModule } from '@angular/material/core';
 import { NgxMaterialTimepickerModule} from 'ngx-material-timepicker';
 import { MatSliderModule} from '@angular/material/slider';
 import { MatCheckboxModule} from '@angular/material/checkbox';
-import { MembersComponent } from './members/members.component';
 import { AuthInterceptor } from './auth-interceptor';
 import { CanActivateViaAuthGuard } from './can-activate-via-auth.guard';
 import { AuthService } from './services/auth.service';
@@ -45,11 +44,7 @@ import { ContactComponent } from './contact/contact.component';
 const routes = [
   { path: 'login', component: LoginComponent },
   {
-      path: 'members',
-      component: MembersComponent,
-      canActivate: [
-          CanActivateViaAuthGuard
-      ]
+      
   },
   { path: '**', redirectTo: '' }
 ];
@@ -65,7 +60,6 @@ const routes = [
     LoginComponent,
     RegisterComponent,
     EventFormComponent,
-    MembersComponent,
     AccountPageComponent,
     DeleteComponent,
     FindEventsComponent,
