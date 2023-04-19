@@ -8,22 +8,19 @@
   
   .content-container {
     display: flex;
-    justify-content: flex-start;
     align-items: center;
   }
   
   .description-container {
     flex: 1;
+    flex-shrink: 0;
+    flex-basis: 90%;
   }
   
   .time-container {
-    margin-left: 5px;
-    text-align: right;
+    margin-right: 400px;
   }
 
-  .starttime {
-    margin-right: 150px;
-  }
 
 .capacity {
   margin-left: 308px;
