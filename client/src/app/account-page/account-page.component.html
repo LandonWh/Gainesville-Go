@@ -1,11 +1,12 @@
 <h1 class="userInformation">User Information</h1>
-<!-- <script>
-  var token = tokenStorage.getToken();
-</script> -->
-<!--{{getFirstname(token)}}-->
-<h4 class="userInformation1" > First Name: {{firstName}}</h4>
-<h4 class="userInformation1"> Last Name: {{lastName}}</h4>
-<h4 class="userInformation1"> Email: {{email}}</h4>
+
+<div *ngIf="user">
+  <h4 class="userInformation1">First Name: {{ user.firstname }}</h4>
+  <h4 class="userInformation1">Last Name: {{ user.lastname }}</h4>
+  <h4 class="userInformation1">Email: {{ user.email }}</h4>
+  <!-- You should avoid displaying the user's password in the account page -->
+</div>
+
 <div class="logoutButton">
   <button mat-flat-button color="primary" (click)="logout()">Log Out</button>
 </div>
