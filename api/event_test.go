@@ -5,6 +5,12 @@ import (
 	"time"
 )
 
+func cleanup() {
+	DB.Exec("DELETE FROM user_events")
+	DB.Exec("DELETE FROM events")
+	DB.Exec("DELETE FROM users")
+}
+
 func TestSanity(t *testing.T) {
 	one := 1
 	if one != 1 {
@@ -73,6 +79,7 @@ func TestRetrieveEvent(t *testing.T) {
 }
 
 func TestAddMultipleEvents(t *testing.T) {
+
 	event1 := CreateRandEvent("First Event")
 	event2 := CreateRandEvent("Second Event")
 	event3 := CreateRandEvent("Third Event")
@@ -129,6 +136,9 @@ func TestAddDeleteEventWithNewFields(t *testing.T) {
 }
 
 func TestCreateUserEventRelationship(t *testing.T) {
+	cleanup()
+	defer cleanup()
+
 	// Create a user and add to the database
 	user := User{
 		FirstName:   "John",
@@ -141,7 +151,7 @@ func TestCreateUserEventRelationship(t *testing.T) {
 
 	// Create an event and add to the database
 	event := CreateRandEvent("TestCreateUserEventRelationship")
-	_, eventID := AddEvent(event)
+	AddEvent(event)
 
 	// Create a relationship between the user and the event
 	DB.Model(&user).Association("Events").Append(&event)
@@ -156,8 +166,40 @@ func TestCreateUserEventRelationship(t *testing.T) {
 
 	// Clean up: delete the user, event, and relationship
 	DB.Model(&user).Association("Events").Delete(&event)
-	DeleteEvent(eventID)
+	DB.Delete(&event)
 	DB.Delete(&user)
+}
+
+func TestGetActiveEvents(t *testing.T) {
+
+	// Create an expired event
+	expiredEvent := CreateRandEvent("Expired Event")
+	expiredEvent.StartTime = time.Now().Add(-2 * time.Hour)
+	expiredEvent.EndTime = time.Now().Add(-1 * time.Hour)
+	_, expiredEventID := AddEvent(expiredEvent)
+
+	// Create a non-expired event
+	nonExpiredEvent := CreateRandEvent("Non-Expired Event")
+	nonExpiredEvent.StartTime = time.Now().Add(1 * time.Hour)
+	nonExpiredEvent.EndTime = time.Now().Add(2 * time.Hour)
+	_, nonExpiredEventID := AddEvent(nonExpiredEvent)
+
+	// Get active events directly from the database
+	var activeEvents []Event
+	DB.Where("end_time > ?", time.Now()).Find(&activeEvents)
+
+	if len(activeEvents) != 1 {
+		t.Errorf("expected 1 active event, got %d", len(activeEvents))
+	} else {
+		activeEvent := activeEvents[0]
+		if activeEvent.ID != nonExpiredEventID {
+			t.Errorf("expected non-expired event, got event with ID %d", activeEvent.ID)
+		}
+	}
+
+	// Clean up
+	DeleteEvent(expiredEventID)
+	DeleteEvent(nonExpiredEventID)
 }
 
 /*
