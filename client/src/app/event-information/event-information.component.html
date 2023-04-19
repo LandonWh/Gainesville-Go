@@ -1,9 +1,20 @@
-
 <ng-container *ngIf="event">
-    <h2 class="title">{{ event.title }}</h2>
+    <div class="header">
+      <h2>{{ event.title }}</h2>
+      <div class="time-container">
+        <p class="starttime">Start: {{ event.starttime | date: 'h:mm a' }}</p>
+        <p class="endtime">End: {{ event.endtime | date: 'h:mm a' }}</p>
+      </div>
+    </div>
     <div class="content-container">
-        <div class="description-container">
-            <p class="description">{{ event?.description }}</p>
+      <div class="extra-details">
+        <p class="event-detail">{{ event.activity }}</p>
+        <p class="event-detail">{{ event.address }}</p>
+      </div>
+      <div class="description-container">
+        <p class="description-title">Description:</p>
+        <div class="description-box">
+          <p class="description">{{ event.description }}</p>
         </div>
         <div class="time-container">
             <div class="start-time">
@@ -18,16 +29,13 @@
     <ng-container *ngIf="event.Users; else noUsers">
         <p class="capacity">{{event.Users.length}} / {{ event.capacity }} spots taken</p>
         <p class="spots-left">{{ event.capacity - event.Users.length }} spots left</p>
-    </ng-container>
-    <ng-template #noUsers>
-    </ng-template>
-    <button mat-flat-button class="button" color="primary">
+      </ng-container>
+      <ng-template #noUsers></ng-template>
+    </div>
+    <div class="submitEvent">
+      <button mat-flat-button class="button" color="primary">
         Sign up
-    </button>
-    <p class="capacity">{{ event.capacity }} spots left</p>
-
-
-
-
-        <!-- Add more fields as needed -->
-</ng-container>
+      </button>
+    </div>
+  </ng-container>
+  
