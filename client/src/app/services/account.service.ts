@@ -1,29 +1,26 @@
-import { Injectable } from '@angular/core';
-import { HttpClient } from '@angular/common/http';
-import { Observable, map } from 'rxjs';
+// import { Injectable } from '@angular/core';
+// import { HttpClient } from '@angular/common/http';
+// import { Observable, map } from 'rxjs';
 
 
 
-export interface Account {
-	firstName: string;
-    lastName: string;
-    email: string;
-  }
+// export interface Account {
+// 	firstName: string;
+//     lastName: string;
+//     email: string;
+//   }
   
 
-@Injectable({
-  providedIn: 'root'
-})
+// @Injectable({
+//   providedIn: 'root'
+// })
 
 
-export class AccountService {
+// export class AccountService {
   
 
-  constructor(private http: HttpClient) { }
+//   constructor(private http: HttpClient) { }
 
-  getAccount(token: string)  {
-    
-    return this.http.post('api/admin/user', {token});
-  }
   
-}
+  
+// }

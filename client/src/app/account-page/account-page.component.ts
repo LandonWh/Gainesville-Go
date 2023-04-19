@@ -3,7 +3,7 @@ import { AuthService } from '../services/auth.service';
 import { Router } from '@angular/router';
 import { TokenStorageService } from '../services/token-storage.service';
 import { UserService } from '../services/user.service';
-import { AccountService, Account } from '../services/account.service';
+//import { AccountService, Account } from '../services/account.service';
 
 //import jwt_decode from 'jwt-decode';
 
@@ -13,7 +13,7 @@ import { AccountService, Account } from '../services/account.service';
   styleUrls: ['./account-page.component.css']
 })
 export class AccountPageComponent implements OnInit {
-  account: Account[] = [];
+  //account: Account[] = [];
   firstName: string;
   lastName: string;
   email: string;
@@ -24,7 +24,7 @@ export class AccountPageComponent implements OnInit {
     private userService: UserService,
     private router: Router,
     public tokenStorage: TokenStorageService,
-    private accountService: AccountService
+    //private accountService: AccountService
   ) {}
 
   user: any;
@@ -41,14 +41,14 @@ export class AccountPageComponent implements OnInit {
     this.authService.logout();
     this.router.navigate(['/login']);
   }
-
+  
   ngOnInit(): void {
+    console.log(localStorage.getItem('token'));
     this.token = localStorage.getItem('token')!;
-    this.accountService.getAccount(this.token)
+    this.authService.getUser(this.token)
     .subscribe(
       response => {
-        console.log("response again: " + response)
-        
+        //console.log("response: " + response)
       },
     );
   }

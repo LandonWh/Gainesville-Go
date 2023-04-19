@@ -27,6 +27,7 @@ export class LoginComponent implements OnInit{
   loginForm: FormGroup;
   valiationFailed: boolean = false;
   token: string = '';
+  user: User;
   
   hide: boolean = false;
 
@@ -53,7 +54,6 @@ export class LoginComponent implements OnInit{
 
 
   login(): void {
-    
     if (this.loginForm.invalid) {
       this.missingField();
       return
@@ -67,7 +67,11 @@ export class LoginComponent implements OnInit{
           console.log(response), 
           this.tokenStorage.getToken, 
           this.isLoggedIn = true;
-          localStorage.setItem('token', response.token);
+          //localStorage.setItem('token', response.tokn);
+          // localStorage.setItem('firstName', response.user.firstName);
+          // localStorage.setItem('lastName', response.user.lastName);
+          // localStorage.setItem('email', response.user.email);
+          
         },
         err => {
           

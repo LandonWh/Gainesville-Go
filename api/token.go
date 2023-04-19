@@ -7,16 +7,16 @@ import (
 	"strings"
 	"time"
 
-	"github.com/gin-gonic/gin"
 	jwt "github.com/dgrijalva/jwt-go"
+	"github.com/gin-gonic/gin"
 )
 
 func GenerateToken(user_id uint) (string, error) {
 
-	token_lifespan,err := strconv.Atoi("10")
+	token_lifespan, err := strconv.Atoi("10")
 
 	if err != nil {
-		return "",err
+		return "", err
 	}
 
 	claims := jwt.MapClaims{}
@@ -57,6 +57,7 @@ func ExtractToken(c *gin.Context) string {
 
 func ExtractTokenID(c *gin.Context) (uint, error) {
 	tokenString := ExtractToken(c)
+	fmt.Println(tokenString)
 	token, err := jwt.Parse(tokenString, func(token *jwt.Token) (interface{}, error) {
 		if _, ok := token.Method.(*jwt.SigningMethodHMAC); !ok {
 			return nil, fmt.Errorf("Unexpected signing method: %v", token.Header["alg"])

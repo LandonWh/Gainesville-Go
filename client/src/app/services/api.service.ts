@@ -41,4 +41,8 @@ export class ApiService {
     ) {
         return this.http.post('api/event', { title, boysOnly, girlsOnly, twentyOne, capacity, description, activity, address, lat, lng });
     }
+
+    getUser(token: string) {
+        return this.http.post('api/admin/user', {token});
+    }
 }
