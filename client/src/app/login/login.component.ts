@@ -26,6 +26,8 @@ export class LoginComponent implements OnInit{
   roles: string[] = [];
   loginForm: FormGroup;
   valiationFailed: boolean = false;
+  token: string = '';
+  user: User;
   
   hide: boolean = false;
 
@@ -66,6 +68,11 @@ export class LoginComponent implements OnInit{
           this.router.navigate(['/home']);
           console.log(response);
           this.isLoggedIn = true;
+          //localStorage.setItem('token', response.tokn);
+          // localStorage.setItem('firstName', response.user.firstName);
+          // localStorage.setItem('lastName', response.user.lastName);
+          // localStorage.setItem('email', response.user.email);
+          
         },
         (err) => {
           this.loginFailed();

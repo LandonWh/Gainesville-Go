@@ -1,0 +1,27 @@
+
+  .title {
+    font-size: 24px;
+    text-align: center;
+    margin-top: 20px;
+    font-weight: 100;
+
+  }
+  
+  .button {
+    margin-top: 475px;
+    margin-left: 310px;
+  }
+
+  .description {
+    margin-left: 50px;
+    text-align: center;
+    margin-right: 50px;
+    font-size: 18px;
+    font-weight: 30;
+  }
+
+  .event-detail {
+    font-size: 16px;
+    margin-bottom: 5px;
+    margin-left: 20px;
+  }

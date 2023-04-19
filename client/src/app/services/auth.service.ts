@@ -84,12 +84,13 @@ export class AuthService {
         twentyOne: boolean,
         capacity: number,
         description: string,
-        //startTime: string,
-        //endTime: string,
+        startTime: string,
+        endTime: string,
         activity: number,
         lat: number,
         lng: number,
-        address: string
+        address: string,
+        date: string,
       ) {
         const payload = {
           title: title,
@@ -98,19 +99,25 @@ export class AuthService {
           twentyOne: twentyOne,
           capacity: capacity,
           description: description,
-          //startTime: startTime,
-          //endTime: endTime,
+          startTime: startTime,
+          endTime: endTime,
           activity: activity,
           lat: lat,
           lng: lng,
-          address: address
-          //date: date,
+          address: address,
+          date: date,
         };
       
-        return this.apiService.createEvent(payload.title, payload.boysOnly, payload.girlsOnly, payload.twentyOne, payload.capacity, payload.description, payload.activity, payload.lat, payload.lng, payload.address, ).pipe(tap((response: any) => { 
+        return this.apiService.createEvent(payload.title, payload.boysOnly, payload.girlsOnly, payload.twentyOne, payload.capacity, payload.description, payload.startTime, payload.endTime, payload.activity, payload.lat, payload.lng, payload.address, payload.date).pipe(tap((response: any) => { 
             console.log(this.token); 
             localStorage.setItem('event_auth', response.token); 
             this._isCreated$.next(true); 
         }));
+      }
+
+      getUser(token: string)  {
+        return this.apiService.getUser(token).pipe(
+            tap((response: any) => {})
+        )
       }
 }
