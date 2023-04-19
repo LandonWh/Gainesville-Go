@@ -17,18 +17,18 @@ func GetEvents(c *gin.Context) {
 }
 
 type createEventInput struct {
-	Title       string `json:"title"`
-	Description string `json:"description"`
-	Capacity    int    `json:"capacity"`
-	Activity    int8   `json:"activity"`
-	//StartTime   time.Time `json:"starttime"`
-	//EndTime     time.Time `json:"endtime"`
-	Address   string  `json:"address"`
-	BoysOnly  bool    `json:"boysonly"`
-	GirlsOnly bool    `json:"girlsonly"`
-	TwentyOne bool    `json:"twentyone"`
-	Lat       float32 `json:"lat"`
-	Lon       float32 `json:"lng"`
+	Title       string    `json:"title"`
+	Description string    `json:"description"`
+	Capacity    int       `json:"capacity"`
+	Activity    int8      `json:"activity"`
+	StartTime   time.Time `json:"starttime"`
+	EndTime     time.Time `json:"endtime"`
+	Address     string    `json:"address"`
+	BoysOnly    bool      `json:"boysonly"`
+	GirlsOnly   bool      `json:"girlsonly"`
+	TwentyOne   bool      `json:"twentyone"`
+	Lat         float32   `json:"lat"`
+	Lon         float32   `json:"lng"`
 }
 
 func CreateEventHandler(c *gin.Context) {

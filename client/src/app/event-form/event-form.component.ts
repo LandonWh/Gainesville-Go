@@ -55,36 +55,41 @@ export class EventFormComponent {
   onSubmit(): void {
     if (this.eventForm.invalid) {
       this.missingField();
-      return
+      return;
     }
-      //Equivalent for event?
-      //this.tokenStorage.saveUser(User);
-      this.authService
+  
+    // Convert startTime and endTime to Date objects
+    const startTime = new Date(this.eventForm.get('startTime')?.value);
+    const endTime = new Date(this.eventForm.get('endTime')?.value);
+  
+    this.authService
       .createEvent(
-        this.eventForm.get('eventName')?.value, 
+        this.eventForm.get('eventName')?.value,
         this.eventForm.get('boys')?.value,
         this.eventForm.get('girls')?.value,
         this.eventForm.get('twentyOne')?.value,
         this.eventForm.get('capacity')?.value,
         this.eventForm.get('description')?.value,
-        this.eventForm.get('startTime')?.value,
-        this.eventForm.get('endTime')?.value,
+        startTime,
+        endTime,
         this.eventForm.get('activityLevelV')?.value,
         this.eventForm.get('lat')?.value,
         this.eventForm.get('lng')?.value,
         this.eventForm.get('address')?.value,
         this.eventForm.get('date')?.value,
-        )
+      )
       .subscribe(
-        response => {
+        (response) => {
           console.log(response);
           this.isEventCreated = true;
-          this.dialogRef.close({ eventCreated: true });},
-        err => {
-          this.createEventFailed()
+          this.dialogRef.close({ eventCreated: true });
+        },
+        (err) => {
+          this.createEventFailed();
         },
       );
   }
+  
 
   activityLevels: activityLevel[] = [
     {value: 1, viewValue: 'Very inactive'},

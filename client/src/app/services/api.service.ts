@@ -31,14 +31,19 @@ export class ApiService {
         twentyOne: boolean,
         capacity: number,
         description: string,
-        startTime: string,
-        endTime: string,
+        startTime: Date,
+        endTime: Date,
         activity: number,
         lat: number,
         lng: number,
         address: string,
-        date: string,
+        date: Date,
     ) {
+        const startTimeDate = new Date(startTime);
+        const endTimeDate = new Date(endTime);
+        const startTimeString = startTime.toISOString();
+        const endTimeString = endTime.toISOString();
+        //const dateString = date.toISOString();
         return this.http.post('api/event', { title, boysOnly, girlsOnly, twentyOne, capacity, description, startTime, endTime, activity, address, lat, lng, date });
     }
 

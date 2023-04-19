@@ -15,8 +15,8 @@ export interface Event {
 	boysonly: boolean;
 	girlsonly: boolean;
 	twentyone: boolean;
-	starttime: string;
-	endtime: string;
+	starttime: Date;
+	endtime: Date;
 	date: string;
 	lat: number;
 	long: number; 
