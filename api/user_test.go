@@ -128,6 +128,28 @@ func TestUserLogin(t *testing.T) {
 	}
 }
 
+func TestUpperCaseEmailUserLogin(t *testing.T) {
+	var jsonStr = []byte(`{"email":"EMAIL@gmail.com","password":"password"}`)
+
+	req, err := http.NewRequest("POST", "/api/login", bytes.NewBuffer(jsonStr))
+	if err != nil {
+		t.Fatal(err)
+	}
+	req.Header.Set("Content-Type", "application/json")
+	rr := httptest.NewRecorder()
+	handler := http.HandlerFunc(UserLogin)
+	handler.ServeHTTP(rr, req)
+	if status := rr.Code; status != http.StatusOK {
+		t.Errorf("handler returned wrong status code: got %v want %v",
+			status, http.StatusOK)
+	}
+	expected := `{"email":"EMAIL@gmail.com","password":"password"}` //NOTE: This test gives back the input rather than the DB contents
+	if rr.Body.String() != expected {
+		t.Errorf("handler returned unexpected body: got %v want %v",
+			rr.Body.String(), expected)
+	}
+}
+
 func TestIncorrectUserLogin(t *testing.T) {
 	var jsonStr = []byte(`{"email":"email@gmail.com","password":"incorrectpassword"}`)
 
@@ -238,10 +260,10 @@ func TestUserLoginAfterDelete(t *testing.T) {
 	}
 }
 
-func TestCreateUserAgain(t *testing.T) {
+func TestCreateUserAgainUpperCaseEmail(t *testing.T) {
 	ConnectDatabase("user_testing.db") //Do this before first test
 
-	var jsonStr = []byte(`{"firstname":"Aidan","lastname":"Winney","dateofbirth":"02072003","email":"email@gmail.com","password":"password"}`)
+	var jsonStr = []byte(`{"firstname":"Aidan","lastname":"Winney","dateofbirth":"02072003","email":"EMAIL@gmail.com","password":"password"}`)
 
 	req, err := http.NewRequest("POST", "/api/register", bytes.NewBuffer(jsonStr))
 	if err != nil {
@@ -256,6 +278,28 @@ func TestCreateUserAgain(t *testing.T) {
 			status, http.StatusOK)
 	}
 	expected := `{"ID":1,"firstname":"Aidan","lastname":"Winney","dateofbirth":"02072003","email":"email@gmail.com","password":"password","Events":null}`
+	if rr.Body.String() != expected {
+		t.Errorf("handler returned unexpected body: got %v want %v",
+			rr.Body.String(), expected)
+	}
+}
+
+func TestLowerCaseEmailUserLoginAfterUpperCase(t *testing.T) {
+	var jsonStr = []byte(`{"email":"email@gmail.com","password":"password"}`)
+
+	req, err := http.NewRequest("POST", "/api/login", bytes.NewBuffer(jsonStr))
+	if err != nil {
+		t.Fatal(err)
+	}
+	req.Header.Set("Content-Type", "application/json")
+	rr := httptest.NewRecorder()
+	handler := http.HandlerFunc(UserLogin)
+	handler.ServeHTTP(rr, req)
+	if status := rr.Code; status != http.StatusOK {
+		t.Errorf("handler returned wrong status code: got %v want %v",
+			status, http.StatusOK)
+	}
+	expected := `{"email":"email@gmail.com","password":"password"}`
 	if rr.Body.String() != expected {
 		t.Errorf("handler returned unexpected body: got %v want %v",
 			rr.Body.String(), expected)
