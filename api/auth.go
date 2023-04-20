@@ -2,6 +2,8 @@ package main
 
 import (
 	"net/http"
+	"strings"
+
 	"github.com/gin-gonic/gin"
 )
 
@@ -43,7 +45,7 @@ func Login(c *gin.Context) {
 
 	u := User{}
 
-	u.Email = input.Email
+	u.Email = strings.ToLower(input.Email)
 	u.Password = input.Password
 
 	token, err := LoginCheck(u.Email, u.Password, true)

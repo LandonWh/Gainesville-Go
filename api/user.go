@@ -89,6 +89,7 @@ func (u *User) SaveUser(doHash bool) (*User, error) {
 
 	//remove spaces in email
 	u.Email = html.EscapeString(strings.TrimSpace(u.Email)) //Probably useless now, keep just in case for now
+	u.Email = strings.ToLower(u.Email)
 
 	if err != nil {
 		return &User{}, err
