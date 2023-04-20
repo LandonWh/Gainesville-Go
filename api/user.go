@@ -48,7 +48,7 @@ func LoginCheck(email string, password string, isHashed bool) (string, error) {
 
 	u := User{}
 
-	err = DB.Model(User{}).Where("email = ?", email).Take(&u).Error
+	err = DB.Model(User{}).Where("email = ?", strings.ToLower(email)).Take(&u).Error
 	if err != nil {
 		return "", err
 	}
