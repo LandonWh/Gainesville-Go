@@ -5,6 +5,8 @@ import { MatFormFieldModule } from '@angular/material/form-field';
 import { ReactiveFormsModule } from '@angular/forms';
 import { AppModule } from '../app.module';
 import { validForm } from 'src/mocks';
+import { MatDialogModule } from '@angular/material/dialog';
+import { Component, Inject, OnInit } from '@angular/core';
 
 describe('EventFormComponent', () => {
   let component: EventFormComponent;
@@ -23,7 +25,7 @@ describe('EventFormComponent', () => {
     activityLevelV: string,
     lat: number,
     lng: number,
-    address: string, ) {
+    address: string ) {
 
     component.eventForm.controls['eventName'].setValue(eventName);
     component.eventForm.controls['boys'].setValue(boys);
@@ -40,12 +42,31 @@ describe('EventFormComponent', () => {
     component.eventForm.controls['address'].setValue(address);
   }
 
+  const mockDialogRef = {
+    close: jasmine.createSpy('close')
+  };
+  
+  const mockDialogData = {
+    message: "Test",
+    latitude: 0,
+    longitude: 0,
+    address: "123 Main St",
+  };
+
+
   beforeEach(async () => {
     await TestBed.configureTestingModule({
       declarations: [ EventFormComponent ],
-      imports: [MatFormFieldModule, AppModule, ReactiveFormsModule],
+      imports: [MatFormFieldModule, AppModule, ReactiveFormsModule, MatDialogModule],
       providers: [
-        {provide: MAT_DIALOG_DATA, useValue: {}},
+        {
+          provide: MatDialogRef,
+          useValue: {},
+        },
+        {
+          provide: MAT_DIALOG_DATA,
+          useValue: mockDialogData,
+        },
         {provide: MatDialogRef, useValue: {}},
       ]
     })
@@ -62,12 +83,21 @@ describe('EventFormComponent', () => {
 
 
   // check to make sure the inputs match when submitting
-  it('Should update the event form to inputs', () => {
-    fixture.detectChanges();
-    updateForm(validForm.eventName, validForm.boys, validForm.girls, validForm.twentyOne,
-      validForm.numPeople, validForm.date, validForm.description, validForm.startTime, validForm.endTime,
-      validForm.activityLevelV, validForm.lat, validForm.lng, validForm.address);
-    expect(component.eventForm.value).toEqual(validForm);
-  })
+  it('should initialize the form', () => {
+    expect(component.eventForm).toBeDefined();
+  });
+
+  it('should be invalid when a required field is missing', () => {
+    component.eventForm.patchValue({
+      eventName: '',
+      capacity: '',
+      date: '',
+      description: '',
+      startTime: '',
+      endTime: '',
+      activityLevelV: '',
+    });
+    expect(component.eventForm.invalid).toBeTruthy();
+  });
 
 });

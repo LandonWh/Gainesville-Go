@@ -40,6 +40,13 @@ export const validForm = {
     address: "123 Main St",
 }
 
+export const mockDialogData = {
+    message: 'Test message',
+    latitude: 123.456,
+    longitude: 789.101,
+    address: 'Test address',
+  };
+
 export const validFormCustom = {
     event: 'The Social',
     boys: true,
